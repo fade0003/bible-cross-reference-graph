@@ -3,7 +3,7 @@
 const express = require('express');
 const path = require('path');
 const { getData, verseKey } = require('./lib/loadData');
-const { buildBookGraph, buildChapterGraph, buildVerseGraph, verseDetail } = require('./lib/graphBuilders');
+const { buildBookGraph, buildChapterGraph, buildVerseGraph, verseDetail, topVerses } = require('./lib/graphBuilders');
 
 const PORT = process.env.PORT || 3300;
 
@@ -63,6 +63,14 @@ async function main() {
     const detail = verseDetail(data, req.params.bookId, chapter, verse, minVotes);
     if (!detail) return res.status(404).json({ error: 'Unknown verse' });
     res.json(detail);
+  });
+
+  app.get('/api/top-verses', (req, res) => {
+    const limitRaw = parseInt(req.query.limit, 10);
+    const limit = Number.isNaN(limitRaw) ? 50 : Math.max(1, Math.min(200, limitRaw));
+    const minVotes = parseMinVotes(req);
+    const bookId = req.query.bookId || null;
+    res.json({ results: topVerses(data, { limit, minVotes, bookId }) });
   });
 
   app.get('/api/search', (req, res) => {

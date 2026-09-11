@@ -14,6 +14,7 @@
   const controls = document.getElementById('controls');
   const searchInput = document.getElementById('searchInput');
   const searchResults = document.getElementById('searchResults');
+  const topVersesBtn = document.getElementById('topVersesBtn');
 
   const CAT_COLOR = {
     ot: '#5f8fd9',
@@ -145,15 +146,15 @@
 
   function goToBooks() {
     view = { level: 'books' };
-    loadView();
+    return loadView();
   }
   function goToBook(bookId) {
     view = { level: 'book', bookId };
-    loadView();
+    return loadView();
   }
   function goToChapter(bookId, chapter) {
     view = { level: 'chapter', bookId, chapter };
-    loadView();
+    return loadView();
   }
 
   // ---- Physics ----
@@ -462,6 +463,34 @@
       };
     });
   }
+
+  // ---- Top cross-referenced verses ----
+  async function openTopVersesPanel() {
+    const data = await fetchJSON('/api/top-verses?limit=50');
+    let html = `
+      <h2>Most cross-referenced verses</h2>
+      <div class="stat-line">Ranked by total linkage count, across the whole Bible.</div>
+    `;
+    data.results.forEach((v, i) => {
+      html += `
+        <div class="conn-item" data-book="${v.bookId}" data-chapter="${v.chapter}" data-verse="${v.verse}">
+          <div><span class="conn-ref ${v.apocryphal ? 'apocrypha' : ''}">${i + 1}. ${v.label}</span><span class="conn-votes">${v.degree} linkages</span></div>
+          ${v.text ? `<div class="conn-text">${escapeHtml(truncate(v.text, 160))}</div>` : ''}
+        </div>
+      `;
+    });
+    panelContent.innerHTML = html;
+    panel.classList.remove('hidden');
+    panelContent.querySelectorAll('.conn-item').forEach((el) => {
+      el.onclick = () => {
+        const b = el.dataset.book;
+        const ch = parseInt(el.dataset.chapter, 10);
+        const v = parseInt(el.dataset.verse, 10);
+        goToChapter(b, ch).then(() => openVersePanel(b, ch, v));
+      };
+    });
+  }
+  topVersesBtn.addEventListener('click', openTopVersesPanel);
 
   function escapeHtml(s) {
     const div = document.createElement('div');

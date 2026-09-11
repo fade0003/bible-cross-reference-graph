@@ -47,6 +47,19 @@ html, body {
 #breadcrumb span.current { color: #d4af60; cursor: default; }
 #breadcrumb .sep { color: #555; cursor: default; }
 
+#topVersesBtn {
+  background: rgba(212, 175, 96, 0.1);
+  border: 1px solid rgba(212, 175, 96, 0.35);
+  color: #d4af60;
+  padding: 7px 12px;
+  border-radius: 6px;
+  font-family: inherit;
+  font-size: 13px;
+  cursor: pointer;
+  white-space: nowrap;
+}
+#topVersesBtn:hover { background: rgba(212, 175, 96, 0.22); }
+
 #searchWrap {
   position: relative;
   width: 280px;
