@@ -1,0 +1,29 @@
+{
+  "_disclaimer": "Unlike the canonical cross-reference set (data/sources/cross_references.txt, ~344,800 links from openbible.info / Treasury of Scripture Knowledge, CC-BY), no open verse-level cross-reference dataset exists for the Apocrypha. The links below were hand-curated by an editor, not drawn from a verified academic index. They are a small, illustrative set of the most commonly cited textual/narrative relationships between apocryphal and canonical books, not an exhaustive or algorithmically-derived list. Each entry's `note` states the nature of the relationship.",
+  "links": [
+    { "from": "PrMan.1.1", "to": "2Chr.33.12", "toEnd": "2Chr.33.19", "note": "The Prayer of Manasses was composed to supply the prayer of King Manasseh referenced but not quoted in 2 Chronicles." },
+    { "from": "PrAzar.1.28", "to": "Dan.3.19", "toEnd": "Dan.3.30", "note": "The Prayer of Azariah / Song of the Three is inserted into the fiery-furnace narrative of Daniel 3 in the Greek text." },
+    { "from": "Sus.1.1", "to": "Dan.1.1", "toEnd": null, "note": "Susanna circulated as a narrative addition attached to the Greek text of Daniel." },
+    { "from": "Bel.1.1", "to": "Dan.6.1", "toEnd": "Dan.6.28", "note": "Bel and the Dragon's second episode parallels Daniel's lions'-den narrative." },
+    { "from": "AddEsth.1.1", "to": "Esth.4.16", "toEnd": null, "note": "The Additions to Esther expand Esther's prayer before approaching the king at this point in the narrative." },
+    { "from": "1Esd.1.1", "to": "2Chr.35.1", "toEnd": "2Chr.36.23", "note": "1 Esdras retells the closing chapters of 2 Chronicles." },
+    { "from": "1Esd.2.1", "to": "Ezra.1.1", "toEnd": "Ezra.1.11", "note": "Parallel account of Cyrus's decree." },
+    { "from": "2Esd.2.42", "to": "Rev.7.9", "toEnd": "Rev.7.17", "note": "Both visions describe a great multitude in white robes bearing palms before God's throne; frequently noted apocalyptic parallel." },
+    { "from": "2Esd.7.26", "to": "Rev.20.11", "toEnd": "Rev.20.15", "note": "Parallel eschatological judgment imagery." },
+    { "from": "Tob.4.15", "to": "Matt.7.12", "toEnd": null, "note": "Tobit's negative-form Golden Rule ('do that to no man which thou wouldest not have done to thee') parallels Jesus' teaching." },
+    { "from": "Tob.4.15", "to": "Luke.6.31", "toEnd": null, "note": "Same Golden Rule parallel." },
+    { "from": "Tob.12.8", "to": "Matt.6.1", "toEnd": "Matt.6.4", "note": "Shared triad of prayer, fasting, and almsgiving as marks of righteousness." },
+    { "from": "Wis.2.12", "to": "Matt.27.39", "toEnd": "Matt.27.43", "note": "Wisdom's mocking of the righteous man who calls God his father is a commonly cited parallel to the mocking of Jesus at the cross." },
+    { "from": "Wis.2.23", "to": "Rom.5.12", "toEnd": null, "note": "Both texts describe death entering the world through envy/sin." },
+    { "from": "Wis.3.1", "to": "Rev.6.9", "toEnd": "Rev.6.11", "note": "Both describe the souls of the righteous/martyrs at rest before God awaiting vindication." },
+    { "from": "Wis.7.25", "to": "Heb.1.3", "toEnd": null, "note": "Wisdom described as the 'brightness'/effulgence of God's glory is echoed in Hebrews' description of the Son." },
+    { "from": "Wis.9.1", "to": "John.1.1", "toEnd": "John.1.3", "note": "Wisdom as the agent of creation through God's word parallels John's Logos prologue." },
+    { "from": "Sir.24.1", "to": "John.1.1", "toEnd": "John.1.14", "note": "Sirach's personified Wisdom, self-described as dwelling among God's people, is widely cited background for John's Word-made-flesh prologue." },
+    { "from": "Sir.44.1", "to": "Heb.11.1", "toEnd": "Heb.11.40", "note": "Sirach's roll call of the famous ('Let us now praise famous men') parallels the roll call of faith in Hebrews 11." },
+    { "from": "Sir.51.23", "to": "Matt.11.28", "toEnd": "Matt.11.30", "note": "Sirach's invitation to 'draw near unto me... and find rest' parallels Jesus' 'come unto me... and I will give you rest.'" },
+    { "from": "Sir.28.2", "to": "Matt.6.14", "toEnd": "Matt.6.15", "note": "Both teach that forgiving others precedes receiving forgiveness." },
+    { "from": "Bar.3.37", "to": "John.1.14", "toEnd": null, "note": "Baruch's Wisdom 'found her way' and 'dwelt among men' has traditionally been read alongside John's Word becoming flesh and dwelling among us." },
+    { "from": "2Macc.7.1", "to": "Heb.11.35", "toEnd": null, "note": "The martyrs of 2 Maccabees 7, tortured while refusing release, are widely recognized as the background for Hebrews' 'others were tortured, refusing to accept release, that they might rise again to a better life.'" },
+    { "from": "2Macc.6.18", "to": "Heb.11.35", "toEnd": null, "note": "Eleazar's martyrdom belongs to the same background cluster for the Hebrews 11:35 allusion." }
+  ]
+}

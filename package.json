@@ -1,0 +1,13 @@
+{
+  "name": "bible-graph",
+  "version": "1.0.0",
+  "description": "Force-directed graph of Bible cross-references (KJV, including Apocrypha), sized by linkage count.",
+  "private": true,
+  "main": "server.js",
+  "scripts": {
+    "start": "node server.js"
+  },
+  "dependencies": {
+    "express": "^4.19.2"
+  }
+}
