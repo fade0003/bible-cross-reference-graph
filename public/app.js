@@ -10,6 +10,7 @@
   const panelClose = document.getElementById('panelClose');
   const minVotesInput = document.getElementById('minVotes');
   const minVotesVal = document.getElementById('minVotesVal');
+  const minVotesLabel = document.getElementById('minVotesLabel');
   const controls = document.getElementById('controls');
   const searchInput = document.getElementById('searchInput');
   const searchResults = document.getElementById('searchResults');
@@ -33,10 +34,17 @@
   // ---- View state ----
   let view = { level: 'books' }; // { level: 'books' } | { level: 'book', bookId } | { level: 'chapter', bookId, chapter }
   let minVotes = 15;
+  let perNode = { books: 6, book: 5 };
+  const SLIDER_CFG = {
+    books: { min: 1, max: 15, step: 1, label: 'Links per book shown' },
+    book: { min: 1, max: 12, step: 1, label: 'Links per chapter shown' },
+    chapter: { min: 0, max: 80, step: 5, label: 'Min. link strength' },
+  };
   let nodes = [];
   let links = [];
   let nodeById = new Map();
   let camera = { x: 0, y: 0, scale: 1 };
+  let autoFit = true;
 
   function sizeScale(nodes) {
     const max = Math.max(1, ...nodes.map((n) => n.size));
@@ -64,20 +72,23 @@
     hint.textContent = 'Loading…';
     hint.style.display = 'block';
     closePanel();
+    autoFit = true;
+
+    controls.style.display = 'flex';
+    syncControlsToLevel();
 
     if (view.level === 'books') {
-      controls.style.display = 'none';
-      const data = await fetchJSON('/api/graph/books');
+      const data = await fetchJSON(`/api/graph/books?perNode=${perNode.books}`);
       nodes = data.nodes.map((n) => ({ ...n, kind: 'book' }));
       links = data.links;
     } else if (view.level === 'book') {
-      controls.style.display = 'none';
-      const data = await fetchJSON(`/api/graph/book/${encodeURIComponent(view.bookId)}`);
+      const data = await fetchJSON(
+        `/api/graph/book/${encodeURIComponent(view.bookId)}?perNode=${perNode.book}`
+      );
       nodes = data.nodes.map((n) => ({ ...n, kind: n.external ? 'externalBook' : 'chapter', bookId: n.external ? n.bookId : view.bookId }));
       links = data.links;
       view.bookMeta = data.book;
     } else if (view.level === 'chapter') {
-      controls.style.display = 'flex';
       const data = await fetchJSON(
         `/api/graph/chapter/${encodeURIComponent(view.bookId)}/${view.chapter}?minVotes=${minVotes}`
       );
@@ -91,6 +102,17 @@
     layoutInit(nodes);
     hint.style.display = 'none';
     renderBreadcrumb();
+  }
+
+  function syncControlsToLevel() {
+    const cfg = SLIDER_CFG[view.level];
+    minVotesLabel.textContent = cfg.label;
+    minVotesInput.min = cfg.min;
+    minVotesInput.max = cfg.max;
+    minVotesInput.step = cfg.step;
+    const current = view.level === 'chapter' ? minVotes : perNode[view.level];
+    minVotesInput.value = current;
+    minVotesVal.textContent = current;
   }
 
   function renderBreadcrumb() {
@@ -141,6 +163,11 @@
     const SPRING_LEN = 90;
     const GRAVITY = 0.0025;
     const DAMPING = 0.86;
+    // Explicit-Euler with a fixed step can blow up (velocity growing every
+    // frame instead of settling) once the graph is sparse enough that spring
+    // forces no longer counteract the repulsion; a hard speed cap keeps the
+    // integration stable regardless of how many edges survive filtering.
+    const MAX_SPEED = 40;
 
     for (let i = 0; i < nodes.length; i++) {
       const a = nodes[i];
@@ -177,9 +204,41 @@
     }
     for (const n of nodes) {
       if (n.fixed) continue;
+      const speed = Math.hypot(n.vx, n.vy);
+      if (speed > MAX_SPEED) {
+        n.vx = (n.vx / speed) * MAX_SPEED;
+        n.vy = (n.vy / speed) * MAX_SPEED;
+      }
       n.x += n.vx;
       n.y += n.vy;
     }
+  }
+
+  // The force layout has no cooling/containment of its own - depending on
+  // how connected the current graph is, nodes settle at wildly different
+  // distances from the origin. Rather than tune physics constants per view,
+  // keep the camera fitted to wherever the nodes actually end up until the
+  // user manually pans/zooms.
+  function fitCameraToNodes(getRadius) {
+    if (nodes.length === 0) return;
+    let minX = Infinity, minY = Infinity, maxX = -Infinity, maxY = -Infinity;
+    for (const n of nodes) {
+      const r = getRadius(n.size);
+      minX = Math.min(minX, n.x - r);
+      maxX = Math.max(maxX, n.x + r);
+      minY = Math.min(minY, n.y - r);
+      maxY = Math.max(maxY, n.y + r);
+    }
+    const bw = Math.max(1, maxX - minX);
+    const bh = Math.max(1, maxY - minY);
+    const cx = (minX + maxX) / 2;
+    const cy = (minY + maxY) / 2;
+    const targetScale = Math.max(0.15, Math.min(4, Math.min(width / (bw * 1.25), height / (bh * 1.25))));
+    const targetX = -cx * targetScale;
+    const targetY = -cy * targetScale;
+    camera.scale += (targetScale - camera.scale) * 0.08;
+    camera.x += (targetX - camera.x) * 0.08;
+    camera.y += (targetY - camera.y) * 0.08;
   }
 
   function draw(getRadius) {
@@ -296,6 +355,7 @@
       dragNode.vx = 0;
       dragNode.vy = 0;
     } else if (panStart) {
+      autoFit = false;
       camera.x = panStart.camX + (px - panStart.px);
       camera.y = panStart.camY + (py - panStart.py);
     }
@@ -316,6 +376,7 @@
 
   canvas.addEventListener('wheel', (e) => {
     e.preventDefault();
+    autoFit = false;
     const factor = e.deltaY < 0 ? 1.1 : 0.9;
     camera.scale = Math.max(0.15, Math.min(4, camera.scale * factor));
   }, { passive: false });
@@ -411,13 +472,15 @@
     return s.length > n ? s.slice(0, n) + '…' : s;
   }
 
-  // ---- Vote slider ----
+  // ---- Link-strength / link-count slider ----
   minVotesInput.addEventListener('input', () => {
-    minVotes = parseInt(minVotesInput.value, 10);
-    minVotesVal.textContent = minVotes;
+    const val = parseInt(minVotesInput.value, 10);
+    minVotesVal.textContent = val;
+    if (view.level === 'chapter') minVotes = val;
+    else perNode[view.level] = val;
   });
   minVotesInput.addEventListener('change', () => {
-    if (view.level === 'chapter') loadView();
+    loadView();
   });
 
   // ---- Search ----
@@ -471,6 +534,7 @@
     const getRadius = sizeScale(nodes);
     getRadiusFn = getRadius;
     physTick(getRadius);
+    if (autoFit) fitCameraToNodes(getRadius);
     draw(getRadius);
     requestAnimationFrame(loop);
   }

@@ -13,6 +13,12 @@ function parseMinVotes(req) {
   return Number.isNaN(n) ? 0 : n;
 }
 
+function parsePerNode(req, fallback) {
+  if (req.query.perNode === undefined || req.query.perNode === '') return fallback;
+  const n = parseInt(req.query.perNode, 10);
+  return Number.isNaN(n) ? fallback : n;
+}
+
 async function main() {
   console.log('Loading Bible data & cross-references...');
   const start = Date.now();
@@ -33,11 +39,11 @@ async function main() {
   });
 
   app.get('/api/graph/books', (req, res) => {
-    res.json(buildBookGraph(data));
+    res.json(buildBookGraph(data, parsePerNode(req, 6)));
   });
 
   app.get('/api/graph/book/:bookId', (req, res) => {
-    const graph = buildChapterGraph(data, req.params.bookId);
+    const graph = buildChapterGraph(data, req.params.bookId, parsePerNode(req, 5));
     if (!graph) return res.status(404).json({ error: 'Unknown book' });
     res.json(graph);
   });
