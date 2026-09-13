@@ -10,7 +10,11 @@
   <header id="topbar">
     <div id="brand">Bible Cross-Reference Graph</div>
     <nav id="siteNav"></nav>
-    <div id="timelineCaption">Canonical reading order, Genesis&rarr;Revelation &mdash; not a historical/composition-date timeline</div>
+    <div id="modeToggle">
+      <button class="tree-btn active" id="modeCanonicalBtn" type="button">Canonical order</button>
+      <button class="tree-btn" id="modeYearBtn" type="button">Estimated year (LXX)</button>
+    </div>
+    <select id="bookFilter"><option value="">All books</option></select>
   </header>
 
   <main id="stage">
@@ -19,7 +23,7 @@
       <div class="legend-item"><span class="dot ot"></span>Old Testament</div>
       <div class="legend-item"><span class="dot nt"></span>New Testament</div>
       <div class="legend-item"><span class="dot apocrypha"></span>Apocrypha</div>
-      <div class="legend-note">Arc height = distance between the two verses. Drag to pan, scroll to zoom.</div>
+      <div class="legend-note" id="tlLegendNote">Arc height = distance between the two verses. Drag to pan, scroll to zoom, click an arc for detail.</div>
     </div>
     <div id="controls">
       <label for="minVotes" id="minVotesLabel">Min. link strength</label>
@@ -30,10 +34,15 @@
     <div id="hint">Loading&hellip;</div>
   </main>
 
+  <aside id="panel" class="hidden">
+    <button id="panelClose" aria-label="Close">&times;</button>
+    <div id="panelContent"></div>
+  </aside>
+
   <footer id="disclaimer">
     Text: King James Version, including the Apocrypha (public domain). Canonical cross-references (~344,800 links) &copy;
     <a href="https://www.openbible.info/labs/cross-references/" target="_blank" rel="noopener">openbible.info</a>, CC BY 4.0.
-    Arc endpoints are placed at each verse's position in canonical reading order (cumulative verse count from Genesis 1:1), not at a historical date.
+    <span id="tlFooterNote">Arc endpoints are placed at each verse's position in canonical reading order (cumulative verse count from Genesis 1:1), not at a historical date.</span>
   </footer>
 
   <script src="nav.js"></script>

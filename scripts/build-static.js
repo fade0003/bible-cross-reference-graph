@@ -124,6 +124,16 @@ function main() {
     fs.copyFileSync(chiasmsPath, path.join(OUT_DIR, 'chiasms.json'));
   }
 
+  const chronologyPath = path.join(DATA_DIR, 'chronology.json');
+  if (fs.existsSync(chronologyPath)) {
+    fs.copyFileSync(chronologyPath, path.join(OUT_DIR, 'chronology.json'));
+  }
+
+  const textualVariantsPath = path.join(DATA_DIR, 'textual-variants.json');
+  if (fs.existsSync(textualVariantsPath)) {
+    fs.copyFileSync(textualVariantsPath, path.join(OUT_DIR, 'textual-variants.json'));
+  }
+
   console.log('Wrote', OUT_DIR);
   for (const f of fs.readdirSync(OUT_DIR)) {
     const { size } = fs.statSync(path.join(OUT_DIR, f));

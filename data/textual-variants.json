@@ -1,0 +1,192 @@
+{
+  "disclaimer": "This is a curated selection of well-documented, frequently-discussed differences between the Masoretic Text (MT - the medieval Hebrew textual tradition underlying most Old Testament translations, including this site's KJV), the Septuagint (LXX - the pre-Christian Greek translation), and the Dead Sea Scrolls (DSS - Hebrew/Aramaic manuscripts from ca. 250 BC-70 AD found at Qumran) - not an exhaustive catalog. Textual criticism is a specialized field with genuine scholarly disagreement over which reading is earliest/original in any given case; where a DSS reading is noted, that manuscript's designation (e.g. 4QSam-a) is given so it can be checked independently. Summaries of MT/LXX readings are paraphrases for a general audience, not new translations.",
+  "variants": [
+    {
+      "id": "gen5-11-genealogies",
+      "category": "Genealogy & Chronology",
+      "ref": "Gen.5.1-Gen.5.32",
+      "title": "The Genesis 5 & 11 patriarchal ages",
+      "mt": "Summed ages-at-fatherhood place the Flood at roughly Anno Mundi 1656.",
+      "lxx": "Most LXX manuscripts give consistently larger ages-at-fatherhood in Gen. 5 and 11 (and add an extra generation, Cainan, between Arphaxad and Shelah - see Luke 3:36), pushing the Flood to roughly AM 2242 and lengthening the whole primeval period by about 650-800 years.",
+      "dss": "The handful of Qumran genealogical fragments (e.g. 4QGen-Exod-a) are too fragmentary at these specific verses to settle which family of numbers is earliest; the Samaritan Pentateuch offers a third, independent set of ages, different again from both MT and LXX.",
+      "significance": "This is the single largest MT/LXX divergence in the Bible in sheer scale, and it's the basis for this site's Timeline page offering a Septuagint-based \"estimated year\" mode alongside canonical reading order.",
+      "relatedOntology": null
+    },
+    {
+      "id": "gen4-8-cain-words",
+      "category": "Narrative Detail",
+      "ref": "Gen.4.8",
+      "title": "What Cain said to Abel before the murder",
+      "mt": "\"Cain spoke to Abel his brother.\" (MT gives no content for the speech - some translations supply \"Let us go out to the field\" only as an interpretive bridge.)",
+      "lxx": "Explicitly includes Cain's words: \"Let us go out to the field.\" The Samaritan Pentateuch, Syriac Peshitta, and Vulgate all agree with this longer reading.",
+      "dss": null,
+      "significance": "A small but clear case where the LXX (and other ancient versions) preserve a clause that either dropped out of the MT tradition or was never in its exemplar - most modern translations follow the LXX/Samaritan reading here for sense.",
+      "relatedOntology": null
+    },
+    {
+      "id": "deut32-8-9-sons-of-god",
+      "category": "Divine Council & Angelology",
+      "ref": "Deut.32.8-Deut.32.9",
+      "title": "\"Sons of Israel\" or \"sons of God\"?",
+      "mt": "The nations were divided \"according to the number of the sons of Israel.\"",
+      "lxx": "\"...according to the number of the angels of God\" (angelōn theou).",
+      "dss": "4QDeut-j, from Qumran, reads \"sons of God\" (bene elohim) in Hebrew - confirming the LXX's reading predates the MT's and wasn't a Greek translator's invention.",
+      "significance": "Central to this site's Ontology page (\"Babel: The Nations Disinherited\"): read with the LXX/DSS text, Yahweh allots the nations to members of his divine council at Babel, then keeps Israel as his own direct portion - a very different picture than \"Israel\" appearing in its own allotment formula before Israel as a nation existed.",
+      "relatedOntology": "babel-disinheritance"
+    },
+    {
+      "id": "deut32-43-song-ending",
+      "category": "Divine Council & Angelology",
+      "ref": "Deut.32.43",
+      "title": "The Song of Moses' ending: four lines or eight?",
+      "mt": "A shorter, four-line close to the Song of Moses.",
+      "lxx": "An eight-line close, including \"Rejoice, O heavens, with him, and let all the sons of God worship him\" / \"let all the angels of God worship him.\"",
+      "dss": "4QDeut-q preserves the longer, LXX-type ending in Hebrew.",
+      "significance": "Hebrews 1:6 quotes the longer ending's \"let all the angels of God worship him\" as Scripture - a New Testament author apparently citing the LXX/DSS text-form rather than the (shorter) text that became the Masoretic tradition.",
+      "relatedOntology": "divine-council"
+    },
+    {
+      "id": "ps22-16-pierced",
+      "category": "Messianic & Christological",
+      "ref": "Ps.22.16",
+      "title": "\"Like a lion\" or \"they pierced\"?",
+      "mt": "The printed Masoretic consonants (kaari) are usually read \"like a lion [are] my hands and feet\" - a famously difficult Hebrew construction.",
+      "lxx": "\"They pierced/dug my hands and feet\" (ōryxan).",
+      "dss": "Fragmentary Psalms material from Qumran (e.g. within Nahal Hever's Psalms fragments) has been cited on both sides of this debate; the case doesn't rest on a single clear DSS reading the way Deut. 32 does.",
+      "significance": "Directly relevant to this site's Ontology page (Messianic Prophecy: \"Hands and feet pierced\", fulfilled per John 19:37, 20:25-27) - which reading is earliest has been argued by both Jewish and Christian scholars for centuries, and isn't settled by manuscript evidence alone.",
+      "relatedOntology": "p-hands-feet-pierced"
+    },
+    {
+      "id": "isa7-14-almah",
+      "category": "Messianic & Christological",
+      "ref": "Isa.7.14",
+      "title": "\"Young woman\" or \"virgin\"?",
+      "mt": "almah - a Hebrew word for a young woman of marriageable age, without inherently specifying virginity (though not excluding it).",
+      "lxx": "parthenos - the ordinary Greek word for \"virgin,\" the stronger and more specific term.",
+      "dss": "The Great Isaiah Scroll (1QIsa-a) preserves almah at this verse, matching the MT's consonants - the DSS doesn't show a Hebrew variant here; the LXX's parthenos reflects a translation choice, not a different Hebrew source text.",
+      "significance": "Matthew 1:23 quotes the LXX's parthenos, applying it to Jesus' virgin birth. Whether almah alone implies virginity, and what the Isaiah 7 sign meant in its 8th-century-BC setting versus its NT application, is one of the most-debated cruxes in Jewish-Christian translation disagreement.",
+      "relatedOntology": "p-immanuel"
+    },
+    {
+      "id": "isa53-11-light",
+      "category": "Messianic & Christological",
+      "ref": "Isa.53.11",
+      "title": "\"He shall see\" - see what?",
+      "mt": "\"He shall see [ ] and be satisfied\" - the printed Masoretic text has no object for \"see.\"",
+      "lxx": "\"He shall see light and be satisfied.\"",
+      "dss": "The Great Isaiah Scroll (1QIsa-a) and 1QIsa-b both include \"light\" (or) here, agreeing with the LXX against the later Masoretic tradition.",
+      "significance": "A case where two independent ancient witnesses (LXX and DSS), unrelated to each other, agree against the MT - widely taken as evidence that \"light\" was in the earlier Hebrew text and dropped out of the manuscript tradition the Masoretes later standardized. Many modern translations (e.g. ESV, NIV) now include \"light\" on this basis.",
+      "relatedOntology": "prophecy-burial-resurrection"
+    },
+    {
+      "id": "1sam17-goliath-height",
+      "category": "Narrative Detail",
+      "ref": "1Sam.17.4",
+      "title": "How tall was Goliath?",
+      "mt": "\"Six cubits and a span\" - roughly 9 feet 9 inches.",
+      "lxx": "Codex Vaticanus (a key LXX manuscript) reads \"four cubits and a span\" - roughly 6 feet 9 inches.",
+      "dss": "4QSam-a, a Qumran Samuel scroll, also reads \"four cubits and a span,\" agreeing with the shorter LXX figure against the MT.",
+      "significance": "A concrete, easy-to-grasp example of a real numerical variant with early manuscript support on both sides - \"four cubits and a span\" is still a very large man (comparable to some ancient/modern giants on record), so the variant doesn't remove Goliath's exceptional size, just its most extreme form.",
+      "relatedOntology": null
+    },
+    {
+      "id": "1sam11-nahash-paragraph",
+      "category": "Narrative Detail",
+      "ref": "1Sam.10.27-1Sam.11.1",
+      "title": "A missing paragraph about Nahash the Ammonite",
+      "mt": "Moves directly from Saul's coronation to Nahash the Ammonite besieging Jabesh-gilead, with no background given for why Nahash was gouging out the right eye of every Israelite man in Gilead.",
+      "lxx": null,
+      "dss": "4QSam-a preserves an extra paragraph here (also known from Josephus, Antiquities 6.68-71) explaining that Nahash had already been systematically blinding the men of Gad and Reuben, and that seven thousand had escaped to Jabesh-gilead - context the MT simply lacks.",
+      "significance": "A case where the earliest witness available (a DSS Samuel scroll) preserves material absent from the MT and not translated in most LXX manuscripts either - some modern translations (e.g. the NRSV) now include this paragraph in a footnote or the main text.",
+      "relatedOntology": null
+    },
+    {
+      "id": "jeremiah-shorter-lxx",
+      "category": "Book-Level Structure",
+      "ref": "Jer.1.1-Jer.51.64",
+      "title": "Two editions of Jeremiah",
+      "mt": "About one-eighth longer than the LXX's Jeremiah, with the oracles against foreign nations (chs. 46-51) placed near the end of the book.",
+      "lxx": "Shorter, and places the oracles against the nations in the middle of the book (after 25:13), in a different internal order.",
+      "dss": "4QJer-b and 4QJer-d, both from Qumran, are Hebrew texts that agree with the LXX's shorter form against the MT - strong evidence that two distinct Hebrew literary editions of Jeremiah circulated in the Second Temple period, not just a Greek translator's abridgment.",
+      "significance": "The clearest case in the Hebrew Bible of two genuinely different ancient editions of the same book, both attested in Hebrew, rather than one \"original\" and one derivative translation.",
+      "relatedOntology": null
+    },
+    {
+      "id": "minor-prophets-order",
+      "category": "Book-Level Structure",
+      "ref": "Hos.1.1",
+      "title": "The Twelve, in a different order",
+      "mt": "Orders the Minor Prophets: Hosea, Joel, Amos, Obadiah, Jonah, Micah, Nahum, Habakkuk, Zephaniah, Haggai, Zechariah, Malachi.",
+      "lxx": "Most LXX manuscripts order the first six differently: Hosea, Amos, Micah, Joel, Obadiah, Jonah, then rejoining the MT order from Nahum on.",
+      "dss": "4QXII-a, a Qumran scroll of the Twelve, appears to follow an order closer to the MT's, suggesting the LXX's rearrangement may be a translator's/editor's choice rather than reflecting a different Hebrew Vorlage - though the fragment is not fully decisive.",
+      "significance": "\"The Twelve\" (Book of the Twelve) was copied as a single scroll, so its internal ordering was a live editorial question in a way individual books' chapter order usually wasn't.",
+      "relatedOntology": null
+    },
+    {
+      "id": "daniel-greek-additions",
+      "category": "Book-Level Structure",
+      "ref": "Dan.1.1-Dan.12.13",
+      "title": "Greek Daniel's extra material",
+      "mt": "Twelve chapters, no Susanna, no Bel and the Dragon, no Prayer of Azariah/Song of the Three Young Men.",
+      "lxx": "Two independent Greek versions circulated (the Old Greek and Theodotion's later revision, which won out liturgically); both include three substantial passages absent from the MT: the Prayer of Azariah and Song of the Three (inserted into ch. 3), and the standalone stories of Susanna and of Bel and the Dragon.",
+      "dss": "Qumran preserved multiple Hebrew/Aramaic Daniel manuscripts (4QDan-a through 4QDan-e) matching the MT's twelve-chapter text closely, with no trace of the Greek additions - suggesting those three pieces were composed in or translated into Greek without an underlying Hebrew/Aramaic Vorlage at Qumran, or that Vorlage simply hasn't survived.",
+      "significance": "This site's data already carries the Prayer of Azariah (PrAzar), Susanna (Sus), and Bel and the Dragon (Bel) as separate apocryphal book entries for exactly this reason - they're LXX/Greek-tradition Daniel material the MT-based Protestant canon doesn't include.",
+      "relatedOntology": null
+    },
+    {
+      "id": "esther-additions",
+      "category": "Book-Level Structure",
+      "ref": "Esth.1.1-Esth.10.3",
+      "title": "Esther without God, and Esther with God",
+      "mt": "Famously never mentions God, prayer, or explicitly religious practice by name anywhere in its ten chapters.",
+      "lxx": "Includes roughly 107 additional verses interspersed through the book (the \"Additions to Esther\"), among them explicit prayers by Mordecai and Esther that name God directly and the full texts of two royal edicts only summarized in the MT.",
+      "dss": null,
+      "significance": "One of the most theologically significant expansions in the LXX tradition - it resolves (for Greek-reading Jews and later Christians) exactly the feature of Hebrew Esther that generations of readers have found most striking. This site's data carries these as the separate AddEsth apocryphal entry.",
+      "relatedOntology": null
+    },
+    {
+      "id": "ps145-missing-nun",
+      "category": "Poetic Structure",
+      "ref": "Ps.145.13",
+      "title": "A missing line in an acrostic psalm",
+      "mt": "Psalm 145 is an acrostic (each verse begins with the next letter of the Hebrew alphabet), but the printed MT skips the letter nun entirely between verses 13 and 14.",
+      "lxx": "Includes a nun-line: \"The LORD is faithful in all his words, and holy in all his works\" (compare the very similar wording already in v. 17).",
+      "dss": "11QPs-a, the great Psalms scroll from Qumran, also preserves the missing nun-line in Hebrew, closely matching the LXX's line - strong independent confirmation that the line was original and dropped out of the medieval Masoretic manuscript tradition (likely by a scribe's eye skipping from one similar-looking line to the next).",
+      "significance": "A clean, structurally-provable case (the acrostic pattern itself proves a line is missing) where DSS and LXX independently agree on the restoration - many modern translations now include this verse (e.g. NIV, ESV, NASB) on that basis.",
+      "relatedOntology": null
+    },
+    {
+      "id": "isaiah-scroll-stability",
+      "category": "Textual Transmission",
+      "ref": "Isa.1.1-Isa.66.24",
+      "title": "The Great Isaiah Scroll: 1,000 years, remarkably stable text",
+      "mt": "The medieval Masoretic Isaiah, standardized roughly a thousand years after the Qumran scrolls were copied.",
+      "lxx": "Generally a fairly close, though not word-for-word, Greek rendering of a Hebrew text-form close to (but not identical to) the MT.",
+      "dss": "1QIsa-a, the nearly-complete Great Isaiah Scroll (copied ca. 125 BC), is overwhelmingly close to the MT's consonantal text across all 66 chapters - the majority of differences are spelling/orthography, not wording - alongside a smaller number of substantive variants (like Isa. 53:11's \"light\", noted separately above).",
+      "significance": "Often cited as the single best evidence for the essential faithfulness of the Masoretic scribal tradition over a very long transmission period - the exceptions (like 53:11) are individually notable precisely because the overall agreement is so high.",
+      "relatedOntology": null
+    },
+    {
+      "id": "num24-7-agag-gog",
+      "category": "Messianic & Christological",
+      "ref": "Num.24.7",
+      "title": "\"Agag\" or \"Gog\"?",
+      "mt": "Balaam's oracle: Israel's king \"shall be higher than Agag\" (a Amalekite royal title, cf. 1 Sam. 15).",
+      "lxx": "\"...higher than Gog\" - the same name that appears as an end-times enemy king in Ezekiel 38-39 and Revelation 20:8.",
+      "dss": null,
+      "significance": "If \"Gog\" is the earlier reading (as some scholars argue, given how well-attested \"Agag\" is as a known Amalekite title, making it the easier/more explicable variant), Balaam's oracle would carry an explicitly eschatological edge in its earliest form, connecting a very early messianic prophecy to reappear centuries later in Ezekiel's and John's visions of a final Gog-conflict.",
+      "relatedOntology": null
+    },
+    {
+      "id": "hab2-4-faithfulness",
+      "category": "Messianic & Christological",
+      "ref": "Hab.2.4",
+      "title": "\"His faithfulness\" or \"my faithfulness\"?",
+      "mt": "\"The righteous shall live by his faith/faithfulness\" (emunato - \"his\").",
+      "lxx": "\"The righteous shall live by my faith/faithfulness\" (ek pisteōs mou - \"my,\" i.e. God's), in the manuscripts that read this way (others align closer to the MT).",
+      "dss": "The Habakkuk Pescher from Qumran (1QpHab) quotes and comments on this verse but doesn't settle the his/my question directly - the commentary reads it in terms of faithfulness/loyalty to the Teacher of Righteousness.",
+      "significance": "Paul quotes this verse in Romans 1:17 and Galatians 3:11 without the possessive (\"the righteous shall live by faith\"), landing closer to neither text-form exactly - the verse's small pronoun variant sits underneath one of the most load-bearing single phrases in Pauline theology.",
+      "relatedOntology": null
+    }
+  ]
+}

@@ -8,6 +8,7 @@
     { href: 'timeline.html', label: 'Timeline' },
     { href: 'chiasm.html', label: 'Chiasms' },
     { href: 'ontology.html', label: 'Ontology' },
+    { href: 'textual-criticism.html', label: 'Textual Variants' },
   ];
 
   function currentFile() {

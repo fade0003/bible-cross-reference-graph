@@ -35,6 +35,33 @@
   // ---- Data (loaded once at boot, see boot() at the bottom - this replaces
   // the per-request Express API this app used to call) ----
   let bibleData = null;
+  let textualVariants = [];
+
+  function parseSimpleRef(ref) {
+    const parts = ref.split('.');
+    const verse = parseInt(parts.pop(), 10);
+    const chapter = parseInt(parts.pop(), 10);
+    const bookId = parts.join('.');
+    return { bookId, chapter, verse };
+  }
+  // Does a curated MT/LXX/DSS variant (see textual-criticism.html) touch this
+  // verse? Ranges are same-book only here (matches how they're authored).
+  function findVariantForVerse(bookId, chapter, verse) {
+    for (const v of textualVariants) {
+      const idx = v.ref.indexOf('-');
+      if (idx === -1) {
+        const a = parseSimpleRef(v.ref);
+        if (a.bookId === bookId && a.chapter === chapter && a.verse === verse) return v;
+      } else {
+        const a = parseSimpleRef(v.ref.slice(0, idx));
+        const b = parseSimpleRef(v.ref.slice(idx + 1));
+        if (a.bookId !== bookId || b.bookId !== bookId) continue;
+        const pos = chapter * 1000 + verse;
+        if (pos >= a.chapter * 1000 + a.verse && pos <= b.chapter * 1000 + b.verse) return v;
+      }
+    }
+    return null;
+  }
 
   // ---- View state ----
   let view = { level: 'books' }; // { level: 'books' } | { level: 'book', bookId } | { level: 'chapter', bookId, chapter }
@@ -414,10 +441,16 @@
     const badgeLabel = detail.book.apocryphal ? 'Apocrypha' : detail.book.category.toUpperCase();
     const inCurrentChapter = view.level === 'chapter' && view.bookId === bookId && view.chapter === chapter;
 
+    const variant = findVariantForVerse(bookId, chapter, verse);
     let html = `
       <span class="badge ${badgeClass}">${badgeLabel}</span>
       <h2>${detail.book.name} ${detail.chapter}:${detail.verse}</h2>
       <div class="verse-text">${escapeHtml(detail.text)}</div>
+      ${
+        variant
+          ? `<div class="variant-note"><a href="textual-criticism.html#tv-${variant.id}" target="_blank" rel="noopener">&#9888; Textual variant (MT/LXX${variant.dss ? '/DSS' : ''}): ${escapeHtml(variant.title)} &rsaquo;</a></div>`
+          : ''
+      }
       <div class="stat-line">${detail.degree} total linkage${detail.degree === 1 ? '' : 's'} to this verse</div>
     `;
     if (!inCurrentChapter) {
@@ -576,6 +609,12 @@
       hint.textContent = 'Failed to load Bible data. Check the console and try reloading.';
       console.error(err);
       return;
+    }
+    try {
+      const tv = await fetch('data/textual-variants.json').then((r) => r.json());
+      textualVariants = tv.variants;
+    } catch (err) {
+      console.error('Textual variants unavailable (non-fatal):', err);
     }
     await loadView();
     requestAnimationFrame(loop);

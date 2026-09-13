@@ -6,12 +6,17 @@
 <title>Divine Council Ontology</title>
 <link rel="stylesheet" href="styles.css" />
 </head>
-<body class="content-page">
+<body class="content-page" id="ontBody">
   <header id="topbar">
     <div id="brand">Bible Cross-Reference Graph</div>
     <nav id="siteNav"></nav>
+    <div id="modeToggle">
+      <button class="tree-btn active" id="viewTreeBtn" type="button">Tree</button>
+      <button class="tree-btn" id="viewGraphBtn" type="button">Node graph</button>
+    </div>
   </header>
 
+  <!-- ---- Tree view ---- -->
   <main id="pageContent">
     <h1>Divine Council &amp; Second Temple Biblical Theology</h1>
     <p class="page-subtitle">A working ontology, after Michael S. Heiser &amp; Douglas Van Dorn</p>
@@ -34,6 +39,25 @@
       <a href="data/ontology.json" target="_blank" rel="noopener">ontology.json</a>
     </p>
   </main>
+
+  <!-- ---- Node graph view ---- -->
+  <main id="stage" hidden>
+    <canvas id="ontCanvas"></canvas>
+    <div id="legend">
+      <div class="legend-item"><span class="dot" style="background:#d4af60"></span>Class / category</div>
+      <div class="legend-item"><span class="dot" style="background:#9dc0f2"></span>Event</div>
+      <div class="legend-item"><span class="dot" style="background:#a6e6bc"></span>Individual / Person</div>
+      <div class="legend-item"><span class="dot" style="background:#ff8b83"></span>Prophecy</div>
+      <div class="legend-item"><span class="dot" style="background:#c9a6f7"></span>Covenant</div>
+      <div class="legend-note">Click a node to expand/collapse its children and see detail. Drag to pan, scroll to zoom.</div>
+    </div>
+    <div id="hint">Loading&hellip;</div>
+  </main>
+
+  <aside id="panel" class="hidden">
+    <button id="panelClose" aria-label="Close">&times;</button>
+    <div id="panelContent"></div>
+  </aside>
 
   <script src="nav.js"></script>
   <script src="ontology.js"></script>

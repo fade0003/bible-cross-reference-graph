@@ -475,6 +475,63 @@
     return { index, bookRanges, total: cursor };
   }
 
+  // Estimated-year axis for the timeline's "chronological" mode, built from
+  // data/chronology.json's hand-curated anchor points (see that file's
+  // `disclaimer`/`method` fields for what these years mean and where they
+  // come from). Anchors give a year at one verse; every other verse's year
+  // is linearly interpolated between the nearest two anchors *in canonical
+  // reading order*. A book with only one anchor (most prophetic/poetic/
+  // epistle books) would otherwise have its whole span smeared linearly
+  // out to the next book's anchor, so a synthetic same-year anchor is
+  // added at the end of any book whose last anchor isn't followed by
+  // another anchor in that same book - holding that book flat at its one
+  // known year instead.
+  function buildChronologyIndex(chronologyData, positions) {
+    const rawAnchors = chronologyData.anchors
+      .map((a) => {
+        const r = parseRef(a.ref);
+        const pos = positions.index.get(verseKey(r.bookId, r.chapter, r.verse));
+        return pos === undefined ? null : { pos, year: a.year, label: a.label, bookId: r.bookId };
+      })
+      .filter(Boolean)
+      .sort((a, b) => a.pos - b.pos);
+
+    const anchors = [];
+    rawAnchors.forEach((a, i) => {
+      anchors.push(a);
+      const isLastOfBook = i === rawAnchors.length - 1 || rawAnchors[i + 1].bookId !== a.bookId;
+      if (isLastOfBook) {
+        const br = positions.bookRanges.find((b) => b.bookId === a.bookId);
+        if (br && br.end - 1 > a.pos) {
+          anchors.push({ pos: br.end - 1, year: a.year, label: a.label, bookId: a.bookId });
+        }
+      }
+    });
+    anchors.sort((a, b) => a.pos - b.pos);
+
+    const years = anchors.map((a) => a.year);
+    return {
+      anchors,
+      minYear: Math.min(...years),
+      maxYear: Math.max(...years),
+    };
+  }
+
+  function yearForPosition(chronIndex, pos) {
+    const { anchors } = chronIndex;
+    if (pos <= anchors[0].pos) return anchors[0].year;
+    for (let i = 0; i < anchors.length - 1; i++) {
+      const a = anchors[i];
+      const b = anchors[i + 1];
+      if (pos >= a.pos && pos <= b.pos) {
+        if (b.pos === a.pos) return a.year;
+        const t = (pos - a.pos) / (b.pos - a.pos);
+        return a.year + t * (b.year - a.year);
+      }
+    }
+    return anchors[anchors.length - 1].year;
+  }
+
   function topVerses(data, { limit = 50, minVotes = 0, bookId = null } = {}) {
     const ranked = [];
     for (const [key, adj] of data.adjacency.entries()) {
@@ -554,6 +611,8 @@
     buildChapterGraph,
     buildVerseGraph,
     globalPositions,
+    buildChronologyIndex,
+    yearForPosition,
     verseDetail,
     topVerses,
     search,
