@@ -181,11 +181,20 @@
 
   let cached = null;
 
+  // Lets the browser paint the just-set progress message before a
+  // synchronous, CPU-bound step (parsing/indexing ~345k cross-references)
+  // blocks the main thread - without this, report()'s DOM update never
+  // makes it to screen until the blocking work is already done.
+  function nextFrame() {
+    return new Promise((resolve) => requestAnimationFrame(() => requestAnimationFrame(resolve)));
+  }
+
   async function getData(onProgress) {
     if (cached) return cached;
     const report = onProgress || (() => {});
 
     report('Fetching Bible text…');
+    await nextFrame();
     const [books, bibleText] = await Promise.all([
       fetchJSON('data/books.json'),
       fetchJSON('data/bible-text.json'),
@@ -193,12 +202,14 @@
     const { booksById, verseText, chapterMeta } = loadBooksAndText(books, bibleText);
 
     report('Fetching cross-references…');
+    await nextFrame();
     const [crossRefText, curatedRaw] = await Promise.all([
       fetchText('data/cross_references.txt'),
       fetchJSON('data/curated-apocrypha-crossrefs.json'),
     ]);
 
     report('Indexing cross-references…');
+    await nextFrame();
     const canonicalEdges = loadCrossReferences(crossRefText, booksById);
     const curatedEdges = loadCuratedApocrypha(curatedRaw, booksById, canonicalEdges.length);
     const edges = canonicalEdges.concat(curatedEdges);
