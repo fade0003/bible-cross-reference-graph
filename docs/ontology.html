@@ -1,0 +1,41 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+<meta charset="UTF-8" />
+<meta name="viewport" content="width=device-width, initial-scale=1.0" />
+<title>Divine Council Ontology</title>
+<link rel="stylesheet" href="styles.css" />
+</head>
+<body class="content-page">
+  <header id="topbar">
+    <div id="brand">Bible Cross-Reference Graph</div>
+    <nav id="siteNav"></nav>
+  </header>
+
+  <main id="pageContent">
+    <h1>Divine Council &amp; Second Temple Biblical Theology</h1>
+    <p class="page-subtitle">A working ontology, after Michael S. Heiser &amp; Douglas Van Dorn</p>
+
+    <div class="disclaimer-box" id="ontDisclaimer"></div>
+    <div class="sources-line" id="ontSources"></div>
+
+    <div id="treeControls">
+      <input id="treeFilter" type="text" placeholder="Filter (e.g. &quot;Melchizedek&quot;, &quot;Rephaim&quot;, &quot;resurrection&quot;)…" autocomplete="off" />
+      <button class="tree-btn" id="expandAllBtn" type="button">Expand all</button>
+      <button class="tree-btn" id="collapseAllBtn" type="button">Collapse all</button>
+    </div>
+
+    <div id="tree">Loading…</div>
+
+    <p class="ttl-link">
+      This page's underlying data is also exported as real OWL/RDF:
+      <a href="data/bible-theology-ontology.ttl" target="_blank" rel="noopener">bible-theology-ontology.ttl</a>
+      &middot;
+      <a href="data/ontology.json" target="_blank" rel="noopener">ontology.json</a>
+    </p>
+  </main>
+
+  <script src="nav.js"></script>
+  <script src="ontology.js"></script>
+</body>
+</html>

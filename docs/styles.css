@@ -47,6 +47,69 @@ html, body {
 #breadcrumb span.current { color: #d4af60; cursor: default; }
 #breadcrumb .sep { color: #555; cursor: default; }
 
+/* ---- Shared site nav (nav.js), used by all four pages ---- */
+#siteNav {
+  display: flex;
+  gap: 4px;
+  white-space: nowrap;
+}
+#siteNav a {
+  color: #9aa0b4;
+  text-decoration: none;
+  font-size: 13px;
+  padding: 5px 10px;
+  border-radius: 5px;
+  border: 1px solid transparent;
+}
+#siteNav a:hover { color: #e8e4d8; background: rgba(255, 255, 255, 0.05); }
+#siteNav a.active {
+  color: #d4af60;
+  border-color: rgba(212, 175, 96, 0.35);
+  background: rgba(212, 175, 96, 0.1);
+}
+
+/* ---- Shared layout for the non-canvas pages (ontology/timeline/chiasm) ---- */
+body.content-page { overflow: auto; }
+body.content-page #topbar { position: static; }
+#pageContent {
+  max-width: 980px;
+  margin: 0 auto;
+  padding: 28px 22px 60px;
+}
+#pageContent > .page-intro {
+  color: #b7bacc;
+  font-size: 14px;
+  line-height: 1.6;
+  margin-bottom: 22px;
+}
+#pageContent h1 {
+  font-size: 22px;
+  color: #d4af60;
+  margin: 0 0 6px;
+}
+#pageContent .page-subtitle {
+  color: #9aa0b4;
+  font-size: 14px;
+  margin: 0 0 18px;
+}
+.disclaimer-box {
+  border: 1px solid rgba(224, 71, 62, 0.3);
+  background: rgba(224, 71, 62, 0.07);
+  border-radius: 8px;
+  padding: 12px 16px;
+  font-size: 12.5px;
+  line-height: 1.6;
+  color: #d9b8b3;
+  margin-bottom: 24px;
+}
+.sources-line {
+  font-size: 11.5px;
+  color: #7d8199;
+  margin-bottom: 24px;
+  line-height: 1.6;
+}
+.sources-line a { color: #9aa5c4; }
+
 #topVersesBtn {
   background: rgba(212, 175, 96, 0.1);
   border: 1px solid rgba(212, 175, 96, 0.35);
@@ -107,7 +170,7 @@ html, body {
   top: 56px; left: 0; right: 0; bottom: 34px;
 }
 
-#graphCanvas {
+#graphCanvas, #tlCanvas {
   display: block;
   width: 100%;
   height: 100%;
@@ -266,3 +329,192 @@ html, body {
   z-index: 20;
 }
 #disclaimer a { color: #8a8ea8; }
+
+/* ---- Ontology tree ---- */
+#treeControls {
+  display: flex;
+  gap: 10px;
+  align-items: center;
+  margin-bottom: 18px;
+  flex-wrap: wrap;
+}
+#treeFilter {
+  flex: 1;
+  min-width: 200px;
+  background: #171a26;
+  border: 1px solid rgba(212, 175, 96, 0.3);
+  color: #e8e4d8;
+  padding: 7px 10px;
+  border-radius: 6px;
+  font-family: inherit;
+  font-size: 13px;
+}
+#treeFilter:focus { outline: none; border-color: #d4af60; }
+.tree-btn {
+  background: rgba(212, 175, 96, 0.1);
+  border: 1px solid rgba(212, 175, 96, 0.35);
+  color: #d4af60;
+  padding: 7px 12px;
+  border-radius: 6px;
+  font-family: inherit;
+  font-size: 12.5px;
+  cursor: pointer;
+  white-space: nowrap;
+}
+.tree-btn:hover { background: rgba(212, 175, 96, 0.22); }
+
+.ont-node {
+  border-left: 2px solid rgba(255, 255, 255, 0.08);
+  margin-left: 4px;
+  padding-left: 14px;
+  margin-bottom: 2px;
+}
+.ont-node > summary {
+  cursor: pointer;
+  list-style: none;
+  padding: 7px 4px;
+  display: flex;
+  align-items: baseline;
+  gap: 8px;
+  border-radius: 5px;
+}
+.ont-node > summary::-webkit-details-marker { display: none; }
+.ont-node > summary:hover { background: rgba(255, 255, 255, 0.04); }
+.ont-node > summary::before {
+  content: '▸';
+  color: #7d8199;
+  font-size: 11px;
+  width: 10px;
+  flex-shrink: 0;
+}
+.ont-node[open] > summary::before { content: '▾'; }
+.ont-label { font-size: 14.5px; color: #e8e4d8; }
+.ont-node.leaf > summary .ont-label { font-size: 13.5px; color: #cfd2e6; }
+
+.ont-badge {
+  font-size: 9.5px;
+  letter-spacing: 0.04em;
+  text-transform: uppercase;
+  padding: 1px 6px;
+  border-radius: 8px;
+  flex-shrink: 0;
+  border: 1px solid rgba(255, 255, 255, 0.12);
+  color: #9aa0b4;
+}
+.ont-badge.Class { color: #d4af60; border-color: rgba(212, 175, 96, 0.4); }
+.ont-badge.Event { color: #9dc0f2; border-color: rgba(95, 143, 217, 0.4); }
+.ont-badge.Individual, .ont-badge.Person { color: #a6e6bc; border-color: rgba(111, 206, 143, 0.4); }
+.ont-badge.Prophecy { color: #ff8b83; border-color: rgba(224, 71, 62, 0.4); }
+.ont-badge.Type { color: #e0a798; border-color: rgba(224, 167, 152, 0.4); }
+.ont-badge.Covenant { color: #c9a6f7; border-color: rgba(201, 166, 247, 0.4); }
+.ont-badge.Nephilim { color: #f2a65f; border-color: rgba(242, 166, 95, 0.4); }
+
+.ont-body { padding: 2px 4px 10px 18px; }
+.ont-summary { font-size: 13px; line-height: 1.55; color: #b7bacc; margin-bottom: 8px; max-width: 68ch; }
+
+.ont-verses { display: flex; flex-wrap: wrap; gap: 6px; margin-bottom: 4px; }
+.ont-verse-chip {
+  font-size: 11.5px;
+  padding: 3px 8px;
+  border-radius: 10px;
+  background: rgba(95, 143, 217, 0.12);
+  border: 1px solid rgba(95, 143, 217, 0.3);
+  color: #9dc0f2;
+  cursor: pointer;
+}
+.ont-verse-chip:hover { background: rgba(95, 143, 217, 0.25); }
+.ont-verse-chip.fulfillment {
+  background: rgba(111, 206, 143, 0.12);
+  border-color: rgba(111, 206, 143, 0.3);
+  color: #a6e6bc;
+}
+.ont-verse-chip.fulfillment:hover { background: rgba(111, 206, 143, 0.25); }
+
+.ont-verse-text {
+  font-size: 12.5px;
+  line-height: 1.5;
+  color: #ede9dc;
+  background: rgba(255, 255, 255, 0.03);
+  border-left: 2px solid rgba(212, 175, 96, 0.4);
+  padding: 6px 10px;
+  margin: 4px 0 8px;
+  max-width: 68ch;
+}
+.ont-verse-text .ref { color: #d4af60; font-weight: bold; margin-right: 6px; }
+.ont-verse-text .more { color: #7d8199; cursor: pointer; text-decoration: underline; font-size: 11.5px; }
+
+.ont-arrow { color: #7d8199; font-size: 12px; padding: 0 2px; }
+
+.ttl-link {
+  display: inline-block;
+  margin-top: 8px;
+  font-size: 12px;
+  color: #9aa5c4;
+}
+
+/* ---- Timeline ---- */
+#timelineCaption {
+  flex: 1;
+  font-size: 12.5px;
+  color: #7d8199;
+  text-align: right;
+}
+#tlCanvas { cursor: grab; }
+#tlTooltip.hidden { display: none; }
+#tlTooltip {
+  position: absolute;
+  background: rgba(10, 12, 20, 0.95);
+  border: 1px solid rgba(212, 175, 96, 0.35);
+  border-radius: 6px;
+  padding: 6px 10px;
+  font-size: 12px;
+  color: #e8e4d8;
+  pointer-events: none;
+  white-space: nowrap;
+  z-index: 15;
+}
+
+/* ---- Chiasm explorer ---- */
+#chiasmPicker { display: flex; flex-wrap: wrap; gap: 8px; margin-bottom: 22px; }
+.chiasm-pick.active { background: rgba(212, 175, 96, 0.3); }
+#chiasmView h2 { font-size: 19px; color: #d4af60; margin: 0 0 4px; }
+.chiasm-scholar-note {
+  font-size: 11.5px;
+  color: #7d8199;
+  font-style: italic;
+  line-height: 1.5;
+  margin: 8px 0 22px;
+  max-width: 70ch;
+}
+.chiasm-rows { display: flex; flex-direction: column; gap: 6px; }
+.chiasm-row {
+  display: flex;
+  align-items: baseline;
+  gap: 10px;
+  padding: 7px 12px;
+  border-left: 3px solid;
+  background: rgba(255, 255, 255, 0.03);
+  border-radius: 0 6px 6px 0;
+  flex-wrap: wrap;
+}
+.chiasm-row.center {
+  background: rgba(212, 175, 96, 0.1);
+  padding-top: 10px;
+  padding-bottom: 10px;
+}
+.chiasm-label {
+  font-weight: bold;
+  font-size: 15px;
+  min-width: 26px;
+  flex-shrink: 0;
+}
+.chiasm-title { font-size: 13.5px; color: #cfd2e6; flex: 1; min-width: 200px; }
+.chiasm-center-badge {
+  font-size: 9.5px;
+  letter-spacing: 0.05em;
+  color: #d4af60;
+  border: 1px solid rgba(212, 175, 96, 0.4);
+  border-radius: 8px;
+  padding: 1px 6px;
+  margin-left: 6px;
+}

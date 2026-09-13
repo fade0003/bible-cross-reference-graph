@@ -444,6 +444,34 @@
     };
   }
 
+  // Cumulative verse index in canonical (Genesis -> Revelation) reading
+  // order - used by the timeline view to place every verse on a single
+  // linear axis. Not a historical/composition-date ordering.
+  function globalPositions(data) {
+    const index = new Map();
+    const bookRanges = [];
+    let cursor = 0;
+    for (const book of data.books) {
+      const start = cursor;
+      const chapters = data.chapterMeta.get(book.id) || [];
+      for (const c of chapters) {
+        for (let v = 1; v <= c.verseCount; v++) {
+          index.set(verseKey(book.id, c.chapter, v), cursor);
+          cursor++;
+        }
+      }
+      bookRanges.push({
+        bookId: book.id,
+        name: book.name,
+        category: book.category,
+        apocryphal: book.apocryphal,
+        start,
+        end: cursor,
+      });
+    }
+    return { index, bookRanges, total: cursor };
+  }
+
   function topVerses(data, { limit = 50, minVotes = 0, bookId = null } = {}) {
     const ranked = [];
     for (const [key, adj] of data.adjacency.entries()) {
@@ -522,6 +550,7 @@
     buildBookGraph,
     buildChapterGraph,
     buildVerseGraph,
+    globalPositions,
     verseDetail,
     topVerses,
     search,

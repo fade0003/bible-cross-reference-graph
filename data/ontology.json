@@ -1,0 +1,377 @@
+{
+  "title": "Divine Council & Second Temple Biblical Theology",
+  "subtitle": "A working ontology, after Michael S. Heiser & Douglas Van Dorn",
+  "sources": [
+    "Michael S. Heiser, The Unseen Realm (2015)",
+    "Michael S. Heiser, Reversing Hermon (2017)",
+    "Michael S. Heiser, Angels (2018)",
+    "Douglas Van Dorn, Giants: Sons of the Gods (2013)",
+    "Douglas Van Dorn, Waters of Creation (2016)",
+    "Douglas Van Dorn, Covenant Theology: A Reformed Baptist Primer (2019)"
+  ],
+  "disclaimer": "This page lays out one particular, identifiable theological reading tradition - the 'divine council worldview' associated with Michael Heiser and Douglas Van Dorn - as a browsable concept hierarchy, not as doctrinally neutral consensus or as proof-texted certainty. Faithful, careful readers of Scripture disagree on several of these points (especially the Nephilim/Rephaim material and some Angel-of-the-LORD identifications). Verse references are supplied for study and are not exhaustive of every relevant passage. Class/property/individual labels are informal OWL-style annotations for the page's export (see the Turtle file), not a claim that this is THE definitive formal ontology of the Bible.",
+  "classes": [
+    { "id": "DivineBeing", "label": "Divine Being (elohim)", "comment": "Any member of the spirit-world class Scripture calls 'elohim' - a plane-of-existence term, not a statement of moral equivalence with Yahweh." },
+    { "id": "CouncilMember", "label": "Divine Council Member", "subClassOf": "DivineBeing", "comment": "A bene elohim ('son of God') seated/serving in Yahweh's heavenly assembly." },
+    { "id": "TheophanicFigure", "label": "Theophanic Figure", "subClassOf": "DivineBeing", "comment": "A figure through whom God is personally, visibly present - preeminently the Angel of the LORD." },
+    { "id": "Nephilim", "label": "Nephilim / Rephaim", "comment": "The giant clans descended from Genesis 6:1-4 and their remnant lines (Anakim, Emim, Zamzummim, Rephaim proper)." },
+    { "id": "Person", "label": "Person", "comment": "A named human individual." },
+    { "id": "Place", "label": "Place", "comment": "A named location." },
+    { "id": "Event", "label": "Event", "comment": "A datable or narratable occurrence." },
+    { "id": "Covenant", "label": "Covenant", "comment": "A formal, sworn relational commitment God makes with people." },
+    { "id": "Prophecy", "label": "Prophecy", "comment": "An Old Testament prediction or type read by the New Testament as fulfilled in Jesus." },
+    { "id": "Type", "label": "Type (Pattern of Grace)", "comment": "An Old Testament person, object, or event that prefigures a New Testament antitype, usually Christ or his saving work." }
+  ],
+  "properties": [
+    { "id": "rulesOver", "label": "rules over", "domain": "DivineBeing", "range": "Place" },
+    { "id": "memberOf", "label": "member of", "domain": "CouncilMember", "range": "Event" },
+    { "id": "identifiedWith", "label": "identified with (yet distinct from)", "domain": "TheophanicFigure", "range": "DivineBeing" },
+    { "id": "appearsIn", "label": "appears in", "domain": "Person", "range": "Event" },
+    { "id": "descendedFrom", "label": "descended from", "domain": "Nephilim", "range": "Event" },
+    { "id": "fulfilledBy", "label": "fulfilled by", "domain": "Prophecy", "range": "Person" },
+    { "id": "typifies", "label": "typifies", "domain": "Type", "range": "Person" },
+    { "id": "establishesCovenant", "label": "establishes covenant with", "domain": "Person", "range": "Covenant" },
+    { "id": "partOf", "label": "part of", "comment": "hierarchical containment used by the tree view" }
+  ],
+  "tree": [
+    {
+      "id": "divine-council",
+      "label": "The Divine Council",
+      "type": "Class",
+      "summary": "Yahweh presides over an assembly of spirit-plane 'elohim' (Ps 82:1), the 'sons of God' (bene elohim), who serve, advise, and in some cases rebel against him. This is the organizing framework Heiser argues runs through the whole Bible's supernatural narrative.",
+      "verses": ["Ps.82.1", "1Kgs.22.19-1Kgs.22.22", "Job.1.6-Job.1.12", "Job.2.1-Job.2.6", "Isa.6.1-Isa.6.8", "Jer.23.18"],
+      "children": [
+        {
+          "id": "council-elohim-term",
+          "label": "Elohim as a Plane-of-Existence Term",
+          "type": "Class",
+          "summary": "'Elohim' is used in the Hebrew Bible as a place-of-residence/species category (any inhabitant of the spirit world), not exclusively as a proper name for Yahweh - which is why human judges, the dead, and other spirits can all be called 'elohim' in context.",
+          "verses": ["Ps.82.6", "Ps.89.5-Ps.89.7", "1Sam.28.13"]
+        },
+        {
+          "id": "bene-elohim",
+          "label": "The Bene Elohim (\"Sons of God\")",
+          "type": "Class",
+          "summary": "Non-human members of Yahweh's council, present at creation and named as a category distinct from humanity.",
+          "verses": ["Job.38.7", "Ps.29.1", "Gen.6.2", "Deut.32.8"]
+        },
+        {
+          "id": "council-yahweh-elyon",
+          "label": "Yahweh as El Elyon, Council Head",
+          "type": "Individual",
+          "summary": "Yahweh is not merely one elohim among the council's members but 'Most High' - judge and owner of the divine council itself.",
+          "verses": ["Ps.82.8", "Ps.95.3", "Deut.10.17"]
+        },
+        {
+          "id": "babel-disinheritance",
+          "label": "Babel: The Nations Disinherited",
+          "type": "Event",
+          "summary": "After Babel, Yahweh allots the nations to lesser elohim ('according to the number of the sons of God', reading with the Dead Sea Scrolls/LXX against the MT's 'sons of Israel') and keeps Israel as his own direct portion - the theological hinge the rest of the Old Testament turns on, and the conceptual root of this app's companion game project, DISINHERITED.",
+          "verses": ["Gen.11.1-Gen.11.9", "Deut.32.8-Deut.32.9", "Deut.4.19-Deut.4.20", "Acts.17.26-Acts.17.27"]
+        },
+        {
+          "id": "council-reclamation",
+          "label": "Reclamation Through Abraham & Israel",
+          "type": "Event",
+          "summary": "Yahweh's answer to Babel: he calls Abraham to father a people through whom every disinherited nation will ultimately be reclaimed.",
+          "verses": ["Gen.12.1-Gen.12.3", "Exod.19.5-Exod.19.6"]
+        },
+        {
+          "id": "council-nt-christ-enthroned",
+          "label": "Christ Enthroned Above the Principalities",
+          "type": "Event",
+          "summary": "The New Testament recasts the council conflict cosmically: Jesus is raised and seated far above every ruler, authority, power, and dominion - the territorial 'elohim' of the nations - and the church's struggle is explicitly against these powers.",
+          "verses": ["Eph.1.20-Eph.1.21", "Col.1.16", "Col.2.15", "Eph.6.12"]
+        }
+      ]
+    },
+    {
+      "id": "angel-of-the-lord",
+      "label": "The Angel of the LORD (Malak YHWH)",
+      "type": "Class",
+      "summary": "A figure who speaks as Yahweh in the first person, is worshiped as Yahweh, and is called Yahweh outright - yet is repeatedly distinguished from 'the LORD' in the same episode. Read by both Heiser and the historic Christian tradition as the clearest Old Testament window onto plurality within the Godhead, and often taken as a pre-incarnate appearance of the Son.",
+      "verses": ["Gen.16.7-Gen.16.13", "Gen.22.11-Gen.22.18", "Exod.3.2-Exod.3.6", "Exod.23.20-Exod.23.23", "Judg.2.1-Judg.2.4"],
+      "children": [
+        {
+          "id": "angel-hagar",
+          "label": "Hagar at the Well (Beer-lahai-roi)",
+          "type": "Event",
+          "summary": "The Angel of the LORD finds Hagar in the wilderness; she names him 'a God who sees' and marvels that she has 'seen him who looks after me.'",
+          "verses": ["Gen.16.7-Gen.16.13"]
+        },
+        {
+          "id": "angel-akedah",
+          "label": "Abraham & Isaac at Moriah",
+          "type": "Event",
+          "summary": "The Angel of the LORD calls from heaven, swears by himself (a divine prerogative), and stops the sacrifice.",
+          "verses": ["Gen.22.11-Gen.22.18"]
+        },
+        {
+          "id": "angel-burning-bush",
+          "label": "The Burning Bush",
+          "type": "Event",
+          "summary": "'The angel of the LORD appeared to him in a flame of fire' - and the text immediately continues, 'God called to him... I am the God of your father.'",
+          "verses": ["Exod.3.2-Exod.3.6", "Exod.3.14"]
+        },
+        {
+          "id": "angel-commander",
+          "label": "Commander of the LORD's Army",
+          "type": "Event",
+          "summary": "Joshua is told to remove his sandals - the same command given Moses at the bush - before this armed figure at Jericho.",
+          "verses": ["Josh.5.13-Josh.5.15"]
+        },
+        {
+          "id": "angel-gideon",
+          "label": "Gideon's Commission",
+          "type": "Event",
+          "summary": "The Angel of the LORD sits under the oak at Ophrah; the narrator then simply calls him 'the LORD.'",
+          "verses": ["Judg.6.11-Judg.6.24"]
+        },
+        {
+          "id": "angel-manoah",
+          "label": "Manoah and the Angel",
+          "type": "Event",
+          "summary": "Samson's parents realize only after the fact that 'we have seen God' - and are afraid they will die for having seen him.",
+          "verses": ["Judg.13.3-Judg.13.22"]
+        },
+        {
+          "id": "angel-zechariah-courtroom",
+          "label": "Zechariah's Heavenly Courtroom",
+          "type": "Event",
+          "summary": "The Angel of the LORD presides as advocate for Joshua the high priest against the satan ('the accuser') - a council-courtroom scene.",
+          "verses": ["Zech.3.1-Zech.3.7"]
+        },
+        {
+          "id": "angel-christophany",
+          "label": "Read as a Christophany",
+          "type": "Individual",
+          "summary": "The New Testament's claim that no one has seen the Father, together with the Son's own testimony ('before Abraham was, I am'), leads much of the historic church to read Old Testament Angel-of-the-LORD appearances as the pre-incarnate Son making the Father known.",
+          "verses": ["John.1.18", "John.8.56-John.8.58", "Col.1.15"]
+        }
+      ]
+    },
+    {
+      "id": "melchizedek",
+      "label": "Melchizedek",
+      "type": "Individual",
+      "summary": "The mysterious king-priest of Salem who blesses Abraham and receives his tithe - given no recorded genealogy, birth, or death, and made in Scripture's argument a pattern ('order') for a priesthood greater than Levi's: Christ's own.",
+      "verses": ["Gen.14.18-Gen.14.20", "Ps.110.4", "Heb.7.1-Heb.7.3"],
+      "children": [
+        {
+          "id": "melch-genesis",
+          "label": "King-Priest of Salem",
+          "type": "Event",
+          "summary": "Melchizedek brings out bread and wine and blesses Abram 'by God Most High, Possessor of heaven and earth.'",
+          "verses": ["Gen.14.18-Gen.14.20"]
+        },
+        {
+          "id": "melch-psalm110",
+          "label": "\"A Priest Forever, After the Order of Melchizedek\"",
+          "type": "Prophecy",
+          "summary": "David's psalm addresses someone as 'my Lord,' seated at Yahweh's right hand, and sworn into an eternal, non-Levitical priesthood.",
+          "verses": ["Ps.110.1", "Ps.110.4"]
+        },
+        {
+          "id": "melch-hebrews",
+          "label": "Fulfilled in Christ's Eternal Priesthood",
+          "type": "Event",
+          "summary": "Hebrews argues at length that Jesus, from the non-priestly tribe of Judah, holds a priesthood after Melchizedek's pattern - permanent, because he continues forever.",
+          "verses": ["Heb.5.6-Heb.5.10", "Heb.6.20", "Heb.7.11-Heb.7.17"]
+        }
+      ]
+    },
+    {
+      "id": "rephaim-nephilim",
+      "label": "Rephaim & Nephilim",
+      "type": "Class",
+      "summary": "Genesis 6's 'sons of God' come in to 'the daughters of man' and produce the Nephilim - 'the mighty men who were of old, the men of renown.' Their line resurfaces after the flood as clans of giants (Anakim, Emim, Zamzummim, Rephaim proper) whom Israel is specifically commissioned to dispossess - read by Heiser and Van Dorn as an extension of the cosmic-geography conflict, not merely a military campaign.",
+      "verses": ["Gen.6.1-Gen.6.4"],
+      "children": [
+        {
+          "id": "nephilim-genesis6",
+          "label": "The Genesis 6 Origin Account",
+          "type": "Event",
+          "summary": "'The Nephilim were on the earth in those days, and also afterward' - explicitly noting a post-flood recurrence of the same phenomenon.",
+          "verses": ["Gen.6.1-Gen.6.4"]
+        },
+        {
+          "id": "rephaim-og-bashan",
+          "label": "Og, King of Bashan",
+          "type": "Person",
+          "summary": "The last of the Rephaim in the region; his iron bed's dimensions (roughly 13.5 by 6 feet) are preserved as a curiosity in Deuteronomy's own text.",
+          "verses": ["Deut.3.11", "Num.21.33-Num.21.35", "Deut.3.1-Deut.3.11", "Josh.12.4-Josh.12.5"]
+        },
+        {
+          "id": "rephaim-clans",
+          "label": "Rephaim, Emim, Zamzummim, Anakim",
+          "type": "Nephilim",
+          "summary": "Deuteronomy catalogs several regional giant-clan names as functionally the same phenomenon under different tribal labels, each already dispossessed by neighboring peoples with Yahweh's help before Israel's own conquest.",
+          "verses": ["Deut.2.10-Deut.2.11", "Deut.2.20-Deut.2.21", "Num.13.32-Num.13.33", "Deut.9.2", "Josh.11.21-Josh.11.22"]
+        },
+        {
+          "id": "rephaim-goliath",
+          "label": "Goliath and the Gittite Giants",
+          "type": "Person",
+          "summary": "Philistine Gath preserves a remnant giant line into David's day; 2 Samuel names four more of Goliath's kin killed by David's men.",
+          "verses": ["1Sam.17.4-1Sam.17.7", "2Sam.21.15-2Sam.21.22", "1Chr.20.4-1Chr.20.8"]
+        },
+        {
+          "id": "nephilim-nt-echo",
+          "label": "New Testament Echoes",
+          "type": "Event",
+          "summary": "Jude and 2 Peter both reference angels who 'did not stay within their own position of authority' and are kept in chains for judgment - widely read (including by Heiser) as an allusion to the Genesis 6 episode via Second Temple Jewish tradition (1 Enoch), which is background reading, not Scripture.",
+          "verses": ["Jude.1.6", "2Pet.2.4"]
+        }
+      ]
+    },
+    {
+      "id": "promises-to-israel",
+      "label": "Promises to Israel (The Covenant Line)",
+      "type": "Class",
+      "summary": "From Babel's disinheritance forward, the Bible's throughline is Yahweh's covenant program to reclaim the nations through one family, one people, one king, and finally one better covenant.",
+      "verses": ["Gen.12.1-Gen.12.3"],
+      "children": [
+        {
+          "id": "covenant-abrahamic",
+          "label": "Abrahamic Covenant: Land, Seed, Blessing",
+          "type": "Covenant",
+          "summary": "Yahweh's unconditional, self-maledictory oath (Genesis 15's smoking-fire-pot ceremony) to give Abraham's offspring a land, make them a great nation, and bless all the families of the earth through them.",
+          "verses": ["Gen.12.1-Gen.12.3", "Gen.15.1-Gen.15.21", "Gen.17.1-Gen.17.14"]
+        },
+        {
+          "id": "covenant-mosaic",
+          "label": "Mosaic (Sinai) Covenant",
+          "type": "Covenant",
+          "summary": "Israel is constituted as 'a kingdom of priests and a holy nation' - a corporate, mediating vocation toward the still-disinherited nations.",
+          "verses": ["Exod.19.3-Exod.19.6", "Exod.24.3-Exod.24.8"]
+        },
+        {
+          "id": "covenant-davidic",
+          "label": "Davidic Covenant",
+          "type": "Covenant",
+          "summary": "Yahweh swears David an eternal house, throne, and kingdom - the direct background for every later 'son of David' messianic expectation.",
+          "verses": ["2Sam.7.8-2Sam.7.16", "Ps.89.3-Ps.89.4", "Ps.89.19-Ps.89.37"]
+        },
+        {
+          "id": "covenant-new",
+          "label": "New Covenant",
+          "type": "Covenant",
+          "summary": "A promised covenant not like Sinai's - law written on the heart, sins remembered no more - which Jesus identifies with his own blood at the Last Supper.",
+          "verses": ["Jer.31.31-Jer.31.34", "Ezek.36.26-Ezek.36.27", "Luke.22.20"]
+        },
+        {
+          "id": "covenant-babel-reversal",
+          "label": "Babel Reversed: Every Nation Reclaimed",
+          "type": "Event",
+          "summary": "The covenant line's destination: Revelation's throne room hears a new song sung by people ransomed 'from every tribe and language and people and nation' - Babel's disinheritance undone.",
+          "verses": ["Gen.12.3", "Gal.3.8", "Gal.3.16", "Rev.5.9-Rev.5.10"]
+        }
+      ]
+    },
+    {
+      "id": "messianic-prophecy",
+      "label": "Messianic Prophecy Fulfilled in Jesus",
+      "type": "Class",
+      "summary": "Tradition catalogs well over 300 Old Testament correlations read as messianic; this page curates a representative core of the most frequently cited, organized by the arc of Jesus' life. Prophetic fulfillment is itself a major plank of the divine-council reading: the disinherited nations are only reclaimed through this specific, predicted, historical Person.",
+      "verses": [],
+      "children": [
+        {
+          "id": "prophecy-lineage",
+          "label": "Lineage & Identity",
+          "type": "Class",
+          "children": [
+            { "id": "p-seed-of-woman", "label": "Seed of the woman, crushes the serpent", "type": "Prophecy", "verses": ["Gen.3.15"], "fulfillment": ["Gal.4.4", "Rom.16.20"] },
+            { "id": "p-seed-of-abraham", "label": "Offspring of Abraham", "type": "Prophecy", "verses": ["Gen.22.18"], "fulfillment": ["Matt.1.1", "Gal.3.16"] },
+            { "id": "p-tribe-of-judah", "label": "From the tribe of Judah", "type": "Prophecy", "verses": ["Gen.49.10"], "fulfillment": ["Luke.3.33", "Heb.7.14"] },
+            { "id": "p-line-of-david", "label": "Heir to David's throne", "type": "Prophecy", "verses": ["2Sam.7.12-2Sam.7.13", "Isa.9.6-Isa.9.7", "Jer.23.5"], "fulfillment": ["Matt.1.1", "Luke.1.32-Luke.1.33"] },
+            { "id": "p-immanuel", "label": "Born of a virgin, \"God with us\"", "type": "Prophecy", "verses": ["Isa.7.14"], "fulfillment": ["Matt.1.22-Matt.1.23"] },
+            { "id": "p-eternal-preexistence", "label": "Goings forth from of old, from everlasting", "type": "Prophecy", "verses": ["Mic.5.2"], "fulfillment": ["John.1.1-John.1.2", "John.8.58"] }
+          ]
+        },
+        {
+          "id": "prophecy-birth-childhood",
+          "label": "Birth & Childhood",
+          "type": "Class",
+          "children": [
+            { "id": "p-bethlehem", "label": "Born in Bethlehem Ephrathah", "type": "Prophecy", "verses": ["Mic.5.2"], "fulfillment": ["Matt.2.1", "Luke.2.4-Luke.2.7"] },
+            { "id": "p-out-of-egypt", "label": "Called out of Egypt", "type": "Prophecy", "verses": ["Hos.11.1"], "fulfillment": ["Matt.2.14-Matt.2.15"] },
+            { "id": "p-rachel-weeping", "label": "Rachel weeping for the children (the massacre at Bethlehem)", "type": "Prophecy", "verses": ["Jer.31.15"], "fulfillment": ["Matt.2.16-Matt.2.18"] },
+            { "id": "p-nazarene", "label": "Called a Nazarene", "type": "Prophecy", "verses": ["Isa.11.1"], "fulfillment": ["Matt.2.23"] }
+          ]
+        },
+        {
+          "id": "prophecy-ministry",
+          "label": "Ministry & Identity",
+          "type": "Class",
+          "children": [
+            { "id": "p-forerunner", "label": "Preceded by a preparing messenger", "type": "Prophecy", "verses": ["Isa.40.3", "Mal.3.1"], "fulfillment": ["Matt.3.1-Matt.3.3", "John.1.23"] },
+            { "id": "p-galilee-ministry", "label": "Ministry begins in Galilee, \"a light to the nations\"", "type": "Prophecy", "verses": ["Isa.9.1-Isa.9.2"], "fulfillment": ["Matt.4.12-Matt.4.16"] },
+            { "id": "p-prophet-like-moses", "label": "A prophet like Moses", "type": "Prophecy", "verses": ["Deut.18.15-Deut.18.18"], "fulfillment": ["Acts.3.20-Acts.3.23"] },
+            { "id": "p-zeal-for-house", "label": "Zeal for God's house consumes him", "type": "Prophecy", "verses": ["Ps.69.9"], "fulfillment": ["John.2.15-John.2.17"] },
+            { "id": "p-parables", "label": "Teaches in parables", "type": "Prophecy", "verses": ["Ps.78.2"], "fulfillment": ["Matt.13.34-Matt.13.35"] },
+            { "id": "p-rejected-by-own", "label": "Rejected by his own", "type": "Prophecy", "verses": ["Isa.53.3", "Ps.69.8"], "fulfillment": ["John.1.11", "John.7.5"] },
+            { "id": "p-triumphal-entry", "label": "Enters Jerusalem, humble, riding a donkey", "type": "Prophecy", "verses": ["Zech.9.9"], "fulfillment": ["Matt.21.4-Matt.21.5", "John.12.14-John.12.15"] }
+          ]
+        },
+        {
+          "id": "prophecy-betrayal-trial",
+          "label": "Betrayal & Trial",
+          "type": "Class",
+          "children": [
+            { "id": "p-betrayed-friend", "label": "Betrayed by a close friend", "type": "Prophecy", "verses": ["Ps.41.9"], "fulfillment": ["Matt.26.14-Matt.26.16", "Matt.26.23-Matt.26.25"] },
+            { "id": "p-thirty-pieces", "label": "Sold for thirty pieces of silver, thrown into the potter's field", "type": "Prophecy", "verses": ["Zech.11.12-Zech.11.13"], "fulfillment": ["Matt.26.15", "Matt.27.9-Matt.27.10"] },
+            { "id": "p-false-witnesses", "label": "Accused by false witnesses", "type": "Prophecy", "verses": ["Ps.35.11"], "fulfillment": ["Matt.26.59-Matt.26.60"] },
+            { "id": "p-silent-before-accusers", "label": "Silent before his accusers", "type": "Prophecy", "verses": ["Isa.53.7"], "fulfillment": ["Matt.27.12-Matt.27.14"] },
+            { "id": "p-struck-and-spit", "label": "Struck and spit upon", "type": "Prophecy", "verses": ["Isa.50.6"], "fulfillment": ["Matt.26.67"] }
+          ]
+        },
+        {
+          "id": "prophecy-crucifixion",
+          "label": "Crucifixion",
+          "type": "Class",
+          "children": [
+            { "id": "p-hands-feet-pierced", "label": "Hands and feet pierced", "type": "Prophecy", "verses": ["Ps.22.16"], "fulfillment": ["John.19.37", "John.20.25-John.20.27"] },
+            { "id": "p-mocked-derided", "label": "Mocked by onlookers, \"he trusted in the LORD\"", "type": "Prophecy", "verses": ["Ps.22.7-Ps.22.8"], "fulfillment": ["Matt.27.39-Matt.27.43"] },
+            { "id": "p-garments-divided", "label": "Garments divided, lots cast", "type": "Prophecy", "verses": ["Ps.22.18"], "fulfillment": ["John.19.23-John.19.24"] },
+            { "id": "p-no-bones-broken", "label": "Not one bone broken", "type": "Prophecy", "verses": ["Ps.34.20", "Exod.12.46"], "fulfillment": ["John.19.33-John.19.36"] },
+            { "id": "p-pierced-side", "label": "They look on him whom they pierced", "type": "Prophecy", "verses": ["Zech.12.10"], "fulfillment": ["John.19.34", "John.19.37"] },
+            { "id": "p-numbered-transgressors", "label": "Numbered with transgressors, intercedes for them", "type": "Prophecy", "verses": ["Isa.53.12"], "fulfillment": ["Mark.15.27-Mark.15.28", "Luke.23.34"] },
+            { "id": "p-forsaken-cry", "label": "\"My God, my God, why have you forsaken me?\"", "type": "Prophecy", "verses": ["Ps.22.1"], "fulfillment": ["Matt.27.46"] },
+            { "id": "p-thirst-vinegar", "label": "Given sour wine for his thirst", "type": "Prophecy", "verses": ["Ps.69.21"], "fulfillment": ["John.19.28-John.19.29"] }
+          ]
+        },
+        {
+          "id": "prophecy-burial-resurrection",
+          "label": "Burial, Resurrection, Exaltation",
+          "type": "Class",
+          "children": [
+            { "id": "p-buried-rich", "label": "Buried with the rich, though he had done no violence", "type": "Prophecy", "verses": ["Isa.53.9"], "fulfillment": ["Matt.27.57-Matt.27.60"] },
+            { "id": "p-not-abandoned-sheol", "label": "Not abandoned to Sheol, no decay", "type": "Prophecy", "verses": ["Ps.16.10"], "fulfillment": ["Acts.2.25-Acts.2.32", "Acts.13.35-Acts.13.37"] },
+            { "id": "p-ascends-on-high", "label": "Ascends on high, leads captivity captive", "type": "Prophecy", "verses": ["Ps.68.18"], "fulfillment": ["Eph.4.8-Eph.4.10"] },
+            { "id": "p-right-hand", "label": "Seated at God's right hand until enemies are made his footstool", "type": "Prophecy", "verses": ["Ps.110.1"], "fulfillment": ["Acts.2.34-Acts.2.35", "Heb.1.13"] },
+            { "id": "p-everlasting-kingdom", "label": "Given dominion, glory, and an everlasting kingdom", "type": "Prophecy", "verses": ["Dan.7.13-Dan.7.14"], "fulfillment": ["Luke.1.32-Luke.1.33", "Rev.11.15"] },
+            { "id": "p-suffering-servant", "label": "The Suffering Servant, wounded for our transgressions", "type": "Prophecy", "verses": ["Isa.52.13-Isa.53.12"], "fulfillment": ["1Pet.2.21-1Pet.2.25", "Acts.8.32-Acts.8.35"] }
+          ]
+        }
+      ]
+    },
+    {
+      "id": "patterns-of-grace",
+      "label": "Patterns of Grace (Typology)",
+      "type": "Class",
+      "summary": "Old Testament persons, objects, and rites that the New Testament reads as deliberately-designed shadows of a greater, later reality in Christ - patterns of grace running ahead of their own fulfillment.",
+      "verses": [],
+      "children": [
+        { "id": "type-adam", "label": "Adam & Christ: the Two Heads", "type": "Type", "summary": "As in Adam all die, so in Christ - the 'last Adam' - all who are his are made alive.", "verses": ["Rom.5.12-Rom.5.19", "1Cor.15.22", "1Cor.15.45"] },
+        { "id": "type-passover-lamb", "label": "The Passover Lamb", "type": "Type", "summary": "A spotless lamb, blood applied, none of its bones broken - John the Baptist's 'Lamb of God' language and Paul's 'Christ, our Passover lamb' make the pattern explicit.", "verses": ["Exod.12.1-Exod.12.13", "John.1.29", "1Cor.5.7"] },
+        { "id": "type-bronze-serpent", "label": "The Bronze Serpent", "type": "Type", "summary": "Whoever looked at the serpent Moses lifted up lived - Jesus applies the pattern to himself directly, lifted up so that whoever believes may have eternal life.", "verses": ["Num.21.4-Num.21.9", "John.3.14-John.3.15"] },
+        { "id": "type-manna", "label": "Manna from Heaven", "type": "Type", "summary": "Bread given daily in the wilderness, versus the 'true bread from heaven' that gives life to the world.", "verses": ["Exod.16.4", "Exod.16.15", "John.6.31-John.6.35", "John.6.48-John.6.51"] },
+        { "id": "type-day-of-atonement", "label": "The Scapegoat & Day of Atonement", "type": "Type", "summary": "One goat's blood atones, another carries the people's sin away into the wilderness - a two-part picture of substitution Hebrews and Paul both draw on.", "verses": ["Lev.16.7-Lev.16.10", "Lev.16.20-Lev.16.22", "Heb.9.11-Heb.9.14", "2Cor.5.21"] },
+        { "id": "type-jonah-sign", "label": "The Sign of Jonah", "type": "Type", "summary": "Three days and three nights in the fish's belly, offered by Jesus himself as the one sign this generation will be given.", "verses": ["Jonah.1.17", "Matt.12.39-Matt.12.40"] },
+        { "id": "type-rock", "label": "The Rock That Followed Them", "type": "Type", "summary": "Water struck from the rock in the wilderness; Paul identifies the rock itself as Christ.", "verses": ["Exod.17.6", "Num.20.7-Num.20.11", "1Cor.10.4"] },
+        { "id": "type-melchizedek-bread-wine", "label": "Melchizedek's Bread and Wine", "type": "Type", "summary": "Read by many in this tradition as the Old Testament's first foreshadowing of the Lord's Supper, offered by the very priest-king who prefigures Christ's own priesthood.", "verses": ["Gen.14.18", "Matt.26.26-Matt.26.28"] },
+        { "id": "type-flood-baptism", "label": "The Flood as a Pattern of Baptism", "type": "Type", "summary": "Peter explicitly names Noah's family, brought safely through water, as corresponding to baptism, which now saves through Christ's resurrection.", "verses": ["Gen.6.1-Gen.8.22", "1Pet.3.20-1Pet.3.21"] }
+      ]
+    }
+  ]
+}

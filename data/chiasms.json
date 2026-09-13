@@ -1,0 +1,78 @@
+{
+  "disclaimer": "Chiasm identification is interpretive - reasonable, careful readers propose different boundaries and centers, especially for a whole book. The Flood narrative and Jonah structures below are widely, though not universally, agreed on; the Leviticus and Revelation structures are each one defensible proposal among several competing ones in the literature. Treat the labeled center as the commentator's argued turning point, not an uncontested fact.",
+  "chiasms": [
+    {
+      "id": "genesis-flood",
+      "book": "Gen",
+      "title": "The Flood Narrative",
+      "refRange": "Gen.6.9-Gen.9.19",
+      "scholarNote": "Structure following Gordon J. Wenham, \"The Coherence of the Flood Narrative,\" Vetus Testamentum 28 (1978), still the standard reference point for this reading.",
+      "description": "One of the cleanest large-scale chiasms in the Hebrew Bible: thirteen panels turning on a single hinge - \"But God remembered Noah\" - the moment the flood stops rising and starts receding.",
+      "sections": [
+        { "label": "A", "title": "Noah and his sons introduced", "ref": "Gen.6.9-Gen.6.10" },
+        { "label": "B", "title": "Corruption of creation; God's resolve to destroy", "ref": "Gen.6.11-Gen.6.12" },
+        { "label": "C", "title": "First divine speech: intent to destroy, command to build the ark", "ref": "Gen.6.13-Gen.6.22" },
+        { "label": "D", "title": "Second divine speech: command to enter the ark", "ref": "Gen.7.1-Gen.7.10" },
+        { "label": "E", "title": "Beginning of the flood", "ref": "Gen.7.11-Gen.7.16" },
+        { "label": "F", "title": "The waters increase, all flesh dies", "ref": "Gen.7.17-Gen.7.24" },
+        { "label": "G", "title": "\"But God remembered Noah\"", "ref": "Gen.8.1", "center": true },
+        { "label": "F'", "title": "The waters decrease", "ref": "Gen.8.2-Gen.8.5" },
+        { "label": "E'", "title": "The earth dries", "ref": "Gen.8.6-Gen.8.14" },
+        { "label": "D'", "title": "Third divine speech: command to leave the ark", "ref": "Gen.8.15-Gen.8.19" },
+        { "label": "C'", "title": "God's resolution never to destroy again; the Noahic covenant", "ref": "Gen.8.20-Gen.9.17" },
+        { "label": "B'", "title": "New instructions to Noah, echoing the creation mandate", "ref": "Gen.9.1-Gen.9.7" },
+        { "label": "A'", "title": "Noah and his sons closed out", "ref": "Gen.9.18-Gen.9.19" }
+      ]
+    },
+    {
+      "id": "leviticus",
+      "book": "Lev",
+      "title": "The Book of Leviticus",
+      "refRange": "Lev.1.1-Lev.27.34",
+      "scholarNote": "A simplified version of structural readings advanced by Mary Douglas (Leviticus as Literature, 1999) and others, who argue the book's units are arranged concentrically around the Day of Atonement rather than merely topically listed.",
+      "description": "Leviticus is usually read as a topical law code, but its major sections can also be read as a ring composition centered on the Day of Atonement - the one day the high priest enters the Holy of Holies, at the literal middle of the book.",
+      "sections": [
+        { "label": "A", "title": "Sacrificial law: offerings and how to bring them", "ref": "Lev.1.1-Lev.7.38" },
+        { "label": "B", "title": "Institution of the priesthood; Nadab and Abihu's death", "ref": "Lev.8.1-Lev.10.20" },
+        { "label": "C", "title": "Purity laws: clean and unclean", "ref": "Lev.11.1-Lev.15.33" },
+        { "label": "D", "title": "The Day of Atonement", "ref": "Lev.16.1-Lev.16.34", "center": true },
+        { "label": "C'", "title": "Holiness laws: blood, sexuality, neighbor-love", "ref": "Lev.17.1-Lev.20.27" },
+        { "label": "B'", "title": "Priestly holiness and acceptable offerings", "ref": "Lev.21.1-Lev.22.33" },
+        { "label": "A'", "title": "Sacred calendar: feasts, sabbatical year, jubilee", "ref": "Lev.23.1-Lev.25.55" }
+      ]
+    },
+    {
+      "id": "jonah",
+      "book": "Jonah",
+      "title": "The Book of Jonah",
+      "refRange": "Jonah.1.1-Jonah.4.11",
+      "scholarNote": "A commonly taught reading; see e.g. the paired-panel outlines in the NIV/ESV Study Bible introductions to Jonah.",
+      "description": "Jonah's two flights from his calling - one physical, one emotional - frame the book: pagan sailors and pagan Nineveh both respond to Yahweh better than his own prophet does.",
+      "sections": [
+        { "label": "A", "title": "Called to Nineveh, Jonah flees; the storm; sailors turn to fear Yahweh", "ref": "Jonah.1.1-Jonah.1.16" },
+        { "label": "B", "title": "Jonah's prayer from inside the fish", "ref": "Jonah.1.17-Jonah.2.10" },
+        { "label": "A'", "title": "Called to Nineveh again, Jonah goes; Nineveh repents before Yahweh", "ref": "Jonah.3.1-Jonah.3.10" },
+        { "label": "B'", "title": "Jonah's complaint outside the city; the plant, the worm, the wind", "ref": "Jonah.4.1-Jonah.4.11" }
+      ]
+    },
+    {
+      "id": "revelation",
+      "book": "Rev",
+      "title": "The Book of Revelation",
+      "refRange": "Rev.1.1-Rev.22.21",
+      "scholarNote": "One widely-taught simplified reading (broadly following Kenneth Strand's and others' seven-part chiastic proposals for Revelation's macrostructure) among several competing outlines - Revelation's structure is genuinely contested, and a purely linear/sequential reading is also common and defensible.",
+      "description": "On this reading, Revelation's seven-fold judgment series (seals, trumpets, bowls) frame a central vision of the real war behind the war: the dragon, the woman, and the beasts of chapters 12-14 - which is also thematically where this app's companion project, DISINHERITED, draws its spiritual-warfare premise.",
+      "sections": [
+        { "label": "A", "title": "Prologue: \"Blessed is the one who reads\"", "ref": "Rev.1.1-Rev.1.8" },
+        { "label": "B", "title": "Seven letters to the churches", "ref": "Rev.1.9-Rev.3.22" },
+        { "label": "C", "title": "Throne room vision; the seven seals", "ref": "Rev.4.1-Rev.8.1" },
+        { "label": "D", "title": "The seven trumpets", "ref": "Rev.8.2-Rev.11.19" },
+        { "label": "E", "title": "The woman, the dragon, and the two beasts - the cosmic conflict", "ref": "Rev.12.1-Rev.14.20", "center": true },
+        { "label": "D'", "title": "The seven bowls of wrath", "ref": "Rev.15.1-Rev.16.21" },
+        { "label": "C'", "title": "The fall of Babylon the great", "ref": "Rev.17.1-Rev.19.10" },
+        { "label": "B'", "title": "The rider on the white horse; final judgment; the millennium", "ref": "Rev.19.11-Rev.20.15" },
+        { "label": "A'", "title": "Epilogue: new heaven, new earth, \"Come, Lord Jesus\"", "ref": "Rev.21.1-Rev.22.21" }
+      ]
+    }
+  ]
+}

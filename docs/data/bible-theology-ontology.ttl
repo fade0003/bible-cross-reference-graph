@@ -1,0 +1,686 @@
+@prefix : <https://bible-cross-reference-graph.local/ontology#> .
+@prefix owl: <http://www.w3.org/2002/07/owl#> .
+@prefix rdf: <http://www.w3.org/1999/02/22-rdf-syntax-ns#> .
+@prefix rdfs: <http://www.w3.org/2000/01/rdf-schema#> .
+@prefix xsd: <http://www.w3.org/2001/XMLSchema#> .
+
+# Divine Council & Second Temple Biblical Theology - A working ontology, after Michael S. Heiser & Douglas Van Dorn
+# Sources: Michael S. Heiser, The Unseen Realm (2015); Michael S. Heiser, Reversing Hermon (2017); Michael S. Heiser, Angels (2018); Douglas Van Dorn, Giants: Sons of the Gods (2013); Douglas Van Dorn, Waters of Creation (2016); Douglas Van Dorn, Covenant Theology: A Reformed Baptist Primer (2019)
+# This page lays out one particular, identifiable theological reading tradition - the 'divine council worldview' associated with Michael Heiser and Douglas Van Dorn - as a browsable concept hierarchy, not as doctrinally neutral consensus or as proof-texted certainty. Faithful, careful readers of Scripture disagree on several of these points (especially the Nephilim/Rephaim material and some Angel-of-the-LORD identifications). Verse references are supplied for study and are not exhaustive of every relevant passage. Class/property/individual labels are informal OWL-style annotations for the page's export (see the Turtle file), not a claim that this is THE definitive formal ontology of the Bible.
+
+: a owl:Ontology ;
+  rdfs:label "Divine Council & Second Temple Biblical Theology" ;
+  rdfs:comment "This page lays out one particular, identifiable theological reading tradition - the 'divine council worldview' associated with Michael Heiser and Douglas Van Dorn - as a browsable concept hierarchy, not as doctrinally neutral consensus or as proof-texted certainty. Faithful, careful readers of Scripture disagree on several of these points (especially the Nephilim/Rephaim material and some Angel-of-the-LORD identifications). Verse references are supplied for study and are not exhaustive of every relevant passage. Class/property/individual labels are informal OWL-style annotations for the page's export (see the Turtle file), not a claim that this is THE definitive formal ontology of the Bible." .
+
+:DivineBeing a owl:Class ;
+  rdfs:label "Divine Being (elohim)" ;
+  rdfs:comment "Any member of the spirit-world class Scripture calls 'elohim' - a plane-of-existence term, not a statement of moral equivalence with Yahweh." .
+
+:CouncilMember a owl:Class ;
+  rdfs:label "Divine Council Member" ;
+  rdfs:subClassOf :DivineBeing ;
+  rdfs:comment "A bene elohim ('son of God') seated/serving in Yahweh's heavenly assembly." .
+
+:TheophanicFigure a owl:Class ;
+  rdfs:label "Theophanic Figure" ;
+  rdfs:subClassOf :DivineBeing ;
+  rdfs:comment "A figure through whom God is personally, visibly present - preeminently the Angel of the LORD." .
+
+:Nephilim a owl:Class ;
+  rdfs:label "Nephilim / Rephaim" ;
+  rdfs:comment "The giant clans descended from Genesis 6:1-4 and their remnant lines (Anakim, Emim, Zamzummim, Rephaim proper)." .
+
+:Person a owl:Class ;
+  rdfs:label "Person" ;
+  rdfs:comment "A named human individual." .
+
+:Place a owl:Class ;
+  rdfs:label "Place" ;
+  rdfs:comment "A named location." .
+
+:Event a owl:Class ;
+  rdfs:label "Event" ;
+  rdfs:comment "A datable or narratable occurrence." .
+
+:Covenant a owl:Class ;
+  rdfs:label "Covenant" ;
+  rdfs:comment "A formal, sworn relational commitment God makes with people." .
+
+:Prophecy a owl:Class ;
+  rdfs:label "Prophecy" ;
+  rdfs:comment "An Old Testament prediction or type read by the New Testament as fulfilled in Jesus." .
+
+:Type a owl:Class ;
+  rdfs:label "Type (Pattern of Grace)" ;
+  rdfs:comment "An Old Testament person, object, or event that prefigures a New Testament antitype, usually Christ or his saving work." .
+
+:rulesOver a owl:ObjectProperty ;
+  rdfs:label "rules over" ;
+  rdfs:domain :DivineBeing ;
+  rdfs:range :Place ;
+  rdfs:comment "" .
+
+:memberOf a owl:ObjectProperty ;
+  rdfs:label "member of" ;
+  rdfs:domain :CouncilMember ;
+  rdfs:range :Event ;
+  rdfs:comment "" .
+
+:identifiedWith a owl:ObjectProperty ;
+  rdfs:label "identified with (yet distinct from)" ;
+  rdfs:domain :TheophanicFigure ;
+  rdfs:range :DivineBeing ;
+  rdfs:comment "" .
+
+:appearsIn a owl:ObjectProperty ;
+  rdfs:label "appears in" ;
+  rdfs:domain :Person ;
+  rdfs:range :Event ;
+  rdfs:comment "" .
+
+:descendedFrom a owl:ObjectProperty ;
+  rdfs:label "descended from" ;
+  rdfs:domain :Nephilim ;
+  rdfs:range :Event ;
+  rdfs:comment "" .
+
+:fulfilledBy a owl:ObjectProperty ;
+  rdfs:label "fulfilled by" ;
+  rdfs:domain :Prophecy ;
+  rdfs:range :Person ;
+  rdfs:comment "" .
+
+:typifies a owl:ObjectProperty ;
+  rdfs:label "typifies" ;
+  rdfs:domain :Type ;
+  rdfs:range :Person ;
+  rdfs:comment "" .
+
+:establishesCovenant a owl:ObjectProperty ;
+  rdfs:label "establishes covenant with" ;
+  rdfs:domain :Person ;
+  rdfs:range :Covenant ;
+  rdfs:comment "" .
+
+:partOf a owl:ObjectProperty ;
+  rdfs:label "part of" ;
+  rdfs:comment "hierarchical containment used by the tree view" .
+
+:divine-council a owl:Class ;
+  rdfs:label "The Divine Council" ;
+  rdfs:comment "Yahweh presides over an assembly of spirit-plane 'elohim' (Ps 82:1), the 'sons of God' (bene elohim), who serve, advise, and in some cases rebel against him. This is the organizing framework Heiser argues runs through the whole Bible's supernatural narrative." ;
+  :verse "Ps.82.1" ;
+  :verse "1Kgs.22.19-1Kgs.22.22" ;
+  :verse "Job.1.6-Job.1.12" ;
+  :verse "Job.2.1-Job.2.6" ;
+  :verse "Isa.6.1-Isa.6.8" ;
+  :verse "Jer.23.18" .
+
+:council-elohim-term a owl:Class ;
+  rdfs:label "Elohim as a Plane-of-Existence Term" ;
+  rdfs:comment "'Elohim' is used in the Hebrew Bible as a place-of-residence/species category (any inhabitant of the spirit world), not exclusively as a proper name for Yahweh - which is why human judges, the dead, and other spirits can all be called 'elohim' in context." ;
+  :partOf :divine-council ;
+  :verse "Ps.82.6" ;
+  :verse "Ps.89.5-Ps.89.7" ;
+  :verse "1Sam.28.13" .
+
+:bene-elohim a owl:Class ;
+  rdfs:label "The Bene Elohim (\"Sons of God\")" ;
+  rdfs:comment "Non-human members of Yahweh's council, present at creation and named as a category distinct from humanity." ;
+  :partOf :divine-council ;
+  :verse "Job.38.7" ;
+  :verse "Ps.29.1" ;
+  :verse "Gen.6.2" ;
+  :verse "Deut.32.8" .
+
+:council-yahweh-elyon a owl:NamedIndividual, :Individual ;
+  rdfs:label "Yahweh as El Elyon, Council Head" ;
+  rdfs:comment "Yahweh is not merely one elohim among the council's members but 'Most High' - judge and owner of the divine council itself." ;
+  :partOf :divine-council ;
+  :verse "Ps.82.8" ;
+  :verse "Ps.95.3" ;
+  :verse "Deut.10.17" .
+
+:babel-disinheritance a owl:NamedIndividual, :Event ;
+  rdfs:label "Babel: The Nations Disinherited" ;
+  rdfs:comment "After Babel, Yahweh allots the nations to lesser elohim ('according to the number of the sons of God', reading with the Dead Sea Scrolls/LXX against the MT's 'sons of Israel') and keeps Israel as his own direct portion - the theological hinge the rest of the Old Testament turns on, and the conceptual root of this app's companion game project, DISINHERITED." ;
+  :partOf :divine-council ;
+  :verse "Gen.11.1-Gen.11.9" ;
+  :verse "Deut.32.8-Deut.32.9" ;
+  :verse "Deut.4.19-Deut.4.20" ;
+  :verse "Acts.17.26-Acts.17.27" .
+
+:council-reclamation a owl:NamedIndividual, :Event ;
+  rdfs:label "Reclamation Through Abraham & Israel" ;
+  rdfs:comment "Yahweh's answer to Babel: he calls Abraham to father a people through whom every disinherited nation will ultimately be reclaimed." ;
+  :partOf :divine-council ;
+  :verse "Gen.12.1-Gen.12.3" ;
+  :verse "Exod.19.5-Exod.19.6" .
+
+:council-nt-christ-enthroned a owl:NamedIndividual, :Event ;
+  rdfs:label "Christ Enthroned Above the Principalities" ;
+  rdfs:comment "The New Testament recasts the council conflict cosmically: Jesus is raised and seated far above every ruler, authority, power, and dominion - the territorial 'elohim' of the nations - and the church's struggle is explicitly against these powers." ;
+  :partOf :divine-council ;
+  :verse "Eph.1.20-Eph.1.21" ;
+  :verse "Col.1.16" ;
+  :verse "Col.2.15" ;
+  :verse "Eph.6.12" .
+
+:angel-of-the-lord a owl:Class ;
+  rdfs:label "The Angel of the LORD (Malak YHWH)" ;
+  rdfs:comment "A figure who speaks as Yahweh in the first person, is worshiped as Yahweh, and is called Yahweh outright - yet is repeatedly distinguished from 'the LORD' in the same episode. Read by both Heiser and the historic Christian tradition as the clearest Old Testament window onto plurality within the Godhead, and often taken as a pre-incarnate appearance of the Son." ;
+  :verse "Gen.16.7-Gen.16.13" ;
+  :verse "Gen.22.11-Gen.22.18" ;
+  :verse "Exod.3.2-Exod.3.6" ;
+  :verse "Exod.23.20-Exod.23.23" ;
+  :verse "Judg.2.1-Judg.2.4" .
+
+:angel-hagar a owl:NamedIndividual, :Event ;
+  rdfs:label "Hagar at the Well (Beer-lahai-roi)" ;
+  rdfs:comment "The Angel of the LORD finds Hagar in the wilderness; she names him 'a God who sees' and marvels that she has 'seen him who looks after me.'" ;
+  :partOf :angel-of-the-lord ;
+  :verse "Gen.16.7-Gen.16.13" .
+
+:angel-akedah a owl:NamedIndividual, :Event ;
+  rdfs:label "Abraham & Isaac at Moriah" ;
+  rdfs:comment "The Angel of the LORD calls from heaven, swears by himself (a divine prerogative), and stops the sacrifice." ;
+  :partOf :angel-of-the-lord ;
+  :verse "Gen.22.11-Gen.22.18" .
+
+:angel-burning-bush a owl:NamedIndividual, :Event ;
+  rdfs:label "The Burning Bush" ;
+  rdfs:comment "'The angel of the LORD appeared to him in a flame of fire' - and the text immediately continues, 'God called to him... I am the God of your father.'" ;
+  :partOf :angel-of-the-lord ;
+  :verse "Exod.3.2-Exod.3.6" ;
+  :verse "Exod.3.14" .
+
+:angel-commander a owl:NamedIndividual, :Event ;
+  rdfs:label "Commander of the LORD's Army" ;
+  rdfs:comment "Joshua is told to remove his sandals - the same command given Moses at the bush - before this armed figure at Jericho." ;
+  :partOf :angel-of-the-lord ;
+  :verse "Josh.5.13-Josh.5.15" .
+
+:angel-gideon a owl:NamedIndividual, :Event ;
+  rdfs:label "Gideon's Commission" ;
+  rdfs:comment "The Angel of the LORD sits under the oak at Ophrah; the narrator then simply calls him 'the LORD.'" ;
+  :partOf :angel-of-the-lord ;
+  :verse "Judg.6.11-Judg.6.24" .
+
+:angel-manoah a owl:NamedIndividual, :Event ;
+  rdfs:label "Manoah and the Angel" ;
+  rdfs:comment "Samson's parents realize only after the fact that 'we have seen God' - and are afraid they will die for having seen him." ;
+  :partOf :angel-of-the-lord ;
+  :verse "Judg.13.3-Judg.13.22" .
+
+:angel-zechariah-courtroom a owl:NamedIndividual, :Event ;
+  rdfs:label "Zechariah's Heavenly Courtroom" ;
+  rdfs:comment "The Angel of the LORD presides as advocate for Joshua the high priest against the satan ('the accuser') - a council-courtroom scene." ;
+  :partOf :angel-of-the-lord ;
+  :verse "Zech.3.1-Zech.3.7" .
+
+:angel-christophany a owl:NamedIndividual, :Individual ;
+  rdfs:label "Read as a Christophany" ;
+  rdfs:comment "The New Testament's claim that no one has seen the Father, together with the Son's own testimony ('before Abraham was, I am'), leads much of the historic church to read Old Testament Angel-of-the-LORD appearances as the pre-incarnate Son making the Father known." ;
+  :partOf :angel-of-the-lord ;
+  :verse "John.1.18" ;
+  :verse "John.8.56-John.8.58" ;
+  :verse "Col.1.15" .
+
+:melchizedek a owl:NamedIndividual, :Individual ;
+  rdfs:label "Melchizedek" ;
+  rdfs:comment "The mysterious king-priest of Salem who blesses Abraham and receives his tithe - given no recorded genealogy, birth, or death, and made in Scripture's argument a pattern ('order') for a priesthood greater than Levi's: Christ's own." ;
+  :verse "Gen.14.18-Gen.14.20" ;
+  :verse "Ps.110.4" ;
+  :verse "Heb.7.1-Heb.7.3" .
+
+:melch-genesis a owl:NamedIndividual, :Event ;
+  rdfs:label "King-Priest of Salem" ;
+  rdfs:comment "Melchizedek brings out bread and wine and blesses Abram 'by God Most High, Possessor of heaven and earth.'" ;
+  :partOf :melchizedek ;
+  :verse "Gen.14.18-Gen.14.20" .
+
+:melch-psalm110 a owl:NamedIndividual, :Prophecy ;
+  rdfs:label "\"A Priest Forever, After the Order of Melchizedek\"" ;
+  rdfs:comment "David's psalm addresses someone as 'my Lord,' seated at Yahweh's right hand, and sworn into an eternal, non-Levitical priesthood." ;
+  :partOf :melchizedek ;
+  :verse "Ps.110.1" ;
+  :verse "Ps.110.4" .
+
+:melch-hebrews a owl:NamedIndividual, :Event ;
+  rdfs:label "Fulfilled in Christ's Eternal Priesthood" ;
+  rdfs:comment "Hebrews argues at length that Jesus, from the non-priestly tribe of Judah, holds a priesthood after Melchizedek's pattern - permanent, because he continues forever." ;
+  :partOf :melchizedek ;
+  :verse "Heb.5.6-Heb.5.10" ;
+  :verse "Heb.6.20" ;
+  :verse "Heb.7.11-Heb.7.17" .
+
+:rephaim-nephilim a owl:Class ;
+  rdfs:label "Rephaim & Nephilim" ;
+  rdfs:comment "Genesis 6's 'sons of God' come in to 'the daughters of man' and produce the Nephilim - 'the mighty men who were of old, the men of renown.' Their line resurfaces after the flood as clans of giants (Anakim, Emim, Zamzummim, Rephaim proper) whom Israel is specifically commissioned to dispossess - read by Heiser and Van Dorn as an extension of the cosmic-geography conflict, not merely a military campaign." ;
+  :verse "Gen.6.1-Gen.6.4" .
+
+:nephilim-genesis6 a owl:NamedIndividual, :Event ;
+  rdfs:label "The Genesis 6 Origin Account" ;
+  rdfs:comment "'The Nephilim were on the earth in those days, and also afterward' - explicitly noting a post-flood recurrence of the same phenomenon." ;
+  :partOf :rephaim-nephilim ;
+  :verse "Gen.6.1-Gen.6.4" .
+
+:rephaim-og-bashan a owl:NamedIndividual, :Person ;
+  rdfs:label "Og, King of Bashan" ;
+  rdfs:comment "The last of the Rephaim in the region; his iron bed's dimensions (roughly 13.5 by 6 feet) are preserved as a curiosity in Deuteronomy's own text." ;
+  :partOf :rephaim-nephilim ;
+  :verse "Deut.3.11" ;
+  :verse "Num.21.33-Num.21.35" ;
+  :verse "Deut.3.1-Deut.3.11" ;
+  :verse "Josh.12.4-Josh.12.5" .
+
+:rephaim-clans a owl:NamedIndividual, :Nephilim ;
+  rdfs:label "Rephaim, Emim, Zamzummim, Anakim" ;
+  rdfs:comment "Deuteronomy catalogs several regional giant-clan names as functionally the same phenomenon under different tribal labels, each already dispossessed by neighboring peoples with Yahweh's help before Israel's own conquest." ;
+  :partOf :rephaim-nephilim ;
+  :verse "Deut.2.10-Deut.2.11" ;
+  :verse "Deut.2.20-Deut.2.21" ;
+  :verse "Num.13.32-Num.13.33" ;
+  :verse "Deut.9.2" ;
+  :verse "Josh.11.21-Josh.11.22" .
+
+:rephaim-goliath a owl:NamedIndividual, :Person ;
+  rdfs:label "Goliath and the Gittite Giants" ;
+  rdfs:comment "Philistine Gath preserves a remnant giant line into David's day; 2 Samuel names four more of Goliath's kin killed by David's men." ;
+  :partOf :rephaim-nephilim ;
+  :verse "1Sam.17.4-1Sam.17.7" ;
+  :verse "2Sam.21.15-2Sam.21.22" ;
+  :verse "1Chr.20.4-1Chr.20.8" .
+
+:nephilim-nt-echo a owl:NamedIndividual, :Event ;
+  rdfs:label "New Testament Echoes" ;
+  rdfs:comment "Jude and 2 Peter both reference angels who 'did not stay within their own position of authority' and are kept in chains for judgment - widely read (including by Heiser) as an allusion to the Genesis 6 episode via Second Temple Jewish tradition (1 Enoch), which is background reading, not Scripture." ;
+  :partOf :rephaim-nephilim ;
+  :verse "Jude.1.6" ;
+  :verse "2Pet.2.4" .
+
+:promises-to-israel a owl:Class ;
+  rdfs:label "Promises to Israel (The Covenant Line)" ;
+  rdfs:comment "From Babel's disinheritance forward, the Bible's throughline is Yahweh's covenant program to reclaim the nations through one family, one people, one king, and finally one better covenant." ;
+  :verse "Gen.12.1-Gen.12.3" .
+
+:covenant-abrahamic a owl:NamedIndividual, :Covenant ;
+  rdfs:label "Abrahamic Covenant: Land, Seed, Blessing" ;
+  rdfs:comment "Yahweh's unconditional, self-maledictory oath (Genesis 15's smoking-fire-pot ceremony) to give Abraham's offspring a land, make them a great nation, and bless all the families of the earth through them." ;
+  :partOf :promises-to-israel ;
+  :verse "Gen.12.1-Gen.12.3" ;
+  :verse "Gen.15.1-Gen.15.21" ;
+  :verse "Gen.17.1-Gen.17.14" .
+
+:covenant-mosaic a owl:NamedIndividual, :Covenant ;
+  rdfs:label "Mosaic (Sinai) Covenant" ;
+  rdfs:comment "Israel is constituted as 'a kingdom of priests and a holy nation' - a corporate, mediating vocation toward the still-disinherited nations." ;
+  :partOf :promises-to-israel ;
+  :verse "Exod.19.3-Exod.19.6" ;
+  :verse "Exod.24.3-Exod.24.8" .
+
+:covenant-davidic a owl:NamedIndividual, :Covenant ;
+  rdfs:label "Davidic Covenant" ;
+  rdfs:comment "Yahweh swears David an eternal house, throne, and kingdom - the direct background for every later 'son of David' messianic expectation." ;
+  :partOf :promises-to-israel ;
+  :verse "2Sam.7.8-2Sam.7.16" ;
+  :verse "Ps.89.3-Ps.89.4" ;
+  :verse "Ps.89.19-Ps.89.37" .
+
+:covenant-new a owl:NamedIndividual, :Covenant ;
+  rdfs:label "New Covenant" ;
+  rdfs:comment "A promised covenant not like Sinai's - law written on the heart, sins remembered no more - which Jesus identifies with his own blood at the Last Supper." ;
+  :partOf :promises-to-israel ;
+  :verse "Jer.31.31-Jer.31.34" ;
+  :verse "Ezek.36.26-Ezek.36.27" ;
+  :verse "Luke.22.20" .
+
+:covenant-babel-reversal a owl:NamedIndividual, :Event ;
+  rdfs:label "Babel Reversed: Every Nation Reclaimed" ;
+  rdfs:comment "The covenant line's destination: Revelation's throne room hears a new song sung by people ransomed 'from every tribe and language and people and nation' - Babel's disinheritance undone." ;
+  :partOf :promises-to-israel ;
+  :verse "Gen.12.3" ;
+  :verse "Gal.3.8" ;
+  :verse "Gal.3.16" ;
+  :verse "Rev.5.9-Rev.5.10" .
+
+:messianic-prophecy a owl:Class ;
+  rdfs:label "Messianic Prophecy Fulfilled in Jesus" ;
+  rdfs:comment "Tradition catalogs well over 300 Old Testament correlations read as messianic; this page curates a representative core of the most frequently cited, organized by the arc of Jesus' life. Prophetic fulfillment is itself a major plank of the divine-council reading: the disinherited nations are only reclaimed through this specific, predicted, historical Person." .
+
+:prophecy-lineage a owl:Class ;
+  rdfs:label "Lineage & Identity" ;
+  :partOf :messianic-prophecy .
+
+:p-seed-of-woman a owl:NamedIndividual, :Prophecy ;
+  rdfs:label "Seed of the woman, crushes the serpent" ;
+  :partOf :prophecy-lineage ;
+  :verse "Gen.3.15" ;
+  :verse "Gal.4.4" ;
+  :verse "Rom.16.20" .
+
+:p-seed-of-abraham a owl:NamedIndividual, :Prophecy ;
+  rdfs:label "Offspring of Abraham" ;
+  :partOf :prophecy-lineage ;
+  :verse "Gen.22.18" ;
+  :verse "Matt.1.1" ;
+  :verse "Gal.3.16" .
+
+:p-tribe-of-judah a owl:NamedIndividual, :Prophecy ;
+  rdfs:label "From the tribe of Judah" ;
+  :partOf :prophecy-lineage ;
+  :verse "Gen.49.10" ;
+  :verse "Luke.3.33" ;
+  :verse "Heb.7.14" .
+
+:p-line-of-david a owl:NamedIndividual, :Prophecy ;
+  rdfs:label "Heir to David's throne" ;
+  :partOf :prophecy-lineage ;
+  :verse "2Sam.7.12-2Sam.7.13" ;
+  :verse "Isa.9.6-Isa.9.7" ;
+  :verse "Jer.23.5" ;
+  :verse "Matt.1.1" ;
+  :verse "Luke.1.32-Luke.1.33" .
+
+:p-immanuel a owl:NamedIndividual, :Prophecy ;
+  rdfs:label "Born of a virgin, \"God with us\"" ;
+  :partOf :prophecy-lineage ;
+  :verse "Isa.7.14" ;
+  :verse "Matt.1.22-Matt.1.23" .
+
+:p-eternal-preexistence a owl:NamedIndividual, :Prophecy ;
+  rdfs:label "Goings forth from of old, from everlasting" ;
+  :partOf :prophecy-lineage ;
+  :verse "Mic.5.2" ;
+  :verse "John.1.1-John.1.2" ;
+  :verse "John.8.58" .
+
+:prophecy-birth-childhood a owl:Class ;
+  rdfs:label "Birth & Childhood" ;
+  :partOf :messianic-prophecy .
+
+:p-bethlehem a owl:NamedIndividual, :Prophecy ;
+  rdfs:label "Born in Bethlehem Ephrathah" ;
+  :partOf :prophecy-birth-childhood ;
+  :verse "Mic.5.2" ;
+  :verse "Matt.2.1" ;
+  :verse "Luke.2.4-Luke.2.7" .
+
+:p-out-of-egypt a owl:NamedIndividual, :Prophecy ;
+  rdfs:label "Called out of Egypt" ;
+  :partOf :prophecy-birth-childhood ;
+  :verse "Hos.11.1" ;
+  :verse "Matt.2.14-Matt.2.15" .
+
+:p-rachel-weeping a owl:NamedIndividual, :Prophecy ;
+  rdfs:label "Rachel weeping for the children (the massacre at Bethlehem)" ;
+  :partOf :prophecy-birth-childhood ;
+  :verse "Jer.31.15" ;
+  :verse "Matt.2.16-Matt.2.18" .
+
+:p-nazarene a owl:NamedIndividual, :Prophecy ;
+  rdfs:label "Called a Nazarene" ;
+  :partOf :prophecy-birth-childhood ;
+  :verse "Isa.11.1" ;
+  :verse "Matt.2.23" .
+
+:prophecy-ministry a owl:Class ;
+  rdfs:label "Ministry & Identity" ;
+  :partOf :messianic-prophecy .
+
+:p-forerunner a owl:NamedIndividual, :Prophecy ;
+  rdfs:label "Preceded by a preparing messenger" ;
+  :partOf :prophecy-ministry ;
+  :verse "Isa.40.3" ;
+  :verse "Mal.3.1" ;
+  :verse "Matt.3.1-Matt.3.3" ;
+  :verse "John.1.23" .
+
+:p-galilee-ministry a owl:NamedIndividual, :Prophecy ;
+  rdfs:label "Ministry begins in Galilee, \"a light to the nations\"" ;
+  :partOf :prophecy-ministry ;
+  :verse "Isa.9.1-Isa.9.2" ;
+  :verse "Matt.4.12-Matt.4.16" .
+
+:p-prophet-like-moses a owl:NamedIndividual, :Prophecy ;
+  rdfs:label "A prophet like Moses" ;
+  :partOf :prophecy-ministry ;
+  :verse "Deut.18.15-Deut.18.18" ;
+  :verse "Acts.3.20-Acts.3.23" .
+
+:p-zeal-for-house a owl:NamedIndividual, :Prophecy ;
+  rdfs:label "Zeal for God's house consumes him" ;
+  :partOf :prophecy-ministry ;
+  :verse "Ps.69.9" ;
+  :verse "John.2.15-John.2.17" .
+
+:p-parables a owl:NamedIndividual, :Prophecy ;
+  rdfs:label "Teaches in parables" ;
+  :partOf :prophecy-ministry ;
+  :verse "Ps.78.2" ;
+  :verse "Matt.13.34-Matt.13.35" .
+
+:p-rejected-by-own a owl:NamedIndividual, :Prophecy ;
+  rdfs:label "Rejected by his own" ;
+  :partOf :prophecy-ministry ;
+  :verse "Isa.53.3" ;
+  :verse "Ps.69.8" ;
+  :verse "John.1.11" ;
+  :verse "John.7.5" .
+
+:p-triumphal-entry a owl:NamedIndividual, :Prophecy ;
+  rdfs:label "Enters Jerusalem, humble, riding a donkey" ;
+  :partOf :prophecy-ministry ;
+  :verse "Zech.9.9" ;
+  :verse "Matt.21.4-Matt.21.5" ;
+  :verse "John.12.14-John.12.15" .
+
+:prophecy-betrayal-trial a owl:Class ;
+  rdfs:label "Betrayal & Trial" ;
+  :partOf :messianic-prophecy .
+
+:p-betrayed-friend a owl:NamedIndividual, :Prophecy ;
+  rdfs:label "Betrayed by a close friend" ;
+  :partOf :prophecy-betrayal-trial ;
+  :verse "Ps.41.9" ;
+  :verse "Matt.26.14-Matt.26.16" ;
+  :verse "Matt.26.23-Matt.26.25" .
+
+:p-thirty-pieces a owl:NamedIndividual, :Prophecy ;
+  rdfs:label "Sold for thirty pieces of silver, thrown into the potter's field" ;
+  :partOf :prophecy-betrayal-trial ;
+  :verse "Zech.11.12-Zech.11.13" ;
+  :verse "Matt.26.15" ;
+  :verse "Matt.27.9-Matt.27.10" .
+
+:p-false-witnesses a owl:NamedIndividual, :Prophecy ;
+  rdfs:label "Accused by false witnesses" ;
+  :partOf :prophecy-betrayal-trial ;
+  :verse "Ps.35.11" ;
+  :verse "Matt.26.59-Matt.26.60" .
+
+:p-silent-before-accusers a owl:NamedIndividual, :Prophecy ;
+  rdfs:label "Silent before his accusers" ;
+  :partOf :prophecy-betrayal-trial ;
+  :verse "Isa.53.7" ;
+  :verse "Matt.27.12-Matt.27.14" .
+
+:p-struck-and-spit a owl:NamedIndividual, :Prophecy ;
+  rdfs:label "Struck and spit upon" ;
+  :partOf :prophecy-betrayal-trial ;
+  :verse "Isa.50.6" ;
+  :verse "Matt.26.67" .
+
+:prophecy-crucifixion a owl:Class ;
+  rdfs:label "Crucifixion" ;
+  :partOf :messianic-prophecy .
+
+:p-hands-feet-pierced a owl:NamedIndividual, :Prophecy ;
+  rdfs:label "Hands and feet pierced" ;
+  :partOf :prophecy-crucifixion ;
+  :verse "Ps.22.16" ;
+  :verse "John.19.37" ;
+  :verse "John.20.25-John.20.27" .
+
+:p-mocked-derided a owl:NamedIndividual, :Prophecy ;
+  rdfs:label "Mocked by onlookers, \"he trusted in the LORD\"" ;
+  :partOf :prophecy-crucifixion ;
+  :verse "Ps.22.7-Ps.22.8" ;
+  :verse "Matt.27.39-Matt.27.43" .
+
+:p-garments-divided a owl:NamedIndividual, :Prophecy ;
+  rdfs:label "Garments divided, lots cast" ;
+  :partOf :prophecy-crucifixion ;
+  :verse "Ps.22.18" ;
+  :verse "John.19.23-John.19.24" .
+
+:p-no-bones-broken a owl:NamedIndividual, :Prophecy ;
+  rdfs:label "Not one bone broken" ;
+  :partOf :prophecy-crucifixion ;
+  :verse "Ps.34.20" ;
+  :verse "Exod.12.46" ;
+  :verse "John.19.33-John.19.36" .
+
+:p-pierced-side a owl:NamedIndividual, :Prophecy ;
+  rdfs:label "They look on him whom they pierced" ;
+  :partOf :prophecy-crucifixion ;
+  :verse "Zech.12.10" ;
+  :verse "John.19.34" ;
+  :verse "John.19.37" .
+
+:p-numbered-transgressors a owl:NamedIndividual, :Prophecy ;
+  rdfs:label "Numbered with transgressors, intercedes for them" ;
+  :partOf :prophecy-crucifixion ;
+  :verse "Isa.53.12" ;
+  :verse "Mark.15.27-Mark.15.28" ;
+  :verse "Luke.23.34" .
+
+:p-forsaken-cry a owl:NamedIndividual, :Prophecy ;
+  rdfs:label "\"My God, my God, why have you forsaken me?\"" ;
+  :partOf :prophecy-crucifixion ;
+  :verse "Ps.22.1" ;
+  :verse "Matt.27.46" .
+
+:p-thirst-vinegar a owl:NamedIndividual, :Prophecy ;
+  rdfs:label "Given sour wine for his thirst" ;
+  :partOf :prophecy-crucifixion ;
+  :verse "Ps.69.21" ;
+  :verse "John.19.28-John.19.29" .
+
+:prophecy-burial-resurrection a owl:Class ;
+  rdfs:label "Burial, Resurrection, Exaltation" ;
+  :partOf :messianic-prophecy .
+
+:p-buried-rich a owl:NamedIndividual, :Prophecy ;
+  rdfs:label "Buried with the rich, though he had done no violence" ;
+  :partOf :prophecy-burial-resurrection ;
+  :verse "Isa.53.9" ;
+  :verse "Matt.27.57-Matt.27.60" .
+
+:p-not-abandoned-sheol a owl:NamedIndividual, :Prophecy ;
+  rdfs:label "Not abandoned to Sheol, no decay" ;
+  :partOf :prophecy-burial-resurrection ;
+  :verse "Ps.16.10" ;
+  :verse "Acts.2.25-Acts.2.32" ;
+  :verse "Acts.13.35-Acts.13.37" .
+
+:p-ascends-on-high a owl:NamedIndividual, :Prophecy ;
+  rdfs:label "Ascends on high, leads captivity captive" ;
+  :partOf :prophecy-burial-resurrection ;
+  :verse "Ps.68.18" ;
+  :verse "Eph.4.8-Eph.4.10" .
+
+:p-right-hand a owl:NamedIndividual, :Prophecy ;
+  rdfs:label "Seated at God's right hand until enemies are made his footstool" ;
+  :partOf :prophecy-burial-resurrection ;
+  :verse "Ps.110.1" ;
+  :verse "Acts.2.34-Acts.2.35" ;
+  :verse "Heb.1.13" .
+
+:p-everlasting-kingdom a owl:NamedIndividual, :Prophecy ;
+  rdfs:label "Given dominion, glory, and an everlasting kingdom" ;
+  :partOf :prophecy-burial-resurrection ;
+  :verse "Dan.7.13-Dan.7.14" ;
+  :verse "Luke.1.32-Luke.1.33" ;
+  :verse "Rev.11.15" .
+
+:p-suffering-servant a owl:NamedIndividual, :Prophecy ;
+  rdfs:label "The Suffering Servant, wounded for our transgressions" ;
+  :partOf :prophecy-burial-resurrection ;
+  :verse "Isa.52.13-Isa.53.12" ;
+  :verse "1Pet.2.21-1Pet.2.25" ;
+  :verse "Acts.8.32-Acts.8.35" .
+
+:patterns-of-grace a owl:Class ;
+  rdfs:label "Patterns of Grace (Typology)" ;
+  rdfs:comment "Old Testament persons, objects, and rites that the New Testament reads as deliberately-designed shadows of a greater, later reality in Christ - patterns of grace running ahead of their own fulfillment." .
+
+:type-adam a owl:NamedIndividual, :Type ;
+  rdfs:label "Adam & Christ: the Two Heads" ;
+  rdfs:comment "As in Adam all die, so in Christ - the 'last Adam' - all who are his are made alive." ;
+  :partOf :patterns-of-grace ;
+  :verse "Rom.5.12-Rom.5.19" ;
+  :verse "1Cor.15.22" ;
+  :verse "1Cor.15.45" .
+
+:type-passover-lamb a owl:NamedIndividual, :Type ;
+  rdfs:label "The Passover Lamb" ;
+  rdfs:comment "A spotless lamb, blood applied, none of its bones broken - John the Baptist's 'Lamb of God' language and Paul's 'Christ, our Passover lamb' make the pattern explicit." ;
+  :partOf :patterns-of-grace ;
+  :verse "Exod.12.1-Exod.12.13" ;
+  :verse "John.1.29" ;
+  :verse "1Cor.5.7" .
+
+:type-bronze-serpent a owl:NamedIndividual, :Type ;
+  rdfs:label "The Bronze Serpent" ;
+  rdfs:comment "Whoever looked at the serpent Moses lifted up lived - Jesus applies the pattern to himself directly, lifted up so that whoever believes may have eternal life." ;
+  :partOf :patterns-of-grace ;
+  :verse "Num.21.4-Num.21.9" ;
+  :verse "John.3.14-John.3.15" .
+
+:type-manna a owl:NamedIndividual, :Type ;
+  rdfs:label "Manna from Heaven" ;
+  rdfs:comment "Bread given daily in the wilderness, versus the 'true bread from heaven' that gives life to the world." ;
+  :partOf :patterns-of-grace ;
+  :verse "Exod.16.4" ;
+  :verse "Exod.16.15" ;
+  :verse "John.6.31-John.6.35" ;
+  :verse "John.6.48-John.6.51" .
+
+:type-day-of-atonement a owl:NamedIndividual, :Type ;
+  rdfs:label "The Scapegoat & Day of Atonement" ;
+  rdfs:comment "One goat's blood atones, another carries the people's sin away into the wilderness - a two-part picture of substitution Hebrews and Paul both draw on." ;
+  :partOf :patterns-of-grace ;
+  :verse "Lev.16.7-Lev.16.10" ;
+  :verse "Lev.16.20-Lev.16.22" ;
+  :verse "Heb.9.11-Heb.9.14" ;
+  :verse "2Cor.5.21" .
+
+:type-jonah-sign a owl:NamedIndividual, :Type ;
+  rdfs:label "The Sign of Jonah" ;
+  rdfs:comment "Three days and three nights in the fish's belly, offered by Jesus himself as the one sign this generation will be given." ;
+  :partOf :patterns-of-grace ;
+  :verse "Jonah.1.17" ;
+  :verse "Matt.12.39-Matt.12.40" .
+
+:type-rock a owl:NamedIndividual, :Type ;
+  rdfs:label "The Rock That Followed Them" ;
+  rdfs:comment "Water struck from the rock in the wilderness; Paul identifies the rock itself as Christ." ;
+  :partOf :patterns-of-grace ;
+  :verse "Exod.17.6" ;
+  :verse "Num.20.7-Num.20.11" ;
+  :verse "1Cor.10.4" .
+
+:type-melchizedek-bread-wine a owl:NamedIndividual, :Type ;
+  rdfs:label "Melchizedek's Bread and Wine" ;
+  rdfs:comment "Read by many in this tradition as the Old Testament's first foreshadowing of the Lord's Supper, offered by the very priest-king who prefigures Christ's own priesthood." ;
+  :partOf :patterns-of-grace ;
+  :verse "Gen.14.18" ;
+  :verse "Matt.26.26-Matt.26.28" .
+
+:type-flood-baptism a owl:NamedIndividual, :Type ;
+  rdfs:label "The Flood as a Pattern of Baptism" ;
+  rdfs:comment "Peter explicitly names Noah's family, brought safely through water, as corresponding to baptism, which now saves through Christ's resurrection." ;
+  :partOf :patterns-of-grace ;
+  :verse "Gen.6.1-Gen.8.22" ;
+  :verse "1Pet.3.20-1Pet.3.21" .
