@@ -184,9 +184,12 @@
   // Lets the browser paint the just-set progress message before a
   // synchronous, CPU-bound step (parsing/indexing ~345k cross-references)
   // blocks the main thread - without this, report()'s DOM update never
-  // makes it to screen until the blocking work is already done.
+  // makes it to screen until the blocking work is already done. Uses
+  // setTimeout rather than requestAnimationFrame: rAF callbacks are
+  // throttled to near-zero in background/hidden tabs, which would hang
+  // the whole load if the tab isn't focused when it starts.
   function nextFrame() {
-    return new Promise((resolve) => requestAnimationFrame(() => requestAnimationFrame(resolve)));
+    return new Promise((resolve) => setTimeout(resolve, 0));
   }
 
   async function getData(onProgress) {
