@@ -15,6 +15,31 @@ npm start
 
 Then open http://localhost:3300 (override with `PORT=xxxx npm start`).
 
+## Static build (GitHub Pages)
+
+`docs/` is a fully static, client-side build of this same app - no server -
+served by GitHub Pages (repo Settings → Pages → Deploy from branch → `main` /
+`/docs`). `docs/graph-core.js` is a client-side port of `lib/loadData.js` +
+`lib/graphBuilders.js` + the `/api/search` handler (same algorithms, fetch()
+instead of fs reads, everything built once in-browser at load time instead of
+per-request). `docs/app.js` is `public/app.js` with its `fetch('/api/...')`
+calls swapped for direct calls into `graph-core.js`.
+
+`docs/data/` holds the static data those calls run against:
+`books.json` and `cross_references.txt` are copied straight from `data/`;
+`bible-text.json` is a leaner re-encoding of `data/sources/KJVA.json` (nested
+`book → chapter → verse text` arrays, dropping the redundant per-verse
+`"Book chapter:verse"` name string that doubles KJVA.json's size). Regenerate
+it after any data change with:
+
+```bash
+node scripts/build-static.js
+```
+
+Keep `docs/app.js`/`docs/graph-core.js` in sync by hand if you change
+`public/app.js`, `lib/loadData.js`, `lib/graphBuilders.js`, or the `/api/search`
+logic in `server.js` - the static build isn't code-generated from them.
+
 ## Data & licensing notes
 
 - **Verse text**: King James Version, including the Apocrypha (public domain).

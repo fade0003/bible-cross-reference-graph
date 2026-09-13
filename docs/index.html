@@ -1,0 +1,52 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+<meta charset="UTF-8" />
+<meta name="viewport" content="width=device-width, initial-scale=1.0" />
+<title>Bible Cross-Reference Graph</title>
+<link rel="stylesheet" href="styles.css" />
+</head>
+<body>
+  <header id="topbar">
+    <div id="brand">Bible Cross-Reference Graph</div>
+    <nav id="breadcrumb"></nav>
+    <button id="topVersesBtn" type="button">Top verses</button>
+    <div id="searchWrap">
+      <input id="searchInput" type="text" placeholder="Jump to a book, chapter, or verse&hellip;" autocomplete="off" />
+      <div id="searchResults"></div>
+    </div>
+  </header>
+
+  <main id="stage">
+    <canvas id="graphCanvas"></canvas>
+    <div id="legend">
+      <div class="legend-item"><span class="dot ot"></span>Old Testament</div>
+      <div class="legend-item"><span class="dot nt"></span>New Testament</div>
+      <div class="legend-item"><span class="dot apocrypha"></span>Apocrypha</div>
+      <div class="legend-note">Node size = number of cross-reference linkages</div>
+    </div>
+    <div id="controls">
+      <label for="minVotes" id="minVotesLabel">Min. link strength</label>
+      <input id="minVotes" type="range" min="0" max="80" value="15" step="5" />
+      <span id="minVotesVal">15</span>
+    </div>
+    <div id="hint">Loading&hellip;</div>
+  </main>
+
+  <aside id="panel" class="hidden">
+    <button id="panelClose" aria-label="Close">&times;</button>
+    <div id="panelContent"></div>
+  </aside>
+
+  <footer id="disclaimer">
+    Text: King James Version, including the Apocrypha (public domain) &mdash; the ESV license does not permit
+    the bulk cross-reference display this graph requires.
+    Canonical cross-references (~344,800 links) &copy; <a href="https://www.openbible.info/labs/cross-references/" target="_blank" rel="noopener">openbible.info</a>, CC BY 4.0, via the
+    <a href="https://github.com/scrollmapper/bible_databases" target="_blank" rel="noopener">scrollmapper/bible_databases</a> mirror.
+    Apocrypha cross-references are a small hand-curated set, not an exhaustive index.
+  </footer>
+
+  <script src="graph-core.js"></script>
+  <script src="app.js"></script>
+</body>
+</html>
