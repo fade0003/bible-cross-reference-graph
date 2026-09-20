@@ -32,7 +32,7 @@
 
   // ---- View state ----
   let view = { level: 'books' }; // { level: 'books' } | { level: 'book', bookId } | { level: 'chapter', bookId, chapter }
-  let minVotes = 15;
+  let minVotes = 5;
   let nodes = [];
   let links = [];
   let nodeById = new Map();
@@ -209,6 +209,15 @@
       ctx.fillStyle = color;
       ctx.globalAlpha = n.dimmed ? 0.35 : 1;
       ctx.fill();
+
+      if (n.text && r >= 11) {
+        const word = themeWord(n.text);
+        if (word) {
+          ctx.fillStyle = '#12151f';
+          drawFittedWord(word, n.x, n.y, r * 1.6, Math.max(7, Math.min(13, r * 0.5)));
+        }
+      }
+
       if (n.apocryphal) {
         ctx.lineWidth = 2 / camera.scale;
         ctx.strokeStyle = '#ffb3ac';
@@ -259,11 +268,49 @@
     return words.length > 4 ? `${preview}…` : preview;
   }
 
+  // Single always-visible "theme word" drawn inside a verse dot - the first
+  // real content word once articles/pronouns/prepositions/auxiliaries are
+  // skipped, so a glance at the dot hints at its topic without hovering.
+  const THEME_STOP_WORDS = new Set([
+    ...PREVIEW_LEAD_WORDS,
+    'the', 'a', 'an', 'unto', 'he', 'she', 'it', 'they', 'we', 'i', 'thou', 'ye',
+    'him', 'her', 'them', 'us', 'me', 'my', 'thy', 'his', 'their', 'our', 'your',
+    'of', 'in', 'on', 'at', 'to', 'from', 'with', 'by', 'as', 'is', 'was', 'were',
+    'are', 'be', 'been', 'being', 'shall', 'will', 'would', 'should', 'hath',
+    'have', 'has', 'had', 'not', 'no', 'nor', 'all', 'also', 'which', 'who',
+    'whom', 'whose', 'this', 'these', 'those', 'there', 'here', 'upon', 'into',
+    'before', 'after', 'among', 'between',
+  ]);
+  function themeWord(text) {
+    if (!text) return '';
+    const words = text.replace(/[.,;:!?"“”]/g, '').split(/\s+/).filter(Boolean);
+    let i = 0;
+    while (i < words.length - 1 && THEME_STOP_WORDS.has(words[i].toLowerCase())) i++;
+    const word = words[i];
+    if (!word) return '';
+    return word.charAt(0).toUpperCase() + word.slice(1).toLowerCase();
+  }
+
+  // Shrinks the font until `word` fits within maxWidth, drawn centered at (cx, cy).
+  function drawFittedWord(word, cx, cy, maxWidth, maxSize) {
+    let size = maxSize;
+    ctx.textAlign = 'center';
+    ctx.textBaseline = 'middle';
+    ctx.font = `bold ${size}px Georgia, serif`;
+    while (size > 6 && ctx.measureText(word).width > maxWidth) {
+      size -= 1;
+      ctx.font = `bold ${size}px Georgia, serif`;
+    }
+    if (size >= 6) ctx.fillText(word, cx, cy);
+    ctx.textBaseline = 'alphabetic';
+  }
+
   // ---- Interaction ----
   let dragNode = null;
   let isDragging = false;
   let dragStart = null;
   let panStart = null;
+  let pinch = null; // { startDist, startScale } while two touches are down
   let getRadiusFn = () => 8;
 
   function toWorld(px, py) {
@@ -290,10 +337,13 @@
     return best;
   }
 
-  canvas.addEventListener('mousedown', (e) => {
+  function canvasPoint(clientX, clientY) {
     const rect = canvas.getBoundingClientRect();
-    const px = e.clientX - rect.left;
-    const py = e.clientY - rect.top;
+    return { px: clientX - rect.left, py: clientY - rect.top };
+  }
+
+  // Shared by mouse and touch input so drag/pan/tap behave identically.
+  function pointerDown(px, py) {
     const n = nodeAt(px, py);
     dragStart = { px, py };
     isDragging = false;
@@ -302,13 +352,10 @@
     } else {
       panStart = { camX: camera.x, camY: camera.y, px, py };
     }
-  });
+  }
 
-  window.addEventListener('mousemove', (e) => {
+  function pointerMove(px, py) {
     if (!dragStart) return;
-    const rect = canvas.getBoundingClientRect();
-    const px = e.clientX - rect.left;
-    const py = e.clientY - rect.top;
     if (Math.abs(px - dragStart.px) > 3 || Math.abs(py - dragStart.py) > 3) {
       isDragging = true;
     }
@@ -322,12 +369,9 @@
       camera.x = panStart.camX + (px - panStart.px);
       camera.y = panStart.camY + (py - panStart.py);
     }
-  });
+  }
 
-  window.addEventListener('mouseup', (e) => {
-    const rect = canvas.getBoundingClientRect();
-    const px = e.clientX - rect.left;
-    const py = e.clientY - rect.top;
+  function pointerUp() {
     if (dragNode && !isDragging) {
       handleNodeClick(dragNode);
     }
@@ -335,7 +379,19 @@
     panStart = null;
     dragStart = null;
     isDragging = false;
+  }
+
+  canvas.addEventListener('mousedown', (e) => {
+    const { px, py } = canvasPoint(e.clientX, e.clientY);
+    pointerDown(px, py);
   });
+
+  window.addEventListener('mousemove', (e) => {
+    const { px, py } = canvasPoint(e.clientX, e.clientY);
+    pointerMove(px, py);
+  });
+
+  window.addEventListener('mouseup', () => pointerUp());
 
   canvas.addEventListener('wheel', (e) => {
     e.preventDefault();
@@ -345,11 +401,62 @@
 
   canvas.addEventListener('mousemove', (e) => {
     if (dragNode) return;
-    const rect = canvas.getBoundingClientRect();
-    const n = nodeAt(e.clientX - rect.left, e.clientY - rect.top);
+    const { px, py } = canvasPoint(e.clientX, e.clientY);
+    const n = nodeAt(px, py);
     canvas.style.cursor = n ? 'pointer' : 'grab';
     for (const nd of nodes) nd.hover = false;
     if (n) n.hover = true;
+  });
+
+  // ---- Touch (phones/tablets): one finger drags/pans/taps like the mouse;
+  // two fingers pinch-zoom. preventDefault keeps the page itself from
+  // scrolling/zooming while a gesture is happening on the canvas.
+  function touchDist(t0, t1) {
+    return Math.hypot(t1.clientX - t0.clientX, t1.clientY - t0.clientY);
+  }
+
+  canvas.addEventListener('touchstart', (e) => {
+    if (e.touches.length === 1) {
+      pinch = null;
+      const { px, py } = canvasPoint(e.touches[0].clientX, e.touches[0].clientY);
+      pointerDown(px, py);
+    } else if (e.touches.length === 2) {
+      dragNode = null;
+      panStart = null;
+      dragStart = null;
+      pinch = { startDist: touchDist(e.touches[0], e.touches[1]), startScale: camera.scale };
+    }
+    e.preventDefault();
+  }, { passive: false });
+
+  canvas.addEventListener('touchmove', (e) => {
+    if (pinch && e.touches.length === 2) {
+      const dist = touchDist(e.touches[0], e.touches[1]);
+      camera.scale = Math.max(0.15, Math.min(4, pinch.startScale * (dist / pinch.startDist)));
+    } else if (e.touches.length === 1) {
+      const { px, py } = canvasPoint(e.touches[0].clientX, e.touches[0].clientY);
+      pointerMove(px, py);
+    }
+    e.preventDefault();
+  }, { passive: false });
+
+  canvas.addEventListener('touchend', (e) => {
+    if (e.touches.length === 0) {
+      pointerUp();
+      pinch = null;
+    } else if (e.touches.length === 1) {
+      // Lifting one finger out of a pinch resumes as a pan, not a fresh tap.
+      pinch = null;
+      const { px, py } = canvasPoint(e.touches[0].clientX, e.touches[0].clientY);
+      dragNode = null;
+      dragStart = { px, py };
+      isDragging = true;
+      panStart = { camX: camera.x, camY: camera.y, px, py };
+    }
+  });
+  canvas.addEventListener('touchcancel', () => {
+    pointerUp();
+    pinch = null;
   });
 
   function handleNodeClick(n) {

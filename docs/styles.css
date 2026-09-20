@@ -175,6 +175,7 @@ body.content-page #topbar { position: static; }
   width: 100%;
   height: 100%;
   cursor: grab;
+  touch-action: none;
 }
 
 #legend {
@@ -584,3 +585,100 @@ body.content-page #topbar { position: static; }
 .tv-witness-label.lxx { background: rgba(111, 206, 143, 0.2); color: #a6e6bc; }
 .tv-witness-label.dss { background: rgba(224, 175, 96, 0.2); color: #e0c398; }
 .tv-significance { font-size: 12.5px; line-height: 1.55; color: #9aa0b4; font-style: italic; }
+
+/* ---- Mobile (phones, e.g. iPhone 14 at 390x844 in portrait) ----
+   The topbar can hold brand + site nav + breadcrumb + a button + search,
+   which never fit one 56px row at phone widths. Below this breakpoint it
+   wraps onto its own rows and the surrounding layout switches from fixed-
+   position math (hardcoded top:56px/bottom:34px) to a plain flex column,
+   so nothing is clipped regardless of how tall the wrapped header ends up. */
+@media (max-width: 900px) {
+  #topbar {
+    flex-wrap: wrap;
+    height: auto;
+    row-gap: 6px;
+    padding: 8px 10px;
+    padding-top: calc(8px + env(safe-area-inset-top, 0px));
+    padding-left: calc(10px + env(safe-area-inset-left, 0px));
+    padding-right: calc(10px + env(safe-area-inset-right, 0px));
+    gap: 6px;
+  }
+  #brand { font-size: 13px; }
+  #siteNav {
+    order: 5;
+    width: 100%;
+    overflow-x: auto;
+    -webkit-overflow-scrolling: touch;
+  }
+  #siteNav a { font-size: 11px; padding: 4px 8px; flex-shrink: 0; }
+  #modeToggle { order: 3; width: 100%; margin-left: 0; }
+  #bookFilter { order: 4; width: 100%; max-width: none; }
+  #timelineCaption { order: 4; width: 100%; text-align: left; }
+
+  body:not(.content-page) {
+    display: flex;
+    flex-direction: column;
+    height: 100vh;
+    height: 100dvh;
+  }
+  body:not(.content-page) #topbar { position: static; flex: 0 0 auto; }
+  body:not(.content-page) #breadcrumb {
+    order: 4;
+    width: 100%;
+    font-size: 12px;
+    overflow-x: auto;
+    white-space: nowrap;
+    flex: none;
+  }
+  body:not(.content-page) #topVersesBtn { order: 3; font-size: 11px; padding: 5px 8px; }
+  body:not(.content-page) #searchWrap { order: 6; width: 100%; }
+
+  body:not(.content-page) #stage {
+    position: relative;
+    flex: 1 1 auto;
+    min-height: 0;
+    top: auto; left: auto; right: auto; bottom: auto;
+  }
+  body:not(.content-page) #panel {
+    position: fixed;
+    inset: 0;
+    top: 0; bottom: 0;
+    width: 100%;
+    max-width: none;
+    height: 100vh;
+    height: 100dvh;
+    padding-top: calc(20px + env(safe-area-inset-top, 0px));
+    padding-bottom: calc(20px + env(safe-area-inset-bottom, 0px));
+  }
+  body:not(.content-page) #disclaimer {
+    position: static;
+    display: block;
+    flex: 0 0 auto;
+    height: auto;
+    white-space: normal;
+    line-height: 1.4;
+    font-size: 10px;
+    padding: 8px 12px calc(8px + env(safe-area-inset-bottom, 0px));
+  }
+
+  #legend {
+    left: 8px;
+    right: auto;
+    top: 8px;
+    bottom: auto;
+    max-width: 46vw;
+    padding: 8px 10px;
+    font-size: 10.5px;
+  }
+  #legend .legend-note { display: none; }
+  #controls {
+    left: 8px;
+    right: 8px;
+    bottom: calc(8px + env(safe-area-inset-bottom, 0px));
+    width: auto;
+  }
+  #controls input[type="range"] { flex: 1 1 auto; width: auto; min-width: 0; }
+
+  #pageContent { padding: 18px 14px 40px; }
+  #tlTooltip { max-width: 70vw; white-space: normal; }
+}

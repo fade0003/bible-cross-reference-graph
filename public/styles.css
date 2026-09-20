@@ -99,6 +99,7 @@ html, body {
   width: 100%;
   height: 100%;
   cursor: grab;
+  touch-action: none;
 }
 
 #legend {
@@ -253,3 +254,86 @@ html, body {
   z-index: 20;
 }
 #disclaimer a { color: #8a8ea8; }
+
+/* ---- Mobile (phones, e.g. iPhone 14 at 390x844 in portrait) ----
+   The topbar (brand + breadcrumb + search) can't fit one 56px row at
+   phone widths. Below this breakpoint it wraps onto its own rows and the
+   surrounding layout switches from fixed-position math (hardcoded
+   top:56px/bottom:34px) to a plain flex column, so nothing is clipped
+   regardless of how tall the wrapped header ends up. */
+@media (max-width: 900px) {
+  body {
+    display: flex;
+    flex-direction: column;
+    height: 100vh;
+    height: 100dvh;
+  }
+  #topbar {
+    position: static;
+    flex: 0 0 auto;
+    flex-wrap: wrap;
+    height: auto;
+    row-gap: 6px;
+    padding: 8px 10px;
+    padding-top: calc(8px + env(safe-area-inset-top, 0px));
+    padding-left: calc(10px + env(safe-area-inset-left, 0px));
+    padding-right: calc(10px + env(safe-area-inset-right, 0px));
+    gap: 6px;
+  }
+  #brand { font-size: 13px; }
+  #breadcrumb {
+    order: 2;
+    width: 100%;
+    font-size: 12px;
+    overflow-x: auto;
+    white-space: nowrap;
+    flex: none;
+  }
+  #searchWrap { order: 3; width: 100%; }
+
+  #stage {
+    position: relative;
+    flex: 1 1 auto;
+    min-height: 0;
+    top: auto; left: auto; right: auto; bottom: auto;
+  }
+  #panel {
+    position: fixed;
+    inset: 0;
+    top: 0; bottom: 0;
+    width: 100%;
+    max-width: none;
+    height: 100vh;
+    height: 100dvh;
+    padding-top: calc(20px + env(safe-area-inset-top, 0px));
+    padding-bottom: calc(20px + env(safe-area-inset-bottom, 0px));
+  }
+  #disclaimer {
+    position: static;
+    display: block;
+    flex: 0 0 auto;
+    height: auto;
+    white-space: normal;
+    line-height: 1.4;
+    font-size: 10px;
+    padding: 8px 12px calc(8px + env(safe-area-inset-bottom, 0px));
+  }
+
+  #legend {
+    left: 8px;
+    right: auto;
+    top: 8px;
+    bottom: auto;
+    max-width: 46vw;
+    padding: 8px 10px;
+    font-size: 10.5px;
+  }
+  #legend .legend-note { display: none; }
+  #controls {
+    left: 8px;
+    right: 8px;
+    bottom: calc(8px + env(safe-area-inset-bottom, 0px));
+    width: auto;
+  }
+  #controls input[type="range"] { flex: 1 1 auto; width: auto; min-width: 0; }
+}
