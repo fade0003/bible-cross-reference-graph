@@ -3,7 +3,7 @@
 const express = require('express');
 const path = require('path');
 const { getData, verseKey } = require('./lib/loadData');
-const { buildBookGraph, buildChapterGraph, buildVerseGraph, verseDetail, topVerses } = require('./lib/graphBuilders');
+const { buildBookGraph, buildChapterGraph, buildVerseGraph, verseDetail } = require('./lib/graphBuilders');
 
 const PORT = process.env.PORT || 3300;
 
@@ -11,12 +11,6 @@ function parseMinVotes(req) {
   if (req.query.minVotes === undefined || req.query.minVotes === '') return 0;
   const n = parseInt(req.query.minVotes, 10);
   return Number.isNaN(n) ? 0 : n;
-}
-
-function parsePerNode(req, fallback) {
-  if (req.query.perNode === undefined || req.query.perNode === '') return fallback;
-  const n = parseInt(req.query.perNode, 10);
-  return Number.isNaN(n) ? fallback : n;
 }
 
 async function main() {
@@ -39,11 +33,11 @@ async function main() {
   });
 
   app.get('/api/graph/books', (req, res) => {
-    res.json(buildBookGraph(data, parsePerNode(req, 6)));
+    res.json(buildBookGraph(data));
   });
 
   app.get('/api/graph/book/:bookId', (req, res) => {
-    const graph = buildChapterGraph(data, req.params.bookId, parsePerNode(req, 5));
+    const graph = buildChapterGraph(data, req.params.bookId);
     if (!graph) return res.status(404).json({ error: 'Unknown book' });
     res.json(graph);
   });
@@ -63,14 +57,6 @@ async function main() {
     const detail = verseDetail(data, req.params.bookId, chapter, verse, minVotes);
     if (!detail) return res.status(404).json({ error: 'Unknown verse' });
     res.json(detail);
-  });
-
-  app.get('/api/top-verses', (req, res) => {
-    const limitRaw = parseInt(req.query.limit, 10);
-    const limit = Number.isNaN(limitRaw) ? 50 : Math.max(1, Math.min(200, limitRaw));
-    const minVotes = parseMinVotes(req);
-    const bookId = req.query.bookId || null;
-    res.json({ results: topVerses(data, { limit, minVotes, bookId }) });
   });
 
   app.get('/api/search', (req, res) => {
