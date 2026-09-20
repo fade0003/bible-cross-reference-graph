@@ -226,6 +226,15 @@
         ctx.font = `${Math.max(10, Math.min(14, r * 0.55))}px Georgia, serif`;
         ctx.textAlign = 'center';
         ctx.fillText(n.label, n.x, n.y - r - 6);
+
+        if (n.hover && n.text) {
+          const preview = topicalPreview(n.text);
+          if (preview) {
+            ctx.fillStyle = '#b7c1e0';
+            ctx.font = `italic ${Math.max(9, Math.min(12, r * 0.45))}px Georgia, serif`;
+            ctx.fillText(preview, n.x, n.y - r - 20);
+          }
+        }
       }
     }
     ctx.restore();
@@ -234,6 +243,20 @@
   function colorFor(n) {
     if (n.apocryphal) return CAT_COLOR.apocrypha;
     return CAT_COLOR[n.category] || '#9aa0b4';
+  }
+
+  // Short hover hint for verse dots - not a real topic model, just the verse's
+  // first few content words (leading conjunctions stripped) so a reader can
+  // guess what a verse is about before opening its full text.
+  const PREVIEW_LEAD_WORDS = new Set([
+    'and', 'for', 'but', 'now', 'then', 'that', 'behold', 'verily', 'so', 'yet', 'when', 'if', 'because', 'o',
+  ]);
+  function topicalPreview(text) {
+    if (!text) return '';
+    const words = text.replace(/[.,;:!?"“”]/g, '').split(/\s+/).filter(Boolean);
+    while (words.length > 4 && PREVIEW_LEAD_WORDS.has(words[0].toLowerCase())) words.shift();
+    const preview = words.slice(0, 4).join(' ');
+    return words.length > 4 ? `${preview}…` : preview;
   }
 
   // ---- Interaction ----
