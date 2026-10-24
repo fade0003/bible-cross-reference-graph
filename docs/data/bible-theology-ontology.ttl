@@ -5,12 +5,12 @@
 @prefix xsd: <http://www.w3.org/2001/XMLSchema#> .
 
 # Divine Council & Second Temple Biblical Theology - A working ontology, after Michael S. Heiser & Douglas Van Dorn
-# Sources: Michael S. Heiser, The Unseen Realm (2015); Michael S. Heiser, Reversing Hermon (2017); Michael S. Heiser, Angels (2018); Douglas Van Dorn, Giants: Sons of the Gods (2013); Douglas Van Dorn, Waters of Creation (2016); Douglas Van Dorn, Covenant Theology: A Reformed Baptist Primer (2019)
-# This page lays out one particular, identifiable theological reading tradition - the 'divine council worldview' associated with Michael Heiser and Douglas Van Dorn - as a browsable concept hierarchy, not as doctrinally neutral consensus or as proof-texted certainty. Faithful, careful readers of Scripture disagree on several of these points (especially the Nephilim/Rephaim material and some Angel-of-the-LORD identifications). Verse references are supplied for study and are not exhaustive of every relevant passage. Class/property/individual labels are informal OWL-style annotations for the page's export (see the Turtle file), not a claim that this is THE definitive formal ontology of the Bible.
+# Sources: Michael S. Heiser, The Unseen Realm (2015); Michael S. Heiser, Reversing Hermon (2017); Michael S. Heiser, Angels (2018); Douglas Van Dorn, Giants: Sons of the Gods (2013); Douglas Van Dorn, Waters of Creation (2016); Douglas Van Dorn, Covenant Theology: A Reformed Baptist Primer (2019); Douglas Van Dorn, teaching on the two powers and the Angel of the LORD; Alan F. Segal, Two Powers in Heaven (1977)
+# This page lays out one particular, identifiable theological reading tradition - the 'divine council worldview' associated with Michael Heiser and Douglas Van Dorn - as a browsable concept hierarchy, not as doctrinally neutral consensus or as proof-texted certainty. Faithful, careful readers of Scripture disagree on several of these points (especially the Nephilim/Rephaim material and some Angel-of-the-LORD identifications). Verse references are supplied for study and are not exhaustive of every relevant passage. Class/property/individual labels are informal OWL-style annotations for the page's export (see the Turtle file), not a claim that this is THE definitive formal ontology of the Bible. The 3D graph's four lenses gather the passages Van Dorn puts at the center of that reading: the two powers in heaven, the Angel of the LORD, the Nephilim, and the places a later text or a later interpretation quiets a more supernatural sense. Where that "hiding" is commentary rather than a change in the Hebrew consonants, the node says so. Isaiah 63:9 and Goliath's height are included because, in those two cases, the earlier text does not simply preserve a more supernatural reading.
 
 : a owl:Ontology ;
   rdfs:label "Divine Council & Second Temple Biblical Theology" ;
-  rdfs:comment "This page lays out one particular, identifiable theological reading tradition - the 'divine council worldview' associated with Michael Heiser and Douglas Van Dorn - as a browsable concept hierarchy, not as doctrinally neutral consensus or as proof-texted certainty. Faithful, careful readers of Scripture disagree on several of these points (especially the Nephilim/Rephaim material and some Angel-of-the-LORD identifications). Verse references are supplied for study and are not exhaustive of every relevant passage. Class/property/individual labels are informal OWL-style annotations for the page's export (see the Turtle file), not a claim that this is THE definitive formal ontology of the Bible." .
+  rdfs:comment "This page lays out one particular, identifiable theological reading tradition - the 'divine council worldview' associated with Michael Heiser and Douglas Van Dorn - as a browsable concept hierarchy, not as doctrinally neutral consensus or as proof-texted certainty. Faithful, careful readers of Scripture disagree on several of these points (especially the Nephilim/Rephaim material and some Angel-of-the-LORD identifications). Verse references are supplied for study and are not exhaustive of every relevant passage. Class/property/individual labels are informal OWL-style annotations for the page's export (see the Turtle file), not a claim that this is THE definitive formal ontology of the Bible. The 3D graph's four lenses gather the passages Van Dorn puts at the center of that reading: the two powers in heaven, the Angel of the LORD, the Nephilim, and the places a later text or a later interpretation quiets a more supernatural sense. Where that \"hiding\" is commentary rather than a change in the Hebrew consonants, the node says so. Isaiah 63:9 and Goliath's height are included because, in those two cases, the earlier text does not simply preserve a more supernatural reading." .
 
 :DivineBeing a owl:Class ;
   rdfs:label "Divine Being (elohim)" ;
@@ -53,6 +53,15 @@
 :Type a owl:Class ;
   rdfs:label "Type (Pattern of Grace)" ;
   rdfs:comment "An Old Testament person, object, or event that prefigures a New Testament antitype, usually Christ or his saving work." .
+
+:TwoPowers a owl:Class ;
+  rdfs:label "Two Powers figure" ;
+  rdfs:subClassOf :TheophanicFigure ;
+  rdfs:comment "A Yahweh figure distinguished from, and yet identified with, another Yahweh figure in the same passage. The category name comes from later rabbinic polemic, as studied by Alan Segal." .
+
+:TextualVeil a owl:Class ;
+  rdfs:label "Textual or interpretive veil" ;
+  rdfs:comment "A place where a later text-form, a translation choice, or a later commentary obscures a more supernatural sense, or a counterexample where it does not." .
 
 :rulesOver a owl:ObjectProperty ;
   rdfs:label "rules over" ;
@@ -106,9 +115,24 @@
   rdfs:label "part of" ;
   rdfs:comment "hierarchical containment used by the tree view" .
 
+:lens a owl:DatatypeProperty ;
+  rdfs:label "highlight lens" ;
+  rdfs:comment "Van Dorn theme lens: two-powers, angel-of-the-lord, nephilim, or masoretic." .
+
+:veil a owl:DatatypeProperty ;
+  rdfs:label "veil kind" ;
+  rdfs:comment "text (a consonantal/text-form difference), interpretation (wording survived, the sense was flattened later), or counterexample." .
+
+:variantId a owl:DatatypeProperty ;
+  rdfs:label "textual-variants entry" .
+
+:seeAlso a owl:ObjectProperty ;
+  rdfs:label "see also" .
+
 :divine-council a owl:Class ;
   rdfs:label "The Divine Council" ;
   rdfs:comment "Yahweh presides over an assembly of spirit-plane 'elohim' (Ps 82:1), the 'sons of God' (bene elohim), who serve, advise, and in some cases rebel against him. This is the organizing framework Heiser argues runs through the whole Bible's supernatural narrative." ;
+  :seeAlso :veil-deut32-43 ;
   :verse "Ps.82.1" ;
   :verse "1Kgs.22.19-1Kgs.22.22" ;
   :verse "Job.1.6-Job.1.12" ;
@@ -120,6 +144,7 @@
   rdfs:label "Elohim as a Plane-of-Existence Term" ;
   rdfs:comment "'Elohim' is used in the Hebrew Bible as a place-of-residence/species category (any inhabitant of the spirit world), not exclusively as a proper name for Yahweh - which is why human judges, the dead, and other spirits can all be called 'elohim' in context." ;
   :partOf :divine-council ;
+  :seeAlso :veil-psalm82-interpretation ;
   :verse "Ps.82.6" ;
   :verse "Ps.89.5-Ps.89.7" ;
   :verse "1Sam.28.13" .
@@ -128,6 +153,7 @@
   rdfs:label "The Bene Elohim (\"Sons of God\")" ;
   rdfs:comment "Non-human members of Yahweh's council, present at creation and named as a category distinct from humanity." ;
   :partOf :divine-council ;
+  :seeAlso :veil-deut32-8 ;
   :verse "Job.38.7" ;
   :verse "Ps.29.1" ;
   :verse "Gen.6.2" ;
@@ -145,6 +171,8 @@
   rdfs:label "Babel: The Nations Disinherited" ;
   rdfs:comment "After Babel, Yahweh allots the nations to lesser elohim ('according to the number of the sons of God', reading with the Dead Sea Scrolls/LXX against the MT's 'sons of Israel') and keeps Israel as his own direct portion - the theological hinge the rest of the Old Testament turns on, and the conceptual root of this app's companion game project, DISINHERITED." ;
   :partOf :divine-council ;
+  :lens "masoretic" ;
+  :seeAlso :veil-deut32-8 ;
   :verse "Gen.11.1-Gen.11.9" ;
   :verse "Deut.32.8-Deut.32.9" ;
   :verse "Deut.4.19-Deut.4.20" ;
@@ -166,9 +194,130 @@
   :verse "Col.2.15" ;
   :verse "Eph.6.12" .
 
+:two-powers a owl:Class ;
+  rdfs:label "The Two Powers in Heaven" ;
+  rdfs:comment "Van Dorn, following Heiser and Alan Segal's Two Powers in Heaven, argues that Israel's scriptures already distinguish two Yahweh figures: one unseen, and one who is seen, sent, and embodied. Both are called LORD. Both receive what belongs only to God. Rabbinic writers later treated a \"two powers\" belief as heresy. Segal showed the controversy was real, and that passages like Daniel 7 and the Angel of the LORD sat at the center of it. Van Dorn's claim, which many Jewish and Christian readers reject, is that the \"heresy\" was the older theology, and that the New Testament names the two figures Father and Son." ;
+  :lens "two-powers" ;
+  :seeAlso :angel-of-the-lord ;
+  :verse "Dan.7.9-Dan.7.14" ;
+  :verse "Ps.110.1" .
+
+:two-powers-gen19 a owl:NamedIndividual, :Event ;
+  rdfs:label "Fire from the LORD, rained by the LORD" ;
+  rdfs:comment "Genesis 19:24 says the LORD rained sulfur and fire on Sodom \"from the LORD out of heaven.\" In the scene just before, Yahweh has been on the ground with Abraham while two angels go on to Sodom. Van Dorn reads one Yahweh on earth calling judgment down from another Yahweh in heaven. The verse is a staple of his two-powers teaching and of older Christian appeals to the same wording." ;
+  :partOf :two-powers ;
+  :lens "two-powers" ;
+  :lens "angel-of-the-lord" ;
+  :seeAlso :angel-mamre ;
+  :seeAlso :veil-tiqqun-gen18 ;
+  :verse "Gen.19.24" ;
+  :verse "Gen.18.22" ;
+  :verse "Gen.19.1" .
+
+:two-powers-daniel7 a owl:NamedIndividual, :Event ;
+  rdfs:label "Daniel 7: two thrones, one cloud-rider" ;
+  rdfs:comment "Thrones, plural, are set. The Ancient of Days sits. Then \"one like a son of man\" comes with the clouds of heaven and is given dominion, glory, and a kingdom. Cloud-riding is a claim of deity in the Hebrew Bible, not a way of describing an ordinary human. The Babylonian Talmud (Hagigah 14a) debates the plural thrones; R. Akiva's suggestion that one was for David was rebuked. Van Dorn and Heiser take the vision as the clearest Old Testament picture of two divine persons, and they note that Jesus applies the cloud-riding Son of Man to himself in front of the high priest." ;
+  :partOf :two-powers ;
+  :lens "two-powers" ;
+  :seeAlso :two-powers-cloud-rider ;
+  :verse "Dan.7.9-Dan.7.10" ;
+  :verse "Dan.7.13-Dan.7.14" ;
+  :verse "Matt.26.63-Matt.26.65" ;
+  :verse "Rev.1.7" ;
+  :verse "Rev.1.13-Rev.1.14" .
+
+:two-powers-psalm110 a owl:NamedIndividual, :Event ;
+  rdfs:label "\"The LORD said to my Lord\"" ;
+  rdfs:comment "Yahweh speaks to David's Lord and seats him at the right hand. The addressee is not David, and Jesus presses the point: if the Messiah is David's son, how is he David's Lord? Van Dorn treats Psalm 110 as a two-powers text, not only a proof of a future human king. The same psalm swears this Lord into Melchizedek's priesthood." ;
+  :partOf :two-powers ;
+  :lens "two-powers" ;
+  :seeAlso :melch-psalm110 ;
+  :verse "Ps.110.1" ;
+  :verse "Ps.110.4" ;
+  :verse "Matt.22.41-Matt.22.45" ;
+  :verse "Acts.2.34-Acts.2.35" ;
+  :verse "Heb.1.13" .
+
+:two-powers-name-angel a owl:NamedIndividual, :Event ;
+  rdfs:label "The Angel who has the Name in him" ;
+  rdfs:comment "Exodus 23: God will send an angel ahead of Israel. Israel must obey him. He will not pardon rebellion, \"for my name is in him.\" Van Dorn does not take \"name\" as a mere label. In the Hebrew Bible the Name is Yahweh's own presence (Deuteronomy 12, the temple as the place of the Name). An angel who contains the Name, who forgives or refuses to forgive, is Yahweh, and yet he is sent by Yahweh." ;
+  :partOf :two-powers ;
+  :lens "two-powers" ;
+  :lens "angel-of-the-lord" ;
+  :seeAlso :angel-name ;
+  :verse "Exod.23.20-Exod.23.23" ;
+  :verse "Deut.12.5" ;
+  :verse "Deut.12.11" .
+
+:two-powers-jacob-blessing a owl:NamedIndividual, :Event ;
+  rdfs:label "The God, and the Angel who redeemed me" ;
+  rdfs:comment "Jacob blesses Joseph's sons by \"the God before whom my fathers walked\" and, in parallel, \"the Angel who redeemed me from all evil.\" He is not correcting himself from God down to a lesser messenger. Hosea says the same wrestling was with God and with the angel. Van Dorn reads the parallelism as two powers in Jacob's own mouth." ;
+  :partOf :two-powers ;
+  :lens "two-powers" ;
+  :lens "angel-of-the-lord" ;
+  :seeAlso :angel-peniel ;
+  :verse "Gen.48.15-Gen.48.16" ;
+  :verse "Hos.12.3-Hos.12.4" .
+
+:two-powers-proverbs30 a owl:NamedIndividual, :Event ;
+  rdfs:label "\"What is his name, and what is his son's name?\"" ;
+  rdfs:comment "Agur's riddle asks who has gone up to heaven and come down, who has gathered the wind, and then: \"What is his name, and what is his son's name?\" Van Dorn refuses to flatten the second question into a metaphor for wisdom. John 3:13 answers the ascent in the language of the Son of Man. The node records that reading; it is not the only way the proverb has been taken." ;
+  :partOf :two-powers ;
+  :lens "two-powers" ;
+  :verse "Prov.30.4" ;
+  :verse "John.3.13" .
+
+:two-powers-isaiah-glory a owl:NamedIndividual, :Event ;
+  rdfs:label "Isaiah saw his glory" ;
+  rdfs:comment "Isaiah 6 is a vision of Yahweh enthroned, the train of his robe filling the temple, the seraphim crying \"holy.\" John 12:41 says Isaiah \"saw his glory and spoke of him,\" and the \"him\" in John's paragraph is Jesus. Van Dorn's conclusion, shared with much of the historic church, is that the enthroned figure Isaiah saw was the Son, not the Father whom John says no one has seen." ;
+  :partOf :two-powers ;
+  :lens "two-powers" ;
+  :seeAlso :angel-christophany ;
+  :verse "Isa.6.1-Isa.6.5" ;
+  :verse "John.12.37-John.12.41" .
+
+:two-powers-cloud-rider a owl:NamedIndividual, :Event ;
+  rdfs:label "The rider on the clouds" ;
+  rdfs:comment "Riding the clouds is an epithet of deity. Deuteronomy 33 and Psalm 68 use it of Yahweh. Daniel 7 gives it to the Son of Man who comes before the Ancient of Days. When Jesus tells the high priest \"you will see the Son of Man seated at the right hand of Power, and coming on the clouds,\" the answer is called blasphemy. Van Dorn, with Heiser, treats that charge as evidence the claim was heard as a claim to the second throne, not as a metaphor for a merely human messiah." ;
+  :partOf :two-powers ;
+  :lens "two-powers" ;
+  :seeAlso :two-powers-daniel7 ;
+  :verse "Deut.33.26" ;
+  :verse "Ps.68.4" ;
+  :verse "Ps.68.33" ;
+  :verse "Dan.7.13" ;
+  :verse "Matt.26.64" ;
+  :verse "Rev.1.7" .
+
+:two-powers-unseen-father a owl:NamedIndividual, :Event ;
+  rdfs:label "No one has seen the Father" ;
+  rdfs:comment "John 1:18: no one has ever seen God; the only God, or only Son, who is at the Father's side has made him known. John 6:46 and 5:37 say the same of the Father. Exodus 33:20 says no man can see Yahweh's face and live. People in the Old Testament nevertheless see God and live: the bush, Peniel, Gideon, Manoah, Isaiah's throne. Van Dorn's resolution is the two-powers distinction. They saw the visible Yahweh, the Son. They did not see the Father." ;
+  :partOf :two-powers ;
+  :lens "two-powers" ;
+  :lens "angel-of-the-lord" ;
+  :seeAlso :angel-christophany ;
+  :seeAlso :angel-burning-bush ;
+  :verse "John.1.18" ;
+  :verse "John.5.37" ;
+  :verse "John.6.46" ;
+  :verse "Exod.33.18-Exod.33.23" .
+
+:two-powers-malachi a owl:NamedIndividual, :Event ;
+  rdfs:label "The Lord who comes to his temple" ;
+  rdfs:comment "Malachi 3:1 distinguishes a preparing messenger from \"the Lord whom you seek\" and from \"the messenger of the covenant\" who comes suddenly to his temple. Mark applies the preparing messenger to John the Baptist. Van Dorn identifies the Lord and the covenant messenger with the Angel of the LORD, the second power, arriving at last in the flesh. The verse is also why the Angel is sometimes called the messenger of the covenant in this tradition." ;
+  :partOf :two-powers ;
+  :lens "two-powers" ;
+  :lens "angel-of-the-lord" ;
+  :verse "Mal.3.1" ;
+  :verse "Mark.1.2-Mark.1.4" ;
+  :verse "John.2.13-John.2.17" .
+
 :angel-of-the-lord a owl:Class ;
   rdfs:label "The Angel of the LORD (Malak YHWH)" ;
   rdfs:comment "A figure who speaks as Yahweh in the first person, is worshiped as Yahweh, and is called Yahweh outright - yet is repeatedly distinguished from 'the LORD' in the same episode. Read by both Heiser and the historic Christian tradition as the clearest Old Testament window onto plurality within the Godhead, and often taken as a pre-incarnate appearance of the Son." ;
+  :lens "angel-of-the-lord" ;
+  :lens "two-powers" ;
+  :seeAlso :two-powers ;
   :verse "Gen.16.7-Gen.16.13" ;
   :verse "Gen.22.11-Gen.22.18" ;
   :verse "Exod.3.2-Exod.3.6" ;
@@ -179,18 +328,23 @@
   rdfs:label "Hagar at the Well (Beer-lahai-roi)" ;
   rdfs:comment "The Angel of the LORD finds Hagar in the wilderness; she names him 'a God who sees' and marvels that she has 'seen him who looks after me.'" ;
   :partOf :angel-of-the-lord ;
+  :lens "angel-of-the-lord" ;
   :verse "Gen.16.7-Gen.16.13" .
 
 :angel-akedah a owl:NamedIndividual, :Event ;
   rdfs:label "Abraham & Isaac at Moriah" ;
   rdfs:comment "The Angel of the LORD calls from heaven, swears by himself (a divine prerogative), and stops the sacrifice." ;
   :partOf :angel-of-the-lord ;
+  :lens "angel-of-the-lord" ;
   :verse "Gen.22.11-Gen.22.18" .
 
 :angel-burning-bush a owl:NamedIndividual, :Event ;
   rdfs:label "The Burning Bush" ;
   rdfs:comment "'The angel of the LORD appeared to him in a flame of fire' - and the text immediately continues, 'God called to him... I am the God of your father.'" ;
   :partOf :angel-of-the-lord ;
+  :lens "angel-of-the-lord" ;
+  :lens "two-powers" ;
+  :seeAlso :two-powers-unseen-father ;
   :verse "Exod.3.2-Exod.3.6" ;
   :verse "Exod.3.14" .
 
@@ -198,33 +352,91 @@
   rdfs:label "Commander of the LORD's Army" ;
   rdfs:comment "Joshua is told to remove his sandals - the same command given Moses at the bush - before this armed figure at Jericho." ;
   :partOf :angel-of-the-lord ;
+  :lens "angel-of-the-lord" ;
   :verse "Josh.5.13-Josh.5.15" .
 
 :angel-gideon a owl:NamedIndividual, :Event ;
   rdfs:label "Gideon's Commission" ;
   rdfs:comment "The Angel of the LORD sits under the oak at Ophrah; the narrator then simply calls him 'the LORD.'" ;
   :partOf :angel-of-the-lord ;
+  :lens "angel-of-the-lord" ;
   :verse "Judg.6.11-Judg.6.24" .
 
 :angel-manoah a owl:NamedIndividual, :Event ;
   rdfs:label "Manoah and the Angel" ;
   rdfs:comment "Samson's parents realize only after the fact that 'we have seen God' - and are afraid they will die for having seen him." ;
   :partOf :angel-of-the-lord ;
+  :lens "angel-of-the-lord" ;
   :verse "Judg.13.3-Judg.13.22" .
 
 :angel-zechariah-courtroom a owl:NamedIndividual, :Event ;
   rdfs:label "Zechariah's Heavenly Courtroom" ;
   rdfs:comment "The Angel of the LORD presides as advocate for Joshua the high priest against the satan ('the accuser') - a council-courtroom scene." ;
   :partOf :angel-of-the-lord ;
+  :lens "angel-of-the-lord" ;
   :verse "Zech.3.1-Zech.3.7" .
 
 :angel-christophany a owl:NamedIndividual, :Individual ;
   rdfs:label "Read as a Christophany" ;
   rdfs:comment "The New Testament's claim that no one has seen the Father, together with the Son's own testimony ('before Abraham was, I am'), leads much of the historic church to read Old Testament Angel-of-the-LORD appearances as the pre-incarnate Son making the Father known." ;
   :partOf :angel-of-the-lord ;
+  :lens "angel-of-the-lord" ;
+  :lens "two-powers" ;
+  :seeAlso :two-powers-unseen-father ;
+  :seeAlso :two-powers-isaiah-glory ;
   :verse "John.1.18" ;
   :verse "John.8.56-John.8.58" ;
   :verse "Col.1.15" .
+
+:angel-mamre a owl:NamedIndividual, :Event ;
+  rdfs:label "Abraham's three visitors" ;
+  rdfs:comment "Yahweh appears at Mamre as three men. Abraham addresses them as Lord. Two of them go on and are called angels at Sodom; Yahweh remains and speaks with Abraham. Van Dorn treats the figure who stays, and who then rains fire \"from the LORD out of heaven,\" as the visible Yahweh rather than as a created angel carrying a message." ;
+  :partOf :angel-of-the-lord ;
+  :lens "angel-of-the-lord" ;
+  :lens "two-powers" ;
+  :seeAlso :two-powers-gen19 ;
+  :seeAlso :veil-tiqqun-gen18 ;
+  :verse "Gen.18.1-Gen.18.3" ;
+  :verse "Gen.18.22" ;
+  :verse "Gen.19.1" .
+
+:angel-peniel a owl:NamedIndividual, :Event ;
+  rdfs:label "The wrestler at Peniel" ;
+  rdfs:comment "A \"man\" wrestles Jacob until daybreak, renames him Israel (\"you have striven with God and with men\"), and will not give his own name. Jacob calls the place Peniel: \"I have seen God face to face, and yet my life has been delivered.\" Hosea names the opponent both God and the angel. Van Dorn does not read this as a created angel who only represents God." ;
+  :partOf :angel-of-the-lord ;
+  :lens "angel-of-the-lord" ;
+  :lens "two-powers" ;
+  :seeAlso :two-powers-jacob-blessing ;
+  :verse "Gen.32.24-Gen.32.30" ;
+  :verse "Hos.12.3-Hos.12.4" .
+
+:angel-name a owl:NamedIndividual, :Event ;
+  rdfs:label "Do not rebel against him: my Name is in him" ;
+  rdfs:comment "The same promise as the two-powers node, from the Angel's side of the ledger. The figure is called an angel, is sent, and yet pardons sins because the Name is in him. Exodus 33 then distinguishes this angel from the Presence: Moses refuses to go if only an ordinary angel leads, and Yahweh answers that his Presence will go. Van Dorn holds the Name-bearer and the Presence together as the visible Yahweh, not as a replaceable courier." ;
+  :partOf :angel-of-the-lord ;
+  :lens "angel-of-the-lord" ;
+  :lens "two-powers" ;
+  :seeAlso :two-powers-name-angel ;
+  :verse "Exod.23.20-Exod.23.23" ;
+  :verse "Exod.33.1-Exod.33.3" ;
+  :verse "Exod.33.14-Exod.33.16" .
+
+:angel-balaam a owl:NamedIndividual, :Event ;
+  rdfs:label "The adversary in Balaam's path" ;
+  rdfs:comment "The Angel of the LORD stands in the way as an adversary, sword drawn. The donkey sees him before the prophet does. Balaam bows. The Angel says he would have killed Balaam and spared the donkey, and that Balaam may speak only the word he gives. Van Dorn lists this with the other appearances: a figure called the Angel of the LORD who exercises a divine prerogative over life and over the prophetic word." ;
+  :partOf :angel-of-the-lord ;
+  :lens "angel-of-the-lord" ;
+  :verse "Num.22.22-Num.22.35" .
+
+:angel-presence a owl:NamedIndividual, :Event ;
+  rdfs:label "The Angel of his Presence" ;
+  rdfs:comment "Isaiah 63:9 in the Hebrew text behind the KJV: in all their affliction he was afflicted, \"and the angel of his presence saved them.\" Van Dorn reads that angel as the same visible Yahweh, not a deputy. The textual note matters in the other direction from Deuteronomy 32. The Septuagint says it was not an envoy or an angel, but the Lord himself who saved them. Here the later Masoretic tradition is the witness that keeps the Angel, and the Greek is the witness that removes him. See the counterexample on the Masoretic-veil lens." ;
+  :partOf :angel-of-the-lord ;
+  :lens "angel-of-the-lord" ;
+  :lens "two-powers" ;
+  :variantId "isa63-9-angel-presence" ;
+  :seeAlso :veil-isa63 ;
+  :verse "Isa.63.9" .
 
 :melchizedek a owl:NamedIndividual, :Individual ;
   rdfs:label "Melchizedek" ;
@@ -243,6 +455,8 @@
   rdfs:label "\"A Priest Forever, After the Order of Melchizedek\"" ;
   rdfs:comment "David's psalm addresses someone as 'my Lord,' seated at Yahweh's right hand, and sworn into an eternal, non-Levitical priesthood." ;
   :partOf :melchizedek ;
+  :lens "two-powers" ;
+  :seeAlso :two-powers-psalm110 ;
   :verse "Ps.110.1" ;
   :verse "Ps.110.4" .
 
@@ -257,18 +471,24 @@
 :rephaim-nephilim a owl:Class ;
   rdfs:label "Rephaim & Nephilim" ;
   rdfs:comment "Genesis 6's 'sons of God' come in to 'the daughters of man' and produce the Nephilim - 'the mighty men who were of old, the men of renown.' Their line resurfaces after the flood as clans of giants (Anakim, Emim, Zamzummim, Rephaim proper) whom Israel is specifically commissioned to dispossess - read by Heiser and Van Dorn as an extension of the cosmic-geography conflict, not merely a military campaign." ;
+  :lens "nephilim" ;
   :verse "Gen.6.1-Gen.6.4" .
 
 :nephilim-genesis6 a owl:NamedIndividual, :Event ;
   rdfs:label "The Genesis 6 Origin Account" ;
   rdfs:comment "'The Nephilim were on the earth in those days, and also afterward' - explicitly noting a post-flood recurrence of the same phenomenon." ;
   :partOf :rephaim-nephilim ;
+  :lens "nephilim" ;
+  :seeAlso :nephilim-not-sethite ;
+  :seeAlso :veil-gen6-interpretation ;
   :verse "Gen.6.1-Gen.6.4" .
 
 :rephaim-og-bashan a owl:NamedIndividual, :Person ;
   rdfs:label "Og, King of Bashan" ;
   rdfs:comment "The last of the Rephaim in the region; his iron bed's dimensions (roughly 13.5 by 6 feet) are preserved as a curiosity in Deuteronomy's own text." ;
   :partOf :rephaim-nephilim ;
+  :lens "nephilim" ;
+  :seeAlso :nephilim-hermon ;
   :verse "Deut.3.11" ;
   :verse "Num.21.33-Num.21.35" ;
   :verse "Deut.3.1-Deut.3.11" ;
@@ -278,6 +498,7 @@
   rdfs:label "Rephaim, Emim, Zamzummim, Anakim" ;
   rdfs:comment "Deuteronomy catalogs several regional giant-clan names as functionally the same phenomenon under different tribal labels, each already dispossessed by neighboring peoples with Yahweh's help before Israel's own conquest." ;
   :partOf :rephaim-nephilim ;
+  :lens "nephilim" ;
   :verse "Deut.2.10-Deut.2.11" ;
   :verse "Deut.2.20-Deut.2.21" ;
   :verse "Num.13.32-Num.13.33" ;
@@ -288,6 +509,8 @@
   rdfs:label "Goliath and the Gittite Giants" ;
   rdfs:comment "Philistine Gath preserves a remnant giant line into David's day; 2 Samuel names four more of Goliath's kin killed by David's men." ;
   :partOf :rephaim-nephilim ;
+  :lens "nephilim" ;
+  :seeAlso :nephilim-height-variant ;
   :verse "1Sam.17.4-1Sam.17.7" ;
   :verse "2Sam.21.15-2Sam.21.22" ;
   :verse "1Chr.20.4-1Chr.20.8" .
@@ -296,8 +519,207 @@
   rdfs:label "New Testament Echoes" ;
   rdfs:comment "Jude and 2 Peter both reference angels who 'did not stay within their own position of authority' and are kept in chains for judgment - widely read (including by Heiser) as an allusion to the Genesis 6 episode via Second Temple Jewish tradition (1 Enoch), which is background reading, not Scripture." ;
   :partOf :rephaim-nephilim ;
+  :lens "nephilim" ;
   :verse "Jude.1.6" ;
   :verse "2Pet.2.4" .
+
+:nephilim-not-sethite a owl:NamedIndividual, :Event ;
+  rdfs:label "Sons of God, not sons of Seth" ;
+  rdfs:comment "Van Dorn's argument against the Sethite reading, which has been common since Augustine: \"sons of God\" in Genesis 6 is the same class named in Job 1:6, 2:1, and 38:7, set over against \"daughters of men,\" a contrast of kinds. Their offspring are Nephilim and gibborim, \"and also afterward,\" which a marriage between two human lines does not explain. Jude 6-7 compares angels who left their position to Sodom's crossing of fleshly bounds, and 2 Peter 2:4-5 puts the angels' sin immediately before the flood. Second Temple sources (1 Enoch 6-16, Jubilees) read divine beings. That literature is background, not Scripture. The Hebrew of Genesis 6 was not rewritten to say \"sons of Seth.\" What changed, later, was the explanation. See the interpretive veil on this verse." ;
+  :partOf :rephaim-nephilim ;
+  :lens "nephilim" ;
+  :seeAlso :nephilim-genesis6 ;
+  :seeAlso :veil-gen6-interpretation ;
+  :verse "Gen.6.1-Gen.6.4" ;
+  :verse "Job.1.6" ;
+  :verse "Job.38.7" ;
+  :verse "Jude.1.6-Jude.1.7" ;
+  :verse "2Pet.2.4-2Pet.2.5" .
+
+:nephilim-hermon a owl:NamedIndividual, :Event ;
+  rdfs:label "Hermon, Bashan, and the Rephaim gate" ;
+  rdfs:comment "Og of Bashan is the last of the Rephaim in that region, ruling from Ashtaroth and Edrei, under Mount Hermon. Deuteronomy 3 records Hermon's other names, Sirion and Senir. Psalm 68 calls Bashan a mountain of God and says \"I will bring again from Bashan.\" Heiser reads Bashan as the old realm of the Rephaim and as an entrance associated with the underworld, and Van Dorn follows him. 1 Enoch 6 names Hermon as the place the Watchers descended. Enoch is not canon. Van Dorn uses it as the Second Temple map of Genesis 6, the map he thinks Jude expects (Jude quotes 1 Enoch). The biblical text itself ties Og, the Rephaim, and Hermon together without the Enoch material." ;
+  :partOf :rephaim-nephilim ;
+  :lens "nephilim" ;
+  :seeAlso :rephaim-og-bashan ;
+  :verse "Deut.3.8-Deut.3.11" ;
+  :verse "Josh.12.4-Josh.12.5" ;
+  :verse "Ps.68.15-Ps.68.16" ;
+  :verse "Ps.68.22" ;
+  :verse "Gen.14.5" .
+
+:nephilim-herem a owl:NamedIndividual, :Event ;
+  rdfs:label "The ban falls on the giant clans" ;
+  rdfs:comment "Van Dorn's reading of the conquest, argued in Giants: Sons of the Gods, is that herem (\"devoted to destruction\") is aimed at the giant clans tied to Genesis 6, not at a theory of ethnicity. Deuteronomy 2 points to other nations whom Yahweh had already used to dispossess Emim, Zamzummim, and Horites, and tells Israel to treat those nations as kin and not to take their land. The spies' fear in Numbers 13 is specifically of the Anakim, whom the text calls Nephilim. Joshua 11:21-22 says the Anakim were cut off, with a remnant left only in Gaza, Gath, and Ashdod, which is where Goliath's line still is in David's day. Other Christian readings of these wars, including within the Reformed tradition Van Dorn writes from, explain the ban through Canaan's wickedness more generally (Genesis 15:16) and do not require a Nephilim bloodline. This node reports his reading." ;
+  :partOf :rephaim-nephilim ;
+  :lens "nephilim" ;
+  :verse "Deut.2.10-Deut.2.12" ;
+  :verse "Deut.2.20-Deut.2.21" ;
+  :verse "Deut.20.16-Deut.20.18" ;
+  :verse "Num.13.28-Num.13.33" ;
+  :verse "Josh.11.21-Josh.11.22" ;
+  :verse "Gen.15.16" .
+
+:nephilim-amorites a owl:NamedIndividual, :Nephilim ;
+  rdfs:label "Amorites, tall as cedars" ;
+  rdfs:comment "Amos, speaking for Yahweh, says \"I destroyed the Amorite before them, whose height was like the height of the cedars and who was strong as the oaks.\" Van Dorn cites this as a prophetic witness that the height of those clans was remembered as a real feature of the conquest, not as a spies' exaggeration the rest of the Bible drops." ;
+  :partOf :rephaim-nephilim ;
+  :lens "nephilim" ;
+  :verse "Amos.2.9" ;
+  :verse "Deut.9.1-Deut.9.2" .
+
+:nephilim-nimrod a owl:NamedIndividual, :Person ;
+  rdfs:label "Nimrod the gibbor, and Babel" ;
+  rdfs:comment "Genesis 10 calls Nimrod a gibbor, a mighty one, the same word Genesis 6:4 uses for the offspring of the sons of God, and a mighty hunter \"before the LORD.\" His kingdom includes Babel. Van Dorn connects the vocabulary and the city. He does not claim the text calls Nimrod a Nephilim. The link he draws is that the gibbor line and the Babel project sit next to each other in the narrative, before the nations are divided." ;
+  :partOf :rephaim-nephilim ;
+  :lens "nephilim" ;
+  :seeAlso :babel-disinheritance ;
+  :verse "Gen.10.8-Gen.10.12" ;
+  :verse "Gen.6.4" ;
+  :verse "Gen.11.1-Gen.11.4" .
+
+:nephilim-spirits a owl:Class ;
+  rdfs:label "Rephaim shades and unclean spirits" ;
+  rdfs:comment "A further step Van Dorn takes, and it should be labeled as his synthesis. 1 Enoch 15 says the giants die and their spirits become the evil spirits on the earth. That book is not Scripture. The biblical texts he sets beside it are: Rephaim as the shades of the dead (Isaiah 14:9, Isaiah 26:14, Job 26:5; the KJV often says \"dead\" where the Hebrew says Rephaim), the shedim Israel sacrificed to (Deuteronomy 32:17), and the unclean spirits who know Jesus and beg not to be sent to the abyss (Mark 5, Luke 8:31). Jude's quotation of Enoch is why Van Dorn thinks the New Testament writers shared the map. Readers who reject that map can still take the cited passages as council, death, and exorcism texts without identifying demons as dead Nephilim." ;
+  :partOf :rephaim-nephilim ;
+  :lens "nephilim" ;
+  :seeAlso :veil-rephaim-word ;
+  :seeAlso :nephilim-nt-echo ;
+  :verse "Isa.14.9" ;
+  :verse "Isa.26.14" ;
+  :verse "Job.26.5" ;
+  :verse "Deut.32.17" ;
+  :verse "Mark.5.1-Mark.5.13" ;
+  :verse "Luke.8.31" ;
+  :verse "Jude.1.14-Jude.1.15" .
+
+:nephilim-height-variant a owl:NamedIndividual, :TextualVeil ;
+  rdfs:label "Goliath's height: the earlier text is the shorter one" ;
+  rdfs:comment "The Masoretic text says Goliath was six cubits and a span, about nine feet nine. The Dead Sea Scrolls Samuel scroll (4QSam-a) and Codex Vaticanus of the Septuagint say four cubits and a span, about six feet nine. This is a real variant, and it runs the opposite direction from \"the Masoretic text hid the giants.\" The earlier Hebrew is the shorter man. Van Dorn's Nephilim case does not depend on the taller number. Four cubits and a span is still a very large warrior, and the rest of the giant-clan texts do not hang on this one figure. It is on the Nephilim lens as a counterexample so the tall reading is not quietly treated as original." ;
+  :partOf :rephaim-nephilim ;
+  :lens "nephilim" ;
+  :veil "counterexample" ;
+  :variantId "1sam17-goliath-height" ;
+  :seeAlso :rephaim-goliath ;
+  :verse "1Sam.17.4" ;
+  :verse "2Sam.21.15-2Sam.21.22" .
+
+:text-veil a owl:Class ;
+  rdfs:label "What the later text and tradition quieted" ;
+  rdfs:comment "Heiser and Van Dorn argue that a handful of spiritually charged readings are clearer in the Dead Sea Scrolls and the Septuagint than in the medieval Masoretic text behind the KJV. The clearest cases are Deuteronomy 32:8 and 32:43, where \"sons of God\" and a scene of heavenly beings worshiping him are missing or shortened in the later Hebrew. Other supernatural passages were not rewritten. Genesis 6 still says \"sons of God.\" Psalm 82 still says \"elohim.\" The Rephaim are still in the consonants. What flattened them was translation and commentary. This branch separates those two kinds of veil, and it keeps two counterexamples (Isaiah 63:9, and Goliath's height on the Nephilim lens) where the argument does not run in a straight line. The Great Isaiah Scroll remains the right warning against turning any of this into a claim that the Masoretes rewrote the Bible." ;
+  :lens "masoretic" .
+
+:veil-deut32-8 a owl:NamedIndividual, :TextualVeil ;
+  rdfs:label "Deuteronomy 32:8, sons of God or sons of Israel" ;
+  rdfs:comment "The Masoretic text divides the nations \"according to the number of the sons of Israel.\" The Septuagint says \"according to the number of the angels of God.\" 4QDeut-j from Qumran reads \"sons of God\" in Hebrew, so the Greek was not a translator's invention. Van Dorn and Heiser treat the Masoretic reading as a theological correction: it removes divine beings from the Babel allotment and, awkwardly, mentions Israel in a formula set before Israel existed. Read with the earlier text, Yahweh keeps Jacob as his own portion and allots the other nations to members of his council. This is the hinge of the divine-council worldview, and it is the strongest \"Masoretic change\" in Van Dorn's set. The node does not claim every Masoretic difference is a cover-up. It claims this one changes the theology of the verse." ;
+  :partOf :text-veil ;
+  :lens "masoretic" ;
+  :veil "text" ;
+  :variantId "deut32-8-9-sons-of-god" ;
+  :seeAlso :babel-disinheritance ;
+  :seeAlso :bene-elohim ;
+  :verse "Deut.32.8-Deut.32.9" ;
+  :verse "Deut.4.19-Deut.4.20" .
+
+:veil-deut32-43 a owl:NamedIndividual, :TextualVeil ;
+  rdfs:label "Deuteronomy 32:43, \"let all the gods worship him\"" ;
+  rdfs:comment "The Masoretic ending of the Song of Moses is the shorter one. The Septuagint's longer ending includes a call for the heavens and the sons of God, or the angels of God, to worship him. 4QDeut-q preserves a longer Hebrew ending of the same type. Hebrews 1:6 quotes \"let all God's angels worship him\" as Scripture, and applies it to the Son. Van Dorn's point is double. The later Hebrew text dropped a scene of divine beings worshiping Yahweh, and the New Testament cites the longer form as worship offered to Christ. That is why this node sits on both the Masoretic lens and the two-powers lens." ;
+  :partOf :text-veil ;
+  :lens "masoretic" ;
+  :lens "two-powers" ;
+  :veil "text" ;
+  :variantId "deut32-43-song-ending" ;
+  :seeAlso :divine-council ;
+  :seeAlso :two-powers ;
+  :verse "Deut.32.43" ;
+  :verse "Heb.1.6" .
+
+:veil-ps22 a owl:NamedIndividual, :TextualVeil ;
+  rdfs:label "Psalm 22:16, \"like a lion\" or \"they pierced\"" ;
+  rdfs:comment "The printed Masoretic consonants (ka'ari) are usually read \"like a lion are my hands and my feet,\" which is difficult Hebrew. The Septuagint says \"they pierced\" or \"they dug\" my hands and feet, and some Hebrew manuscripts point the same way. Unlike Deuteronomy 32, this one is not settled by a clear Dead Sea Scroll reading. Van Dorn and the ontology's messianic list still treat the pierced reading as the one the New Testament narrative fits (John 19-20). It is marked here as a real crux with a weaker manuscript case than Deuteronomy 32, not as a closed proof that scribes deleted the crucifixion from the psalm." ;
+  :partOf :text-veil ;
+  :lens "masoretic" ;
+  :lens "two-powers" ;
+  :veil "text" ;
+  :variantId "ps22-16-pierced" ;
+  :seeAlso :p-hands-feet-pierced ;
+  :verse "Ps.22.16" ;
+  :verse "John.19.37" ;
+  :verse "John.20.25-John.20.27" .
+
+:veil-isa53-light a owl:NamedIndividual, :TextualVeil ;
+  rdfs:label "Isaiah 53:11, the missing word \"light\"" ;
+  rdfs:comment "The Masoretic text says the servant will see and be satisfied, with no object. The Septuagint says he will see light. So do both of the major Qumran Isaiah scrolls, 1QIsa-a and 1QIsa-b. Two witnesses that are not copies of each other agree against the later Masoretic tradition. \"Light\" is a resurrection word in this context: the servant who poured out his soul sees light and is satisfied. Many modern translations restore it. Van Dorn's interest is the pattern, not a claim that the Masoretes targeted messianic verses in general. Isaiah as a whole, in the Great Isaiah Scroll, is remarkably close to the Masoretic text. This word is one of the exceptions." ;
+  :partOf :text-veil ;
+  :lens "masoretic" ;
+  :veil "text" ;
+  :variantId "isa53-11-light" ;
+  :seeAlso :p-suffering-servant ;
+  :verse "Isa.53.11" .
+
+:veil-gen6-interpretation a owl:NamedIndividual, :TextualVeil ;
+  rdfs:label "Genesis 6 kept the words; the meaning was changed" ;
+  rdfs:comment "This is not a Masoretic consonant change, and the page should not call it one. The Masoretic text of Genesis 6:2 still says bene ha-elohim, \"the sons of God.\" The Septuagint also says \"the sons of God,\" not \"the sons of Seth\" and not, in the ordinary Greek text, \"the angels.\" The supernatural reading was quieted later, by interpretation: Targum Onkelos says \"sons of the nobles,\" and Rashi says \"sons of the rulers and judges.\" Christian tradition often took a third road, Augustine's Sethite view. Van Dorn's claim is that the veil here is exegetical. The words that are actually in the Hebrew say \"sons of God.\"" ;
+  :partOf :text-veil ;
+  :lens "masoretic" ;
+  :lens "nephilim" ;
+  :veil "interpretation" ;
+  :seeAlso :nephilim-not-sethite ;
+  :seeAlso :nephilim-genesis6 ;
+  :verse "Gen.6.2" ;
+  :verse "Gen.6.4" .
+
+:veil-psalm82-interpretation a owl:NamedIndividual, :TextualVeil ;
+  rdfs:label "Psalm 82: the elohim were left in the text" ;
+  rdfs:comment "Another case where the Masoretic consonants were not softened. \"God stands in the divine council; in the midst of the gods he holds judgment.\" Verse 6: \"I said, you are gods, sons of the Most High, all of you.\" Jesus quotes that line in John 10. The flattening happens in interpretation, especially the move, already in the Targum and in many later readers, to make the elohim into human judges only. Heiser and Van Dorn take the council as real spirit beings whom God judges, which is why mortals can be told they will die like men: that sentence is an insult only if they are not men. This node is on the Masoretic lens so the lens is not only a list of manuscript changes." ;
+  :partOf :text-veil ;
+  :lens "masoretic" ;
+  :veil "interpretation" ;
+  :seeAlso :council-elohim-term ;
+  :seeAlso :divine-council ;
+  :verse "Ps.82.1" ;
+  :verse "Ps.82.6-Ps.82.7" ;
+  :verse "John.10.34-John.10.36" .
+
+:veil-rephaim-word a owl:NamedIndividual, :TextualVeil ;
+  rdfs:label "One Hebrew word, printed as \"giants\" and as \"the dead\"" ;
+  rdfs:comment "The Masoretic text uses Rephaim both for the giant clan of the conquest and for the shades of the dead. The consonants were not replaced. English translation of that Masoretic text splits them. The KJV says \"giants\" in Deuteronomy 2-3 and \"the dead\" or \"deceased\" in Isaiah 14:9, Isaiah 26:14, Job 26:5, and Proverbs 9:18. A reader of the English alone cannot see that it is one word. Van Dorn, with Heiser, treats that split as a veil over the Nephilim afterlife: the clan and the shades are one vocabulary. Whether those shades are the disembodied giants is a further step, argued on the Nephilim lens, and it is not proved by the word alone." ;
+  :partOf :text-veil ;
+  :lens "masoretic" ;
+  :lens "nephilim" ;
+  :veil "interpretation" ;
+  :seeAlso :nephilim-spirits ;
+  :seeAlso :rephaim-nephilim ;
+  :verse "Deut.3.11" ;
+  :verse "Isa.14.9" ;
+  :verse "Isa.26.14" ;
+  :verse "Job.26.5" ;
+  :verse "Prov.9.18" .
+
+:veil-tiqqun-gen18 a owl:NamedIndividual, :TextualVeil ;
+  rdfs:label "Genesis 18:22 and the tiqqune sopherim" ;
+  rdfs:comment "Jewish scribal tradition itself lists about eighteen tiqqune sopherim, \"emendations of the scribes,\" places the text was changed out of reverence. Genesis 18:22 is on the traditional lists. The transmitted text says Abraham still stood before the LORD. The lists say the earlier line had the LORD standing before Abraham, and that scribes reversed it so God would not appear to wait on a man. There is no Dead Sea Scroll of this verse that confirms the older wording. The evidence is the masoretic tradition's own account of a change, not a Qumran manuscript. Van Dorn uses the scene either way: Yahweh is present at Mamre as one of the three. If the tiqqun list is right, the original was starker. The node is marked as a text-form claim with weaker evidence than Deuteronomy 32." ;
+  :partOf :text-veil ;
+  :lens "masoretic" ;
+  :lens "two-powers" ;
+  :lens "angel-of-the-lord" ;
+  :veil "text" ;
+  :seeAlso :angel-mamre ;
+  :seeAlso :two-powers-gen19 ;
+  :verse "Gen.18.1-Gen.18.2" ;
+  :verse "Gen.18.22" .
+
+:veil-isa63 a owl:NamedIndividual, :TextualVeil ;
+  rdfs:label "Isaiah 63:9 runs the other way" ;
+  rdfs:comment "A counterexample, kept on this lens so it does not become a brief for one side of every variant. The Hebrew text, including the Masoretic reading behind the KJV, says the Angel of his Presence saved them. The Septuagint says it was not an envoy and not an angel, but the Lord himself. Van Dorn follows the Hebrew, because the Angel of the Presence is the visible Yahweh, not a denial of a mediator. Anyone arguing that \"the older text is always the more supernatural text\" has to deal with this verse. Here the Greek is the witness that removes the Angel." ;
+  :partOf :text-veil ;
+  :lens "masoretic" ;
+  :lens "angel-of-the-lord" ;
+  :lens "two-powers" ;
+  :veil "counterexample" ;
+  :variantId "isa63-9-angel-presence" ;
+  :seeAlso :angel-presence ;
+  :verse "Isa.63.8-Isa.63.9" .
 
 :promises-to-israel a owl:Class ;
   rdfs:label "Promises to Israel (The Covenant Line)" ;
@@ -518,6 +940,7 @@
 :p-hands-feet-pierced a owl:NamedIndividual, :Prophecy ;
   rdfs:label "Hands and feet pierced" ;
   :partOf :prophecy-crucifixion ;
+  :seeAlso :veil-ps22 ;
   :verse "Ps.22.16" ;
   :verse "John.19.37" ;
   :verse "John.20.25-John.20.27" .
@@ -607,6 +1030,7 @@
 :p-suffering-servant a owl:NamedIndividual, :Prophecy ;
   rdfs:label "The Suffering Servant, wounded for our transgressions" ;
   :partOf :prophecy-burial-resurrection ;
+  :seeAlso :veil-isa53-light ;
   :verse "Isa.52.13-Isa.53.12" ;
   :verse "1Pet.2.21-1Pet.2.25" ;
   :verse "Acts.8.32-Acts.8.35" .

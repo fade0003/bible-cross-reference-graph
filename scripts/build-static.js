@@ -69,6 +69,21 @@ function buildOntologyTurtle(ont) {
     lines.push('');
   }
 
+  lines.push(':lens a owl:DatatypeProperty ;');
+  lines.push('  rdfs:label "highlight lens" ;');
+  lines.push('  rdfs:comment "Van Dorn theme lens: two-powers, angel-of-the-lord, nephilim, or masoretic." .');
+  lines.push('');
+  lines.push(':veil a owl:DatatypeProperty ;');
+  lines.push('  rdfs:label "veil kind" ;');
+  lines.push('  rdfs:comment "text (a consonantal/text-form difference), interpretation (wording survived, the sense was flattened later), or counterexample." .');
+  lines.push('');
+  lines.push(':variantId a owl:DatatypeProperty ;');
+  lines.push('  rdfs:label "textual-variants entry" .');
+  lines.push('');
+  lines.push(':seeAlso a owl:ObjectProperty ;');
+  lines.push('  rdfs:label "see also" .');
+  lines.push('');
+
   function walk(node, parentId) {
     // A node typed "Class" is itself an owl:Class (e.g. "The Divine Council"
     // as a category); anything else is an owl:NamedIndividual of that class
@@ -78,6 +93,10 @@ function buildOntologyTurtle(ont) {
     lines.push(`  rdfs:label "${ttlEscape(node.label)}" ;`);
     if (node.summary) lines.push(`  rdfs:comment "${ttlEscape(node.summary)}" ;`);
     if (parentId) lines.push(`  :partOf :${parentId} ;`);
+    (node.themes || []).forEach((t) => lines.push(`  :lens "${ttlEscape(t)}" ;`));
+    if (node.veil) lines.push(`  :veil "${ttlEscape(node.veil)}" ;`);
+    if (node.variantId) lines.push(`  :variantId "${ttlEscape(node.variantId)}" ;`);
+    (node.seeAlso || []).forEach((id) => lines.push(`  :seeAlso :${id} ;`));
     const verses = (node.verses || []).concat(node.fulfillment || []);
     verses.forEach((v, i) => {
       const last = i === verses.length - 1;

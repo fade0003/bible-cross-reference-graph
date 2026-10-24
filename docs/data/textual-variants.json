@@ -1,5 +1,5 @@
 {
-  "disclaimer": "This is a curated selection of well-documented, frequently-discussed differences between the Masoretic Text (MT - the medieval Hebrew textual tradition underlying most Old Testament translations, including this site's KJV), the Septuagint (LXX - the pre-Christian Greek translation), and the Dead Sea Scrolls (DSS - Hebrew/Aramaic manuscripts from ca. 250 BC-70 AD found at Qumran) - not an exhaustive catalog. Textual criticism is a specialized field with genuine scholarly disagreement over which reading is earliest/original in any given case; where a DSS reading is noted, that manuscript's designation (e.g. 4QSam-a) is given so it can be checked independently. Summaries of MT/LXX readings are paraphrases for a general audience, not new translations.",
+  "disclaimer": "This is a curated selection of well-documented, frequently-discussed differences between the Masoretic Text (MT - the medieval Hebrew textual tradition underlying most Old Testament translations, including this site's KJV), the Septuagint (LXX - the pre-Christian Greek translation), and the Dead Sea Scrolls (DSS - Hebrew/Aramaic manuscripts from ca. 250 BC-70 AD found at Qumran) - not an exhaustive catalog. Textual criticism is a specialized field with genuine scholarly disagreement over which reading is earliest/original in any given case; where a DSS reading is noted, that manuscript's designation (e.g. 4QSam-a) is given so it can be checked independently. Summaries of MT/LXX readings are paraphrases for a general audience, not new translations. Entries marked as a Van Dorn crux are the ones the divine-council reading (Michael Heiser and Douglas Van Dorn) treats as spiritually decisive. That is not a claim that every such difference was a deliberate cover-up, and two of them (Isaiah 63:9, Goliath's height) run in the opposite direction from 'the earlier text is the more supernatural one.'",
   "variants": [
     {
       "id": "gen5-11-genealogies",
@@ -31,8 +31,9 @@
       "mt": "The nations were divided \"according to the number of the sons of Israel.\"",
       "lxx": "\"...according to the number of the angels of God\" (angelōn theou).",
       "dss": "4QDeut-j, from Qumran, reads \"sons of God\" (bene elohim) in Hebrew - confirming the LXX's reading predates the MT's and wasn't a Greek translator's invention.",
-      "significance": "Central to this site's Ontology page (\"Babel: The Nations Disinherited\"): read with the LXX/DSS text, Yahweh allots the nations to members of his divine council at Babel, then keeps Israel as his own direct portion - a very different picture than \"Israel\" appearing in its own allotment formula before Israel as a nation existed.",
-      "relatedOntology": "babel-disinheritance"
+      "significance": "Central to this site's Ontology page (\"Babel: The Nations Disinherited,\" and the Masoretic-veil lens): read with the LXX/DSS text, Yahweh allots the nations to members of his divine council at Babel, then keeps Israel as his own direct portion - a very different picture than \"Israel\" appearing in its own allotment formula before Israel as a nation existed. Douglas Van Dorn treats this as the clearest case of a later Hebrew reading quieting the divine-council worldview.",
+      "relatedOntology": "veil-deut32-8",
+      "lenses": ["masoretic"]
     },
     {
       "id": "deut32-43-song-ending",
@@ -42,8 +43,21 @@
       "mt": "A shorter, four-line close to the Song of Moses.",
       "lxx": "An eight-line close, including \"Rejoice, O heavens, with him, and let all the sons of God worship him\" / \"let all the angels of God worship him.\"",
       "dss": "4QDeut-q preserves the longer, LXX-type ending in Hebrew.",
-      "significance": "Hebrews 1:6 quotes the longer ending's \"let all the angels of God worship him\" as Scripture - a New Testament author apparently citing the LXX/DSS text-form rather than the (shorter) text that became the Masoretic tradition.",
-      "relatedOntology": "divine-council"
+      "significance": "Hebrews 1:6 quotes the longer ending's \"let all the angels of God worship him\" as Scripture, and applies it to the Son - a New Testament author apparently citing the LXX/DSS text-form rather than the (shorter) text that became the Masoretic tradition. On the ontology's two-powers lens, the dropped lines are a scene of heavenly beings worshiping the figure Hebrews identifies with Christ.",
+      "relatedOntology": "veil-deut32-43",
+      "lenses": ["masoretic", "two-powers"]
+    },
+    {
+      "id": "isa63-9-angel-presence",
+      "category": "Divine Council & Angelology",
+      "ref": "Isa.63.9",
+      "title": "The Angel of his Presence, or no angel at all?",
+      "mt": "Following the traditional qere (\"to him\" rather than the written \"not\"): \"In all their affliction he was afflicted, and the angel of his presence saved them.\" The KJV translates this Hebrew reading. The Angel is the savior, not a denial of a mediator.",
+      "lxx": "\"Not an elder / envoy, nor an angel, but the Lord himself saved them.\" The Greek reads the line as a rejection of any intermediary.",
+      "dss": null,
+      "significance": "A counterexample on this site's Masoretic-veil lens. Douglas Van Dorn follows the Hebrew: the Angel of the Presence is the visible Yahweh of the two-powers reading. Here the Septuagint, not the Masoretic text, is the witness that removes the Angel. The ketiv/qere on the first clause (\"not\" versus \"to him\") is a separate, older crux inside the Hebrew tradition itself.",
+      "relatedOntology": "veil-isa63",
+      "lenses": ["angel-of-the-lord", "two-powers", "masoretic"]
     },
     {
       "id": "ps22-16-pierced",
@@ -53,8 +67,9 @@
       "mt": "The printed Masoretic consonants (kaari) are usually read \"like a lion [are] my hands and feet\" - a famously difficult Hebrew construction.",
       "lxx": "\"They pierced/dug my hands and feet\" (ōryxan).",
       "dss": "Fragmentary Psalms material from Qumran (e.g. within Nahal Hever's Psalms fragments) has been cited on both sides of this debate; the case doesn't rest on a single clear DSS reading the way Deut. 32 does.",
-      "significance": "Directly relevant to this site's Ontology page (Messianic Prophecy: \"Hands and feet pierced\", fulfilled per John 19:37, 20:25-27) - which reading is earliest has been argued by both Jewish and Christian scholars for centuries, and isn't settled by manuscript evidence alone.",
-      "relatedOntology": "p-hands-feet-pierced"
+      "significance": "Directly relevant to this site's Ontology page (Messianic Prophecy: \"Hands and feet pierced\", fulfilled per John 19:37, 20:25-27, and the Masoretic-veil lens) - which reading is earliest has been argued by both Jewish and Christian scholars for centuries, and isn't settled by manuscript evidence alone. The manuscript case is weaker here than at Deuteronomy 32.",
+      "relatedOntology": "veil-ps22",
+      "lenses": ["masoretic", "two-powers"]
     },
     {
       "id": "isa7-14-almah",
@@ -75,8 +90,9 @@
       "mt": "\"He shall see [ ] and be satisfied\" - the printed Masoretic text has no object for \"see.\"",
       "lxx": "\"He shall see light and be satisfied.\"",
       "dss": "The Great Isaiah Scroll (1QIsa-a) and 1QIsa-b both include \"light\" (or) here, agreeing with the LXX against the later Masoretic tradition.",
-      "significance": "A case where two independent ancient witnesses (LXX and DSS), unrelated to each other, agree against the MT - widely taken as evidence that \"light\" was in the earlier Hebrew text and dropped out of the manuscript tradition the Masoretes later standardized. Many modern translations (e.g. ESV, NIV) now include \"light\" on this basis.",
-      "relatedOntology": "prophecy-burial-resurrection"
+      "significance": "A case where two independent ancient witnesses (LXX and DSS), unrelated to each other, agree against the MT - widely taken as evidence that \"light\" was in the earlier Hebrew text and dropped out of the manuscript tradition the Masoretes later standardized. Many modern translations (e.g. ESV, NIV) now include \"light\" on this basis. In the divine-council reading, \"light\" is a resurrection word in the servant song. It is one exception inside a book, Isaiah, whose overall text is remarkably stable (see the Great Isaiah Scroll entry).",
+      "relatedOntology": "veil-isa53-light",
+      "lenses": ["masoretic"]
     },
     {
       "id": "1sam17-goliath-height",
@@ -86,8 +102,9 @@
       "mt": "\"Six cubits and a span\" - roughly 9 feet 9 inches.",
       "lxx": "Codex Vaticanus (a key LXX manuscript) reads \"four cubits and a span\" - roughly 6 feet 9 inches.",
       "dss": "4QSam-a, a Qumran Samuel scroll, also reads \"four cubits and a span,\" agreeing with the shorter LXX figure against the MT.",
-      "significance": "A concrete, easy-to-grasp example of a real numerical variant with early manuscript support on both sides - \"four cubits and a span\" is still a very large man (comparable to some ancient/modern giants on record), so the variant doesn't remove Goliath's exceptional size, just its most extreme form.",
-      "relatedOntology": null
+      "significance": "A concrete, easy-to-grasp example of a real numerical variant with early manuscript support on both sides - \"four cubits and a span\" is still a very large man (comparable to some ancient/modern giants on record), so the variant doesn't remove Goliath's exceptional size, just its most extreme form. For Douglas Van Dorn's Nephilim reading this is a counterexample to 'the Masoretic text hid the giants': the earlier Hebrew and a major Septuagint manuscript are the shorter ones. His case does not depend on the taller figure.",
+      "relatedOntology": "nephilim-height-variant",
+      "lenses": ["nephilim"]
     },
     {
       "id": "1sam11-nahash-paragraph",
