@@ -170,13 +170,14 @@ body.content-page #topbar { position: static; }
   top: 56px; left: 0; right: 0; bottom: 34px;
 }
 
-#graphCanvas, #tlCanvas {
+#graphCanvas, #tlCanvas, #ontCanvas {
   display: block;
   width: 100%;
   height: 100%;
   cursor: grab;
   touch-action: none;
 }
+#ontCanvas.dragging { cursor: grabbing; }
 
 #legend {
   position: absolute;
@@ -420,6 +421,105 @@ body.content-page #topbar { position: static; }
 .ont-badge.Type { color: #e0a798; border-color: rgba(224, 167, 152, 0.4); }
 .ont-badge.Covenant { color: #c9a6f7; border-color: rgba(201, 166, 247, 0.4); }
 .ont-badge.Nephilim { color: #f2a65f; border-color: rgba(242, 166, 95, 0.4); }
+.ont-badge.TextualVeil { color: #e07a9a; border-color: rgba(224, 122, 154, 0.45); text-transform: none; letter-spacing: 0.01em; }
+.ont-badge.TwoPowers { color: #f2d36b; border-color: rgba(242, 211, 107, 0.45); text-transform: none; letter-spacing: 0.01em; }
+
+.theme-bar { display: flex; flex-wrap: wrap; gap: 6px; align-items: center; }
+#treeControls .theme-bar { flex: 1 0 100%; margin-top: 2px; }
+.theme-btn {
+  background: rgba(255, 255, 255, 0.03);
+  border: 1px solid rgba(255, 255, 255, 0.14);
+  color: #c9cbe0;
+  padding: 5px 10px;
+  border-radius: 999px;
+  font-family: inherit;
+  font-size: 12px;
+  cursor: pointer;
+  display: inline-flex;
+  align-items: center;
+  gap: 6px;
+}
+.theme-btn:hover { background: rgba(255, 255, 255, 0.07); }
+.theme-btn.active { background: rgba(255, 255, 255, 0.08); }
+.theme-btn .swatch {
+  width: 8px;
+  height: 8px;
+  border-radius: 50%;
+  display: inline-block;
+  box-shadow: 0 0 6px currentColor;
+}
+.theme-chip {
+  font-size: 9.5px;
+  letter-spacing: 0.03em;
+  text-transform: uppercase;
+  padding: 1px 6px;
+  border-radius: 8px;
+  border: 1px solid;
+  flex-shrink: 0;
+  background: rgba(255, 255, 255, 0.03);
+}
+.theme-chip.veil-text { color: #e07a9a; border-color: rgba(224, 122, 154, 0.55); }
+.theme-chip.veil-interpretation { color: #e0c398; border-color: rgba(224, 195, 152, 0.55); }
+.theme-chip.veil-counterexample { color: #9ad7c4; border-color: rgba(154, 215, 196, 0.55); }
+.theme-chip.lens-two-powers { color: #f2d36b; border-color: rgba(242, 211, 107, 0.55); }
+.theme-chip.lens-angel-of-the-lord { color: #7ec8ff; border-color: rgba(126, 200, 255, 0.55); }
+.theme-chip.lens-nephilim { color: #f2a65f; border-color: rgba(242, 166, 95, 0.55); }
+.theme-chip.lens-masoretic { color: #e07a9a; border-color: rgba(224, 122, 154, 0.55); }
+.ont-node.lens-hit > summary { background: rgba(242, 211, 107, 0.06); }
+.tv-lenses { margin: 2px 0 8px; }
+
+#controls.ont-graph-controls {
+  flex-direction: column;
+  align-items: stretch;
+  gap: 8px;
+  left: auto;
+  right: 400px;
+  bottom: 16px;
+  max-width: min(480px, calc(100vw - 430px));
+  pointer-events: auto;
+}
+.lens-blurb {
+  margin: 0;
+  color: #9aa0b4;
+  font-size: 11.5px;
+  line-height: 1.45;
+  max-width: 42ch;
+}
+.graph-control-row { display: flex; gap: 6px; }
+.graph-disclaimer {
+  position: absolute;
+  top: 10px;
+  left: 50%;
+  transform: translateX(-50%);
+  width: min(560px, 46vw);
+  text-align: center;
+  font-size: 11.5px;
+  line-height: 1.4;
+  color: #d9b8b3;
+  pointer-events: none;
+  background: rgba(10, 12, 20, 0.78);
+  border: 1px solid rgba(224, 71, 62, 0.28);
+  border-radius: 8px;
+  padding: 6px 10px;
+  z-index: 2;
+}
+.graph-disclaimer .disclaimer-short { display: none; }
+
+.sr-only {
+  position: absolute;
+  width: 1px;
+  height: 1px;
+  padding: 0;
+  margin: -1px;
+  overflow: hidden;
+  clip: rect(0, 0, 0, 0);
+  white-space: nowrap;
+  border: 0;
+}
+#ontCanvas:focus {
+  outline: 2px solid rgba(212, 175, 96, 0.85);
+  outline-offset: -3px;
+}
 
 .ont-body { padding: 2px 4px 10px 18px; }
 .ont-summary { font-size: 13px; line-height: 1.55; color: #b7bacc; margin-bottom: 8px; max-width: 68ch; }
@@ -664,13 +764,37 @@ body.content-page #topbar { position: static; }
   #legend {
     left: 8px;
     right: auto;
-    top: 8px;
+    top: 72px;
     bottom: auto;
     max-width: 46vw;
     padding: 8px 10px;
     font-size: 10.5px;
   }
   #legend .legend-note { display: none; }
+  .graph-disclaimer {
+    display: block;
+    top: 8px;
+    left: 8px;
+    right: 8px;
+    width: auto;
+    max-width: none;
+    transform: none;
+    text-align: left;
+    font-size: 11px;
+    line-height: 1.35;
+    padding: 6px 8px;
+  }
+  .graph-disclaimer .disclaimer-long { display: none; }
+  .graph-disclaimer .disclaimer-short { display: inline; }
+  #controls.ont-graph-controls {
+    top: auto;
+    right: 8px;
+    left: 8px;
+    bottom: calc(8px + env(safe-area-inset-bottom, 0px));
+    max-width: none;
+    transform: none;
+  }
+  .lens-blurb { max-width: none; }
   #controls {
     left: 8px;
     right: 8px;
