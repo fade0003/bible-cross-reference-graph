@@ -1,6 +1,6 @@
 // Tiny shared top-nav injected into every page's #siteNav placeholder, so
-// the four visualizations (graph, timeline, chiasm, ontology) read as one
-// app suite without duplicating a hand-written nav in each HTML file.
+// the pages read as one site without duplicating a hand-written nav in
+// each HTML file.
 (function () {
   'use strict';
   const PAGES = [
@@ -9,6 +9,7 @@
     { href: 'chiasm.html', label: 'Chiasms' },
     { href: 'ontology.html', label: '3D Ontology' },
     { href: 'textual-criticism.html', label: 'Textual Variants' },
+    { href: 'whats-new.html', label: "What's new" },
   ];
 
   function currentFile() {
