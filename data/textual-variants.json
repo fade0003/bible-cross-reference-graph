@@ -54,8 +54,8 @@
       "title": "The Angel of his Presence, or no angel at all?",
       "mt": "Following the traditional qere (\"to him\" rather than the written \"not\"): \"In all their affliction he was afflicted, and the angel of his presence saved them.\" The KJV translates this Hebrew reading. The Angel is the savior, not a denial of a mediator.",
       "lxx": "\"Not an elder / envoy, nor an angel, but the Lord himself saved them.\" The Greek reads the line as a rejection of any intermediary.",
-      "dss": null,
-      "significance": "A counterexample on this site's Masoretic-veil lens. Douglas Van Dorn follows the Hebrew: the Angel of the Presence is the visible Yahweh of the two-powers reading. Here the Septuagint, not the Masoretic text, is the witness that removes the Angel. The ketiv/qere on the first clause (\"not\" versus \"to him\") is a separate, older crux inside the Hebrew tradition itself.",
+      "dss": "The Great Isaiah Scroll (1QIsa-a) preserves Isaiah 63:9. In the Qumran-Digital transcription of column 51 it reads לוא צר ומלאכ פניו הושיעמה: \"not\" (the ketiv, spelled with vav) rather than the Masoretic qere \"to him,\" and \"the angel of his presence saved them.\" It does not adopt the Septuagint's removal of the angel. 1QIsa-b is too broken at this line for a reading to be claimed from it.",
+      "significance": "A counterexample on this site's Masoretic-veil lens. Douglas Van Dorn follows the Hebrew: the Angel of the Presence is the visible Yahweh of the two-powers reading. Here the Septuagint, not the Masoretic text, is the witness that removes the Angel. The ketiv/qere on the first clause (\"not\" versus \"to him\") is a separate, older crux inside the Hebrew tradition itself. 1QIsa-a agrees with the ketiv \"not\" and still keeps the angel.",
       "relatedOntology": "veil-isa63",
       "lenses": ["angel-of-the-lord", "two-powers", "masoretic"]
     },
@@ -66,7 +66,7 @@
       "title": "\"Like a lion\" or \"they pierced\"?",
       "mt": "The printed Masoretic consonants (kaari) are usually read \"like a lion [are] my hands and feet\" - a famously difficult Hebrew construction.",
       "lxx": "\"They pierced/dug my hands and feet\" (ōryxan).",
-      "dss": "Fragmentary Psalms material from Qumran (e.g. within Nahal Hever's Psalms fragments) has been cited on both sides of this debate; the case doesn't rest on a single clear DSS reading the way Deut. 32 does.",
+      "dss": "No Qumran Psalms scroll preserves the disputed word. A Psalms fragment from Nahal Hever (5/6HevPs), in the Judean Desert but not from Qumran, has been read as ka'aru rather than ka'ari. Published editions disagree about how secure that letter is. The case does not rest on a single clear Qumran reading the way Deuteronomy 32 does.",
       "significance": "Directly relevant to this site's Ontology page (Messianic Prophecy: \"Hands and feet pierced\", fulfilled per John 19:37, 20:25-27, and the Masoretic-veil lens) - which reading is earliest has been argued by both Jewish and Christian scholars for centuries, and isn't settled by manuscript evidence alone. The manuscript case is weaker here than at Deuteronomy 32.",
       "relatedOntology": "veil-ps22",
       "lenses": ["masoretic", "two-powers"]
@@ -102,7 +102,7 @@
       "mt": "\"Six cubits and a span\" - roughly 9 feet 9 inches.",
       "lxx": "Codex Vaticanus (a key LXX manuscript) reads \"four cubits and a span\" - roughly 6 feet 9 inches.",
       "dss": "4QSam-a, a Qumran Samuel scroll, also reads \"four cubits and a span,\" agreeing with the shorter LXX figure against the MT.",
-      "significance": "A concrete, easy-to-grasp example of a real numerical variant with early manuscript support on both sides - \"four cubits and a span\" is still a very large man (comparable to some ancient/modern giants on record), so the variant doesn't remove Goliath's exceptional size, just its most extreme form. For Douglas Van Dorn's Nephilim reading this is a counterexample to 'the Masoretic text hid the giants': the earlier Hebrew and a major Septuagint manuscript are the shorter ones. His case does not depend on the taller figure.",
+      "significance": "A concrete, easy-to-grasp example of a real numerical variant with early manuscript support on both sides - \"four cubits and a span\" is still a very large man (comparable to some ancient/modern giants on record), so the variant doesn't remove Goliath's exceptional size, just its most extreme form. For Douglas Van Dorn's Nephilim reading this is a counterexample to 'the Masoretic text hid the giants.' Many textual critics judge the shorter figure in 4QSam-a and Codex Vaticanus to be the earlier Hebrew, so the taller Masoretic number would be secondary. That judgment is an argument from those witnesses, not a closed fact, and his case does not depend on the taller figure.",
       "relatedOntology": "nephilim-height-variant",
       "lenses": ["nephilim"]
     },

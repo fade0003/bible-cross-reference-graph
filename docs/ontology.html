@@ -4,6 +4,8 @@
 <meta charset="UTF-8" />
 <meta name="viewport" content="width=device-width, initial-scale=1.0, viewport-fit=cover" />
 <title>Divine Council Ontology — 3D</title>
+<link rel="icon" href="favicon.ico" sizes="32x32" />
+<link rel="icon" href="favicon.svg" type="image/svg+xml" />
 <link rel="stylesheet" href="styles.css" />
 </head>
 <body id="ontBody">
@@ -11,7 +13,7 @@
     <div id="brand">Bible Cross-Reference Graph</div>
     <nav id="siteNav"></nav>
     <div id="modeToggle">
-      <button class="tree-btn" id="viewTreeBtn" type="button">Tree</button>
+      <button class="tree-btn" id="viewTreeBtn" type="button" aria-label="Tree view, the keyboard-accessible outline of this map">Tree</button>
       <button class="tree-btn active" id="viewGraphBtn" type="button">3D graph</button>
     </div>
   </header>
@@ -44,8 +46,9 @@
 
   <!-- ---- 3D node-graph view ---- -->
   <main id="stage">
-    <canvas id="ontCanvas"></canvas>
-    <div id="graphDisclaimer" class="graph-disclaimer">A Heiser and Van Dorn reading, offered for study. The Nephilim material and some Angel-of-the-LORD identifications are disputed. The tree holds the full note.</div>
+    <p id="ontCanvasHelp" class="sr-only">Arrow keys orbit the map. Plus and minus zoom. Enter opens the node nearest the center. The Tree button in the header is a keyboard-accessible outline of the same concepts.</p>
+    <canvas id="ontCanvas" tabindex="0" role="application" aria-label="Three-dimensional map of the divine-council ontology" aria-describedby="ontCanvasHelp"></canvas>
+    <div id="graphDisclaimer" class="graph-disclaimer"><span class="disclaimer-long">A Heiser and Van Dorn reading, offered for study. The Nephilim material and some Angel-of-the-LORD identifications are disputed. The tree holds the full note.</span><span class="disclaimer-short">A Heiser and Van Dorn reading, offered for study. Nephilim material and some Angel identifications are disputed.</span></div>
     <div id="legend">
       <div class="legend-item"><span class="dot" style="background:#d4af60"></span>Class / category</div>
       <div class="legend-item"><span class="dot" style="background:#9dc0f2"></span>Event</div>
@@ -54,7 +57,7 @@
       <div class="legend-item"><span class="dot" style="background:#c9a6f7"></span>Covenant</div>
       <div class="legend-item"><span class="dot" style="background:#f2a65f"></span>Nephilim</div>
       <div class="legend-item"><span class="dot" style="background:#e07a9a"></span>Textual veil</div>
-      <div class="legend-note">Drag to orbit, scroll to zoom, right-drag to pan. Click a node. Shift-click expands the whole branch. Rings mark a Van Dorn lens. Dashed lines are cross-links.</div>
+      <div class="legend-note">Drag to orbit, scroll to zoom, right-drag to pan. Click a node. Shift-click expands the whole branch. Rings mark a Van Dorn lens. Dashed lines are cross-links. Keyboard: focus the map, then arrow keys, plus and minus, and Enter. The Tree button is the full outline.</div>
     </div>
     <div id="controls" class="ont-graph-controls">
       <div id="graphThemeBar" class="theme-bar"></div>

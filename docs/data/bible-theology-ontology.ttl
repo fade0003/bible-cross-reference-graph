@@ -5,7 +5,7 @@
 @prefix xsd: <http://www.w3.org/2001/XMLSchema#> .
 
 # Divine Council & Second Temple Biblical Theology - A working ontology, after Michael S. Heiser & Douglas Van Dorn
-# Sources: Michael S. Heiser, The Unseen Realm (2015); Michael S. Heiser, Reversing Hermon (2017); Michael S. Heiser, Angels (2018); Douglas Van Dorn, Giants: Sons of the Gods (2013); Douglas Van Dorn, Waters of Creation (2016); Douglas Van Dorn, Covenant Theology: A Reformed Baptist Primer (2019); Douglas Van Dorn, teaching on the two powers and the Angel of the LORD; Alan F. Segal, Two Powers in Heaven (1977)
+# Sources: Michael S. Heiser, The Unseen Realm (2015); Michael S. Heiser, Reversing Hermon (2017); Michael S. Heiser, Angels (2018); Douglas Van Dorn, Giants: Sons of the Gods (2013); Douglas Van Dorn, Waters of Creation (2016); Douglas Van Dorn, Covenant Theology: A Reformed Baptist Primer (2019); Matt Foreman and Douglas Van Dorn, The Angel of the LORD: A Biblical, Historical, and Theological Study (Waters of Creation Publishing, 2020); Alan F. Segal, Two Powers in Heaven (1977)
 # This page lays out one particular, identifiable theological reading tradition - the 'divine council worldview' associated with Michael Heiser and Douglas Van Dorn - as a browsable concept hierarchy, not as doctrinally neutral consensus or as proof-texted certainty. Faithful, careful readers of Scripture disagree on several of these points (especially the Nephilim/Rephaim material and some Angel-of-the-LORD identifications). Verse references are supplied for study and are not exhaustive of every relevant passage. Class/property/individual labels are informal OWL-style annotations for the page's export (see the Turtle file), not a claim that this is THE definitive formal ontology of the Bible. The 3D graph's four lenses gather the passages Van Dorn puts at the center of that reading: the two powers in heaven, the Angel of the LORD, the Nephilim, and the places a later text or a later interpretation quiets a more supernatural sense. Where that "hiding" is commentary rather than a change in the Hebrew consonants, the node says so. Isaiah 63:9 and Goliath's height are included because, in those two cases, the earlier text does not simply preserve a more supernatural reading.
 
 : a owl:Ontology ;
@@ -216,7 +216,7 @@
 
 :two-powers-daniel7 a owl:NamedIndividual, :Event ;
   rdfs:label "Daniel 7: two thrones, one cloud-rider" ;
-  rdfs:comment "Thrones, plural, are set. The Ancient of Days sits. Then \"one like a son of man\" comes with the clouds of heaven and is given dominion, glory, and a kingdom. Cloud-riding is a claim of deity in the Hebrew Bible, not a way of describing an ordinary human. The Babylonian Talmud (Hagigah 14a) debates the plural thrones; R. Akiva's suggestion that one was for David was rebuked. Van Dorn and Heiser take the vision as the clearest Old Testament picture of two divine persons, and they note that Jesus applies the cloud-riding Son of Man to himself in front of the high priest." ;
+  rdfs:comment "Thrones, plural, are set. The Ancient of Days sits. Then \"one like a son of man\" comes with the clouds of heaven and is given dominion, glory, and a kingdom. Heiser and Van Dorn argue that cloud-riding is a claim of deity in the Hebrew Bible, not a way of describing an ordinary human. Isaiah 19:1 is the clearer wording of that epithet; Psalm 68:4 is the disputed one (see the cloud-rider node). The Babylonian Talmud (Hagigah 14a) debates the plural thrones; R. Akiva's suggestion that one was for David was rebuked. Van Dorn and Heiser take the vision as the clearest Old Testament picture of two divine persons, and they note that Jesus applies the cloud-riding Son of Man to himself in front of the high priest." ;
   :partOf :two-powers ;
   :lens "two-powers" ;
   :seeAlso :two-powers-cloud-rider ;
@@ -278,10 +278,11 @@
 
 :two-powers-cloud-rider a owl:NamedIndividual, :Event ;
   rdfs:label "The rider on the clouds" ;
-  rdfs:comment "Riding the clouds is an epithet of deity. Deuteronomy 33 and Psalm 68 use it of Yahweh. Daniel 7 gives it to the Son of Man who comes before the Ancient of Days. When Jesus tells the high priest \"you will see the Son of Man seated at the right hand of Power, and coming on the clouds,\" the answer is called blasphemy. Van Dorn, with Heiser, treats that charge as evidence the claim was heard as a claim to the second throne, not as a metaphor for a merely human messiah." ;
+  rdfs:comment "Heiser and Van Dorn argue that riding the clouds is a claim of deity, not a title for an ordinary human king. The clearest line is Isaiah 19:1, where the LORD \"rideth upon a swift cloud.\" Deuteronomy 33:26 calls God the one who rides the heavens. Psalm 68:4 in the KJV says he \"rideth upon the heavens\"; the Hebrew (rokeb ba-araboth) is disputed, and readers divide over \"heavens,\" \"deserts,\" and, with Heiser, \"clouds.\" Daniel 7 gives the clouds to one like a son of man who comes before the Ancient of Days. When Jesus tells the high priest \"you will see the Son of Man seated at the right hand of Power, and coming on the clouds,\" the answer is called blasphemy. Van Dorn, with Heiser, treats that charge as evidence the claim was heard as a claim to the second throne. That is their argument. It is not a settled fact about what the epithet must mean." ;
   :partOf :two-powers ;
   :lens "two-powers" ;
   :seeAlso :two-powers-daniel7 ;
+  :verse "Isa.19.1" ;
   :verse "Deut.33.26" ;
   :verse "Ps.68.4" ;
   :verse "Ps.68.33" ;
@@ -412,7 +413,7 @@
 
 :angel-name a owl:NamedIndividual, :Event ;
   rdfs:label "Do not rebel against him: my Name is in him" ;
-  rdfs:comment "The same promise as the two-powers node, from the Angel's side of the ledger. The figure is called an angel, is sent, and yet pardons sins because the Name is in him. Exodus 33 then distinguishes this angel from the Presence: Moses refuses to go if only an ordinary angel leads, and Yahweh answers that his Presence will go. Van Dorn holds the Name-bearer and the Presence together as the visible Yahweh, not as a replaceable courier." ;
+  rdfs:comment "Exodus 23:20-23 and Exodus 33 are two different moments, and this note keeps them apart. In Exodus 23 God sends an angel ahead of Israel. Israel must not rebel against him, \"for my name is in him,\" and he will not pardon that rebellion. The figure is called an angel and is sent, yet the Name, Yahweh's own presence, is in him. Exodus 33 is the crisis after the calf. Yahweh says he will send an angel but will not go up in their midst (33:2-3). Moses refuses to go on those terms, and Yahweh answers that his Presence will go (33:14-16). Read on its own, Exodus 33 distinguishes the angel it offers from the Presence Moses demands. Van Dorn does not treat the Name-bearer of Exodus 23 as that replaceable angel. He holds the Name-bearer and the Presence together as the visible Yahweh." ;
   :partOf :angel-of-the-lord ;
   :lens "angel-of-the-lord" ;
   :lens "two-powers" ;
@@ -594,8 +595,8 @@
   :verse "Jude.1.14-Jude.1.15" .
 
 :nephilim-height-variant a owl:NamedIndividual, :TextualVeil ;
-  rdfs:label "Goliath's height: the earlier text is the shorter one" ;
-  rdfs:comment "The Masoretic text says Goliath was six cubits and a span, about nine feet nine. The Dead Sea Scrolls Samuel scroll (4QSam-a) and Codex Vaticanus of the Septuagint say four cubits and a span, about six feet nine. This is a real variant, and it runs the opposite direction from \"the Masoretic text hid the giants.\" The earlier Hebrew is the shorter man. Van Dorn's Nephilim case does not depend on the taller number. Four cubits and a span is still a very large warrior, and the rest of the giant-clan texts do not hang on this one figure. It is on the Nephilim lens as a counterexample so the tall reading is not quietly treated as original." ;
+  rdfs:label "Goliath's height: the shorter reading may be earlier" ;
+  rdfs:comment "The Masoretic text says Goliath was six cubits and a span, about nine feet nine. The Dead Sea Scrolls Samuel scroll (4QSam-a) and Codex Vaticanus of the Septuagint say four cubits and a span, about six feet nine. This is a real variant, and it runs the opposite direction from \"the Masoretic text hid the giants.\" Many textual critics judge the shorter figure, where 4QSam-a and Vaticanus agree, to be the earlier Hebrew, so the very tall Masoretic number would be secondary. That is a text-critical argument from the age and agreement of those witnesses, not a fact this page can simply declare. Van Dorn's Nephilim case does not depend on the taller number. Four cubits and a span is still a very large warrior, and the rest of the giant-clan texts do not hang on this one figure. It is on the Nephilim lens as a counterexample so the tall reading is not quietly treated as original." ;
   :partOf :rephaim-nephilim ;
   :lens "nephilim" ;
   :veil "counterexample" ;
@@ -606,7 +607,7 @@
 
 :text-veil a owl:Class ;
   rdfs:label "What the later text and tradition quieted" ;
-  rdfs:comment "Heiser and Van Dorn argue that a handful of spiritually charged readings are clearer in the Dead Sea Scrolls and the Septuagint than in the medieval Masoretic text behind the KJV. The clearest cases are Deuteronomy 32:8 and 32:43, where \"sons of God\" and a scene of heavenly beings worshiping him are missing or shortened in the later Hebrew. Other supernatural passages were not rewritten. Genesis 6 still says \"sons of God.\" Psalm 82 still says \"elohim.\" The Rephaim are still in the consonants. What flattened them was translation and commentary. This branch separates those two kinds of veil, and it keeps two counterexamples (Isaiah 63:9, and Goliath's height on the Nephilim lens) where the argument does not run in a straight line. The Great Isaiah Scroll remains the right warning against turning any of this into a claim that the Masoretes rewrote the Bible." ;
+  rdfs:comment "Heiser and Van Dorn argue that a handful of spiritually charged readings are clearer in the Dead Sea Scrolls and the Septuagint than in the medieval Masoretic text behind the KJV. The clearest cases are Deuteronomy 32:8 and 32:43, where \"sons of God\" and a scene of heavenly beings worshiping him are missing or shortened in the later Hebrew. Other supernatural passages were not rewritten. Genesis 6 still says \"sons of God.\" Psalm 82 still says \"elohim.\" The Rephaim are still in the consonants. What flattened them was translation and commentary. The notes in this section keep those two kinds of veil apart. One is a difference in the Hebrew consonants. The other is a later interpretation of words that stayed in the text. The same section keeps two counterexamples (Isaiah 63:9, and Goliath's height on the Nephilim lens) where the argument does not run in a straight line. The Great Isaiah Scroll remains the right warning against turning any of this into a claim that the Masoretes rewrote the Bible." ;
   :lens "masoretic" .
 
 :veil-deut32-8 a owl:NamedIndividual, :TextualVeil ;
@@ -636,7 +637,7 @@
 
 :veil-ps22 a owl:NamedIndividual, :TextualVeil ;
   rdfs:label "Psalm 22:16, \"like a lion\" or \"they pierced\"" ;
-  rdfs:comment "The printed Masoretic consonants (ka'ari) are usually read \"like a lion are my hands and my feet,\" which is difficult Hebrew. The Septuagint says \"they pierced\" or \"they dug\" my hands and feet, and some Hebrew manuscripts point the same way. Unlike Deuteronomy 32, this one is not settled by a clear Dead Sea Scroll reading. Van Dorn and the ontology's messianic list still treat the pierced reading as the one the New Testament narrative fits (John 19-20). It is marked here as a real crux with a weaker manuscript case than Deuteronomy 32, not as a closed proof that scribes deleted the crucifixion from the psalm." ;
+  rdfs:comment "The printed Masoretic consonants (ka'ari) are usually read \"like a lion are my hands and my feet,\" which is difficult Hebrew. The Septuagint says \"they pierced\" or \"they dug\" my hands and feet, and some Hebrew manuscripts point the same way. No Qumran Psalms manuscript preserves the disputed word. A Psalms fragment from Nahal Hever (5/6HevPs) has been read as ka'aru rather than ka'ari. Nahal Hever is in the Judean Desert, not at Qumran, and published editions still disagree about how secure that letter is. Van Dorn and the ontology's messianic list still treat the pierced reading as the one the New Testament narrative fits (John 19-20). It is marked here as a real crux with a weaker manuscript case than Deuteronomy 32, not as a closed proof that scribes deleted the crucifixion from the psalm." ;
   :partOf :text-veil ;
   :lens "masoretic" ;
   :lens "two-powers" ;
@@ -659,7 +660,7 @@
 
 :veil-gen6-interpretation a owl:NamedIndividual, :TextualVeil ;
   rdfs:label "Genesis 6 kept the words; the meaning was changed" ;
-  rdfs:comment "This is not a Masoretic consonant change, and the page should not call it one. The Masoretic text of Genesis 6:2 still says bene ha-elohim, \"the sons of God.\" The Septuagint also says \"the sons of God,\" not \"the sons of Seth\" and not, in the ordinary Greek text, \"the angels.\" The supernatural reading was quieted later, by interpretation: Targum Onkelos says \"sons of the nobles,\" and Rashi says \"sons of the rulers and judges.\" Christian tradition often took a third road, Augustine's Sethite view. Van Dorn's claim is that the veil here is exegetical. The words that are actually in the Hebrew say \"sons of God.\"" ;
+  rdfs:comment "This is not a change in the Masoretic consonants. The Hebrew of Genesis 6:2 still says bene ha-elohim, \"the sons of God,\" and it does not say \"the sons of Seth.\" Rahlfs's Septuaginta prints \"the sons of God\" (hoi huioi tou theou) at this verse. Codex Alexandrinus is a real exception: Brenton's apparatus and Swete's edition record that Alexandrinus reads \"the angels of God\" at Genesis 6:2. That angels reading is a Greek manuscript variant. It is not the text Rahlfs prints, and it is not a second Hebrew wording. The supernatural sense was quieted later, by interpretation: Targum Onkelos says \"sons of the nobles,\" and Rashi says \"sons of the rulers and judges.\" Christian tradition often took a third road, Augustine's Sethite view. Van Dorn's claim is that the veil here is exegetical. The words that are actually in the Hebrew say \"sons of God.\"" ;
   :partOf :text-veil ;
   :lens "masoretic" ;
   :lens "nephilim" ;
@@ -671,7 +672,7 @@
 
 :veil-psalm82-interpretation a owl:NamedIndividual, :TextualVeil ;
   rdfs:label "Psalm 82: the elohim were left in the text" ;
-  rdfs:comment "Another case where the Masoretic consonants were not softened. \"God stands in the divine council; in the midst of the gods he holds judgment.\" Verse 6: \"I said, you are gods, sons of the Most High, all of you.\" Jesus quotes that line in John 10. The flattening happens in interpretation, especially the move, already in the Targum and in many later readers, to make the elohim into human judges only. Heiser and Van Dorn take the council as real spirit beings whom God judges, which is why mortals can be told they will die like men: that sentence is an insult only if they are not men. This node is on the Masoretic lens so the lens is not only a list of manuscript changes." ;
+  rdfs:comment "Another case where the Masoretic consonants were not softened. \"God stands in the divine council; in the midst of the gods he holds judgment.\" Verse 6: \"I said, you are gods, sons of the Most High, all of you.\" Jesus quotes that line in John 10. The flattening happens in interpretation, especially the move, already in the Targum and in many later readers, to make the elohim into human judges only. Heiser and Van Dorn take the council as real spirit beings whom God judges. On that reading, \"you shall die like men\" lands as an insult only if the ones addressed are not already men. Readers who hear the elohim as human judges take the same line as a warning to those judges. This node is on the Masoretic lens so the lens is not only a list of manuscript changes." ;
   :partOf :text-veil ;
   :lens "masoretic" ;
   :veil "interpretation" ;
@@ -711,7 +712,7 @@
 
 :veil-isa63 a owl:NamedIndividual, :TextualVeil ;
   rdfs:label "Isaiah 63:9 runs the other way" ;
-  rdfs:comment "A counterexample, kept on this lens so it does not become a brief for one side of every variant. The Hebrew text, including the Masoretic reading behind the KJV, says the Angel of his Presence saved them. The Septuagint says it was not an envoy and not an angel, but the Lord himself. Van Dorn follows the Hebrew, because the Angel of the Presence is the visible Yahweh, not a denial of a mediator. Anyone arguing that \"the older text is always the more supernatural text\" has to deal with this verse. Here the Greek is the witness that removes the Angel." ;
+  rdfs:comment "A counterexample, kept on this lens so it does not become a brief for one side of every variant. The Hebrew text, including the Masoretic reading behind the KJV, says the Angel of his Presence saved them. The Great Isaiah Scroll (1QIsa-a) has the verse too. It writes לוא, \"not,\" which is the ketiv rather than the Masoretic qere \"to him,\" and it keeps \"and the angel of his presence saved them\" (ומלאכ פניו הושיעמה). It does not follow the Septuagint. The Septuagint says it was not an envoy and not an angel, but the Lord himself. Van Dorn follows the Hebrew, because the Angel of the Presence is the visible Yahweh, not a denial of a mediator. Anyone arguing that \"the older text is always the more supernatural text\" has to deal with this verse. Here the Greek is the witness that removes the Angel." ;
   :partOf :text-veil ;
   :lens "masoretic" ;
   :lens "angel-of-the-lord" ;

@@ -115,6 +115,69 @@ function buildOntologyTurtle(ont) {
   return lines.join('\n');
 }
 
+function parseVerseRef(ref) {
+  const parts = ref.split('.');
+  const verse = parseInt(parts.pop(), 10);
+  const chapter = parseInt(parts.pop(), 10);
+  const bookId = parts.join('.');
+  return { bookId, chapter, verse };
+}
+
+function chaptersTouched(ref) {
+  let a;
+  let b;
+  if (ref.includes('-')) {
+    const idx = ref.indexOf('-');
+    a = parseVerseRef(ref.slice(0, idx));
+    b = parseVerseRef(ref.slice(idx + 1));
+  } else {
+    a = parseVerseRef(ref);
+    b = a;
+  }
+  const keys = [];
+  if (a.bookId !== b.bookId) {
+    keys.push([a.bookId, a.chapter], [b.bookId, b.chapter]);
+    return keys;
+  }
+  const start = Math.min(a.chapter, b.chapter);
+  const end = Math.max(a.chapter, b.chapter);
+  for (let ch = start; ch <= end; ch++) keys.push([a.bookId, ch]);
+  return keys;
+}
+
+function collectOntologyRefs(node, refs) {
+  (node.verses || []).forEach((r) => refs.push(r));
+  (node.fulfillment || []).forEach((r) => refs.push(r));
+  (node.children || []).forEach((child) => collectOntologyRefs(child, refs));
+}
+
+// A small slice of bible-text.json: every chapter the ontology actually
+// cites, in the same book -> chapters -> verses shape the page already uses.
+// The ontology page draws from ontology.json first and fetches this in the
+// background, instead of blocking on the full ~5MB text.
+function buildOntologyVerses(ont, bibleText) {
+  const refs = [];
+  (ont.tree || []).forEach((node) => collectOntologyRefs(node, refs));
+  const out = {};
+  const seen = new Set();
+  for (const ref of refs) {
+    for (const [bookId, chapter] of chaptersTouched(ref)) {
+      const key = bookId + ':' + chapter;
+      if (seen.has(key)) continue;
+      seen.add(key);
+      const chapters = bibleText[bookId];
+      const verses = chapters && chapters[chapter - 1];
+      if (!verses) {
+        console.warn('No verse text for', bookId, chapter, 'cited as', ref);
+        continue;
+      }
+      if (!out[bookId]) out[bookId] = [];
+      out[bookId][chapter - 1] = verses;
+    }
+  }
+  return out;
+}
+
 function main() {
   fs.mkdirSync(OUT_DIR, { recursive: true });
 
@@ -136,6 +199,10 @@ function main() {
     const ontology = JSON.parse(fs.readFileSync(ontologyPath, 'utf8'));
     fs.copyFileSync(ontologyPath, path.join(OUT_DIR, 'ontology.json'));
     fs.writeFileSync(path.join(OUT_DIR, 'bible-theology-ontology.ttl'), buildOntologyTurtle(ontology));
+    fs.writeFileSync(
+      path.join(OUT_DIR, 'ontology-verses.json'),
+      JSON.stringify(buildOntologyVerses(ontology, bibleText))
+    );
   }
 
   const chiasmsPath = path.join(DATA_DIR, 'chiasms.json');

@@ -8,12 +8,37 @@
   const disclaimerEl = document.getElementById('ontDisclaimer');
   const sourcesEl = document.getElementById('ontSources');
 
-  // ---- Minimal verse lookup (books.json + bible-text.json only - this page
-  // doesn't need the ~8MB cross-reference index the graph page loads) ----
+  // ---- Minimal verse lookup. The graph draws from ontology.json and
+  // books.json. Verse wording is a small generated subset
+  // (data/ontology-verses.json), fetched after the first frame so the
+  // canvas is not blocked on the full Bible text. ----
   let booksById = new Map();
   let bibleText = {};
+  let bibleTextLoaded = false;
+  let bibleTextPromise = null;
   let themeById = new Map();
   let activeTheme = null;
+
+  function loadBibleText() {
+    if (bibleTextLoaded) return Promise.resolve(bibleText);
+    if (bibleTextPromise) return bibleTextPromise;
+    bibleTextPromise = fetch('data/ontology-verses.json')
+      .then((r) => {
+        if (!r.ok) throw new Error('ontology-verses.json ' + r.status);
+        return r.json();
+      })
+      .then((text) => {
+        bibleText = text || {};
+        bibleTextLoaded = true;
+        return bibleText;
+      })
+      .catch((err) => {
+        console.error(err);
+        bibleTextLoaded = true;
+        return bibleText;
+      });
+    return bibleTextPromise;
+  }
 
   function parseRef(ref) {
     const parts = ref.split('.');
@@ -91,11 +116,30 @@
     return div.innerHTML;
   }
 
+  function typeBadgeText(type) {
+    if (type === 'TextualVeil') return 'Textual veil';
+    if (type === 'TwoPowers') return 'Two powers';
+    return type || 'Individual';
+  }
+
   // ---- Verse chip click -> inline expand ----
   function onVerseChipClick(chip, ref) {
     const existing = chip.nextElementSibling;
     if (existing && existing.classList.contains('ont-verse-text-wrap')) {
+      if (existing.dataset.loading === '1') return;
       existing.remove();
+      return;
+    }
+    if (!bibleTextLoaded) {
+      const wrap = document.createElement('div');
+      wrap.className = 'ont-verse-text-wrap';
+      wrap.dataset.loading = '1';
+      wrap.innerHTML = '<div class="ont-verse-text"><em>Loading verse text…</em></div>';
+      chip.insertAdjacentElement('afterend', wrap);
+      loadBibleText().then(() => {
+        if (wrap.isConnected) wrap.remove();
+        onVerseChipClick(chip, ref);
+      });
       return;
     }
     const { verses, truncated, total } = expandRef(ref);
@@ -145,7 +189,7 @@
           : node.veil === 'counterexample'
             ? '<span class="theme-chip veil-counterexample">Counterexample</span>'
             : '';
-    summary.innerHTML = `<span class="ont-badge ${node.type || 'Individual'}">${node.type || 'Individual'}</span><span class="ont-label">${escapeHtml(node.label)}</span>${themeChips}${veilChip}`;
+    summary.innerHTML = `<span class="ont-badge ${node.type || 'Individual'}">${escapeHtml(typeBadgeText(node.type))}</span><span class="ont-label">${escapeHtml(node.label)}</span>${themeChips}${veilChip}`;
     details.appendChild(summary);
 
     const body = document.createElement('div');
@@ -306,9 +350,13 @@
   let nodeById = new Map();
   let currentView = 'graph';
   let selectedId = null;
-  let spinning = true;
+  const motionQuery = window.matchMedia('(prefers-reduced-motion: reduce)');
+  let spinning = !motionQuery.matches;
   let spinningPaused = false;
+  let userGesturing = false;
+  let renderScheduled = false;
   let graphBooted = false;
+  const noHover = window.matchMedia('(hover: none), (pointer: coarse)').matches;
   let awake = 0;
   let frameAfter = 0;
   let focusId = null;
@@ -436,6 +484,7 @@
       rebuildGraphElements();
       frameAfter = 70;
       awake = 200;
+      scheduleDraw();
     }
     if (!opts.silentHash) writeHash();
   }
@@ -490,6 +539,7 @@
         rebuildGraphElements();
         frameAfter = 28;
         awake = 180;
+        scheduleDraw();
       }
     }
   }
@@ -512,7 +562,10 @@
     ctx.setTransform(dpr, 0, 0, dpr, 0, 0);
   }
   window.addEventListener('resize', () => {
-    if (currentView === 'graph') resize();
+    if (currentView === 'graph') {
+      resize();
+      scheduleDraw();
+    }
   });
 
   function visibleIds() {
@@ -607,6 +660,7 @@
       selectedId = null;
       panel.classList.add('hidden');
     }
+    recomputeRadii();
   }
 
   function physTick() {
@@ -794,11 +848,24 @@
     return '#' + [r, g, bl].map((v) => v.toString(16).padStart(2, '0')).join('');
   }
 
+  let cachedRadii = new Map();
+
+  function recomputeRadii() {
+    let max = 1;
+    for (const n of graphNodes) if (n.size > max) max = n.size;
+    cachedRadii = new Map();
+    for (const n of graphNodes) {
+      let r = 8 + 15 * Math.sqrt(n.size / max);
+      if (n.id === 'ROOT') r += 4;
+      cachedRadii.set(n.id, r);
+    }
+  }
+
   function worldRadius(node) {
-    const max = Math.max(1, ...graphNodes.map((n) => n.size));
-    let r = 8 + 15 * Math.sqrt(node.size / max);
-    if (node.id === 'ROOT') r += 4;
-    return r;
+    const hit = cachedRadii.get(node.id);
+    if (hit != null) return hit;
+    recomputeRadii();
+    return cachedRadii.get(node.id) || 8;
   }
 
   function drawSphere(sx, sy, r, color, alpha) {
@@ -855,7 +922,7 @@
       if (!p) continue;
       const themes = (byId.get(n.id) && byId.get(n.id).themes) || [];
       const tagged = !!(activeTheme && themes.includes(activeTheme));
-      const pulse = tagged ? 1 + 0.07 * Math.sin(performance.now() / 260 + n.x * 0.01) : 1;
+      const pulse = tagged && spinning && !motionQuery.matches ? 1 + 0.07 * Math.sin(performance.now() / 260 + n.x * 0.01) : 1;
       const sr = Math.max(3.5, worldRadius(n) * p.s * pulse);
       n.sx = cx + p.x;
       n.sy = cy + p.y;
@@ -955,9 +1022,12 @@
         if (n.hover) score += 160;
         if (item.tagged) score += 80;
         if (n.id === 'ROOT') score += 40;
+        const meta = byId.get(n.id);
+        const pinLabel = noHover && !!(meta && meta.parentId === 'ROOT');
+        if (pinLabel) score += 220;
         const force =
-          n.id === selectedId || n.hover || item.tagged || n.id === 'ROOT' || item.sr > 15;
-        return { item, score, force };
+          n.id === selectedId || n.hover || item.tagged || n.id === 'ROOT' || item.sr > 15 || pinLabel;
+        return { item, score, force, pinLabel };
       })
       .filter((row) => row.force)
       .sort((a, b) => b.score - a.score);
@@ -970,32 +1040,63 @@
     for (const row of labels) {
       const n = row.item.n;
       if (!row.force) continue;
-      if (!n.hover && n.id !== selectedId) {
+      const pinLabel = row.pinLabel;
+      if (!n.hover && n.id !== selectedId && !pinLabel) {
         if (budget <= 0) continue;
       }
       let text = n.label;
       const limit = graphNodes.length > 14 ? 32 : 42;
       if (text.length > limit) text = text.slice(0, limit - 1) + '…';
       const tw = ctx.measureText(text).width;
-      const x = n.sx - tw / 2 - 6;
-      const y = n.sy - row.item.sr - 20;
-      const box = { x, y, w: tw + 12, h: 18 };
+      const boxW = tw + 12;
+      const boxH = 18;
+      const minX = 4;
+      const maxX = Math.max(minX, width - boxW - 4);
+      const candidates = [
+        n.sy - row.item.sr - 20,
+        n.sy + row.item.sr + 6,
+        n.sy - row.item.sr - 44,
+        n.sy + row.item.sr + 28,
+      ];
       const pad = 6;
-      const hit = placed.some(
-        (p) => x - pad < p.x + p.w && x + box.w + pad > p.x && y - pad < p.y + p.h && y + box.h + pad > p.y
-      );
-      if (hit && n.id !== selectedId && !n.hover) {
+      let box = null;
+      for (const y0 of candidates) {
+        let x = n.sx - boxW / 2;
+        let y = y0;
+        if (x < minX) x = minX;
+        if (x > maxX) x = maxX;
+        if (y < 4) y = 4;
+        if (y + boxH > height - 4) y = Math.max(4, height - boxH - 4);
+        const trial = { x, y, w: boxW, h: boxH };
+        const hit = placed.some(
+          (p) => trial.x - pad < p.x + p.w && trial.x + trial.w + pad > p.x && trial.y - pad < p.y + p.h && trial.y + trial.h + pad > p.y
+        );
+        if (!hit || n.id === selectedId || n.hover) {
+          box = trial;
+          break;
+        }
+      }
+      if (!box && pinLabel) {
+        let x = n.sx - boxW / 2;
+        let y = candidates[0];
+        if (x < minX) x = minX;
+        if (x > maxX) x = maxX;
+        if (y < 4) y = 4;
+        if (y + boxH > height - 4) y = Math.max(4, height - boxH - 4);
+        box = { x, y, w: boxW, h: boxH };
+      }
+      if (!box) {
         n.labelBox = null;
         continue;
       }
       placed.push(box);
       n.labelBox = box;
-      if (n.id !== selectedId && !n.hover) budget -= 1;
+      if (n.id !== selectedId && !n.hover && !pinLabel) budget -= 1;
       ctx.fillStyle = 'rgba(8, 10, 16, 0.72)';
       roundRect(box.x, box.y, box.w, box.h, 4);
       ctx.fill();
       ctx.fillStyle = row.item.tagged ? themeColor(activeTheme) : '#e8e4d8';
-      ctx.fillText(text, n.sx, n.sy - row.item.sr - 5);
+      ctx.fillText(text, box.x + boxW / 2, box.y + boxH - 3);
     }
   }
 
@@ -1059,6 +1160,7 @@
       focusId = id;
       frameAfter = 24;
       awake = 160;
+      scheduleDraw();
     }
     showNodePanel(byId.get(id));
   }
@@ -1087,7 +1189,7 @@
       })
       .join('');
     const veil = VEIL_LABEL[ontNode.veil];
-    let html = '<span class="ont-badge ' + (ontNode.type || 'Individual') + '">' + escapeHtml(ontNode.type || 'Individual') + '</span>';
+    let html = '<span class="ont-badge ' + (ontNode.type || 'Individual') + '">' + escapeHtml(typeBadgeText(ontNode.type)) + '</span>';
     if (themeChips) html += '<div class="theme-bar" style="margin:8px 0">' + themeChips + '</div>';
     if (veil) html += '<div class="theme-bar" style="margin-bottom:8px"><span class="theme-chip ' + veil[1] + '">' + veil[0] + '</span></div>';
     html += '<h2>' + escapeHtml(ontNode.label) + '</h2>';
@@ -1166,6 +1268,7 @@
           focusId = ontNode.id;
           frameAfter = 24;
           awake = 160;
+          scheduleDraw();
           writeHash();
           showNodePanel(ontNode);
         }
@@ -1174,15 +1277,17 @@
   }
   panelClose.onclick = () => panel.classList.add('hidden');
 
-  function onNodeClick(n, shiftKey) {
+  function onNodeClick(n, shiftKey, opts) {
+    opts = opts || {};
     const meta = byId.get(n.id);
     selectedId = n.id;
-    if (meta.childIds.length > 0) {
+    if (!opts.panelOnly && meta.childIds.length > 0) {
       if (shiftKey) expandSubtree(n.id);
       else if (collapsed.has(n.id)) collapsed.delete(n.id);
       else collapsed.add(n.id);
       rebuildGraphElements();
       awake = 180;
+      scheduleDraw();
     }
     showNodePanel(meta);
   }
@@ -1198,6 +1303,8 @@
       canvas.setPointerCapture(e.pointerId);
       pointers.set(e.pointerId, { x: e.clientX, y: e.clientY });
       spinningPaused = true;
+      userGesturing = true;
+      scheduleDraw();
       if (pointers.size >= 2) {
         const pts = [...pointers.values()];
         pinch = { dist: Math.hypot(pts[0].x - pts[1].x, pts[0].y - pts[1].y) || 1, cam: cam.dist };
@@ -1234,6 +1341,7 @@
         canvas.style.cursor = hit ? 'pointer' : 'grab';
         for (const n of graphNodes) n.hover = false;
         if (hit) hit.hover = true;
+        scheduleDraw();
         return;
       }
       const dx = e.clientX - gesture.x;
@@ -1268,7 +1376,11 @@
         gesture = null;
         canvas.classList.remove('dragging');
       }
-      if (pointers.size === 0) spinningPaused = false;
+      if (pointers.size === 0) {
+        spinningPaused = false;
+        userGesturing = false;
+        scheduleDraw();
+      }
     }
     canvas.addEventListener('pointerup', endPointer);
     canvas.addEventListener('pointercancel', endPointer);
@@ -1279,16 +1391,30 @@
         ease = null;
         const factor = e.deltaY < 0 ? 0.9 : 1.1;
         cam.dist = Math.max(180, Math.min(2000, cam.dist * factor));
+        scheduleDraw();
       },
       { passive: false }
     );
   }
 
+  function syncSpinButton() {
+    if (!spinBtn) return;
+    spinBtn.classList.toggle('active', spinning);
+    spinBtn.setAttribute('aria-pressed', spinning ? 'true' : 'false');
+  }
+  syncSpinButton();
+  if (motionQuery.addEventListener) {
+    motionQuery.addEventListener('change', (e) => {
+      if (!e.matches) return;
+      spinning = false;
+      syncSpinButton();
+    });
+  }
   if (spinBtn) {
     spinBtn.addEventListener('click', () => {
       spinning = !spinning;
-      spinBtn.classList.toggle('active', spinning);
-      spinBtn.setAttribute('aria-pressed', spinning ? 'true' : 'false');
+      syncSpinButton();
+      scheduleDraw();
     });
   }
   if (resetViewBtn) {
@@ -1298,25 +1424,78 @@
       ease = { tx: 0, ty: 8, tz: 0, dist: 760, pitch: 0.4 };
       frameAfter = activeTheme ? 20 : 0;
       focusId = null;
+      scheduleDraw();
+    });
+  }
+
+  function nearestNode() {
+    let best = null;
+    let bestD = Infinity;
+    const cx = width / 2;
+    const cy = height / 2;
+    for (const n of graphNodes) {
+      if (n.sx == null) continue;
+      const d = Math.hypot(n.sx - cx, n.sy - cy);
+      if (d < bestD) {
+        best = n;
+        bestD = d;
+      }
+    }
+    return best;
+  }
+
+  if (canvas) {
+    canvas.addEventListener('keydown', (e) => {
+      if (currentView !== 'graph') return;
+      const step = e.shiftKey ? 0.1 : 0.06;
+      let handled = true;
+      if (e.key === 'ArrowLeft') cam.yaw -= step;
+      else if (e.key === 'ArrowRight') cam.yaw += step;
+      else if (e.key === 'ArrowUp') cam.pitch = Math.max(-1.15, Math.min(1.15, cam.pitch - step * 0.55));
+      else if (e.key === 'ArrowDown') cam.pitch = Math.max(-1.15, Math.min(1.15, cam.pitch + step * 0.55));
+      else if (e.key === '+' || e.key === '=' ) cam.dist = Math.max(180, cam.dist * 0.9);
+      else if (e.key === '-' || e.key === '_') cam.dist = Math.min(2000, cam.dist * 1.1);
+      else if (e.key === 'Enter') {
+        const hit = nearestNode();
+        if (hit) onNodeClick(hit, e.shiftKey, { panelOnly: true });
+      } else handled = false;
+      if (!handled) return;
+      e.preventDefault();
+      ease = null;
+      scheduleDraw();
     });
   }
   window.addEventListener('keydown', (e) => {
     if (e.key === 'Escape') panel.classList.add('hidden');
   });
 
-  function loop() {
-    if (currentView === 'graph' && graphNodes.length && ctx) {
-      if (width < 2 || height < 2) resize();
-      if (spinning && !spinningPaused && !ease) cam.yaw += 0.0016;
-      physTick();
-      applyEase();
-      if (frameAfter > 0) {
-        frameAfter -= 1;
-        if (frameAfter === 0) frameVisible();
-      }
-      draw();
-    }
+  function shouldContinue() {
+    if (currentView !== 'graph' || !graphNodes.length || !ctx) return false;
+    if (userGesturing) return true;
+    if (spinning && !spinningPaused) return true;
+    if (awake > 0 || ease || frameAfter > 0) return true;
+    return false;
+  }
+
+  function scheduleDraw() {
+    if (renderScheduled || currentView !== 'graph') return;
+    renderScheduled = true;
     requestAnimationFrame(loop);
+  }
+
+  function loop() {
+    renderScheduled = false;
+    if (currentView !== 'graph' || !graphNodes.length || !ctx) return;
+    if (width < 2 || height < 2) resize();
+    if (spinning && !spinningPaused && !ease) cam.yaw += 0.0016;
+    physTick();
+    applyEase();
+    if (frameAfter > 0) {
+      frameAfter -= 1;
+      if (frameAfter === 0) frameVisible();
+    }
+    draw();
+    if (shouldContinue()) scheduleDraw();
   }
 
   function bootGraph() {
@@ -1326,7 +1505,7 @@
     rebuildGraphElements();
     frameAfter = 90;
     awake = 280;
-    requestAnimationFrame(loop);
+    scheduleDraw();
   }
 
   function applyLocation() {
@@ -1373,18 +1552,19 @@
 
   async function boot() {
     try {
-      const [ont, books, text] = await Promise.all([
+      const [ont, books] = await Promise.all([
         fetch('data/ontology.json').then((r) => r.json()),
         fetch('data/books.json').then((r) => r.json()),
-        fetch('data/bible-text.json').then((r) => r.json()),
       ]);
       booksById = new Map(books.map((b) => [b.id, b]));
-      bibleText = text;
       render(ont);
       indexTree(ont);
       buildThemeBars();
       if (ontHint) ontHint.style.display = 'none';
       applyLocation();
+      // The graph's first frame is already queued. Start the verse file on
+      // the next frame so drawing is not gated on that download.
+      requestAnimationFrame(() => loadBibleText());
     } catch (err) {
       if (treeEl) treeEl.textContent = 'Failed to load the ontology data. Check the console and try reloading.';
       if (ontHint) ontHint.textContent = 'Failed to load the ontology data.';
