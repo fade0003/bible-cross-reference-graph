@@ -1,0 +1,97 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+<meta charset="UTF-8" />
+<meta name="viewport" content="width=device-width, initial-scale=1.0, viewport-fit=cover" />
+<title>What's new</title>
+<link rel="stylesheet" href="styles.css" />
+<style>
+  /* Entry chrome lives on this page so a later note can be another article. */
+  #pageContent .news-entry p,
+  #pageContent .news-entry li {
+    font-size: 14px;
+    line-height: 1.6;
+    color: #cfd2e6;
+  }
+  #pageContent .news-entry ul {
+    margin: 8px 0 0;
+    padding-left: 1.25em;
+  }
+  #pageContent .news-entry li + li { margin-top: 6px; }
+  #pageContent .news-entry time {
+    color: #d4af60;
+    font-size: 13.5px;
+  }
+  #pageContent .news-entry a { color: #9aa5c4; }
+  #pageContent .news-note {
+    font-size: 12.5px;
+    line-height: 1.55;
+    color: #9aa0b4;
+    font-style: italic;
+    margin: 0 0 10px;
+  }
+</style>
+</head>
+<body class="content-page">
+  <header id="topbar">
+    <div id="brand">Bible Cross-Reference Graph</div>
+    <nav id="siteNav"></nav>
+  </header>
+
+  <main id="pageContent">
+    <h1>What's new</h1>
+    <p class="page-subtitle">Changes to this site, newest first</p>
+    <p class="page-intro">Dated notes on what has reached the live pages, and on work that is written but not merged yet.</p>
+
+    <!--
+      Newest entry first. To add one, copy an <article class="news-entry">
+      and place it above the older articles. Leave the weekly study-note
+      section out until there are notes to publish.
+    -->
+    <section id="newsLog" aria-label="Dated changes">
+
+      <article class="tv-card news-entry" id="2026-10-23">
+        <div class="tv-card-head">
+          <time datetime="2026-10-23">October 23, 2026</time>
+          <span class="tv-category">In progress</span>
+        </div>
+        <h3>3D ontology, not yet on the live site</h3>
+        <p class="news-note">This has not been merged. It is under review, and the live Ontology page still shows the tree and the flat node graph.</p>
+        <p>Branch <a href="https://github.com/fade0003/bible-cross-reference-graph/tree/cursor/3d-vandorn-graph-c4b3"><code>cursor/3d-vandorn-graph-c4b3</code></a> turns the Ontology page into an orbitable 3D view. Four lenses bring forward Douglas Van Dorn's reading: the two powers in heaven, the Angel of the LORD, the Nephilim, and the Masoretic cruxes (the lens is labeled &ldquo;Masoretic veil&rdquo;). That last lens also marks places where the earlier text does not simply hide a more supernatural reading. The Textual Variants page on the same branch adds a &ldquo;Van Dorn spiritual cruxes&rdquo; filter.</p>
+      </article>
+
+      <article class="tv-card news-entry" id="2026-09-20">
+        <div class="tv-card-head">
+          <time datetime="2026-09-20">September 20, 2026</time>
+          <span class="tv-category">Live</span>
+        </div>
+        <h3>Mobile layout, theme words, and verse-dot previews</h3>
+        <ul>
+          <li>On screens under 900px the header, search, panel, legend, and controls reflow instead of overflowing the desktop bar, and the verse panel fills the phone screen. The canvas takes one-finger drag, pan, and tap, and two-finger pinch-zoom.</li>
+          <li>Verse dots always show one theme word: the first content word, with stopwords stripped, rather than a label that appears only on hover.</li>
+          <li>The default minimum link strength is 5, down from 15, so the force layout starts with more of its springs already engaged.</li>
+          <li>Hovering a verse dot shows a short italic preview, about three or four words of the verse, above the reference.</li>
+          <li>The graph code was synced from the palingen-studios project (<code>claude/bible-verse-graph-6t436x</code>).</li>
+        </ul>
+      </article>
+
+      <article class="tv-card news-entry" id="2026-09-13">
+        <div class="tv-card-head">
+          <time datetime="2026-09-13">September 13, 2026</time>
+          <span class="tv-category">Live</span>
+        </div>
+        <h3>Timeline chronology, ontology graph, and textual variants</h3>
+        <ul>
+          <li>The timeline gained an estimated-year axis, using Septuagint genealogical reckoning for the early chapters, and more interaction: click an arc for the two verses, and filter the arcs by book.</li>
+          <li>The ontology page gained a node-graph view beside the tree.</li>
+          <li>A textual-criticism page was added for a curated set of Masoretic, Septuagint, and Dead Sea Scrolls differences.</li>
+          <li>A static-build loading hang in background or hidden tabs was fixed. The load now yields with a timeout, which still fires when a tab is hidden, instead of waiting on an animation frame that the browser may not deliver.</li>
+        </ul>
+      </article>
+
+    </section>
+  </main>
+
+  <script src="nav.js"></script>
+</body>
+</html>
