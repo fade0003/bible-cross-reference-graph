@@ -7,7 +7,7 @@
     { href: 'index.html', label: 'Graph' },
     { href: 'timeline.html', label: 'Timeline' },
     { href: 'chiasm.html', label: 'Chiasms' },
-    { href: 'ontology.html', label: 'Ontology' },
+    { href: 'ontology.html', label: '3D Ontology' },
     { href: 'textual-criticism.html', label: 'Textual Variants' },
   ];
 

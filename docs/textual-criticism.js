@@ -97,27 +97,41 @@
 
   let allVariants = [];
 
+  const LENS_LABEL = {
+    'two-powers': 'Two Powers',
+    'angel-of-the-lord': 'Angel of the LORD',
+    nephilim: 'Nephilim',
+    masoretic: 'Masoretic veil',
+  };
+
   function renderCard(v) {
     const el = document.createElement('div');
     el.className = 'tv-card';
     el.id = `tv-${v.id}`;
-    el.dataset.searchBlob = [v.title, v.category, v.mt, v.lxx, v.dss, v.significance].filter(Boolean).join(' ').toLowerCase();
+    const lenses = v.lenses || [];
+    el.dataset.searchBlob = [v.title, v.category, v.mt, v.lxx, v.dss, v.significance, ...lenses].filter(Boolean).join(' ').toLowerCase();
     el.dataset.category = v.category;
+    el.dataset.lenses = lenses.join(' ');
 
     let witnesses = '';
     if (v.mt) witnesses += `<div class="tv-witness"><span class="tv-witness-label mt">MT</span>${escapeHtml(v.mt)}</div>`;
     if (v.lxx) witnesses += `<div class="tv-witness"><span class="tv-witness-label lxx">LXX</span>${escapeHtml(v.lxx)}</div>`;
     if (v.dss) witnesses += `<div class="tv-witness"><span class="tv-witness-label dss">DSS</span>${escapeHtml(v.dss)}</div>`;
 
+    const lensBadges = lenses
+      .map((id) => `<span class="theme-chip lens-${id}">${escapeHtml(LENS_LABEL[id] || id)}</span>`)
+      .join('');
+
     el.innerHTML = `
       <div class="tv-card-head">
         <span class="tv-category">${escapeHtml(v.category)}</span>
         <span class="ont-verse-chip" data-ref="${v.ref}">${refLabel(v.ref)}</span>
       </div>
+      ${lensBadges ? `<div class="theme-bar tv-lenses">${lensBadges}</div>` : ''}
       <h3>${escapeHtml(v.title)}</h3>
       <div class="tv-witnesses">${witnesses}</div>
       <div class="tv-significance">${escapeHtml(v.significance)}</div>
-      ${v.relatedOntology ? `<a class="ttl-link" href="ontology.html">&rarr; See this in the Divine Council Ontology</a>` : ''}
+      ${v.relatedOntology ? `<a class="ttl-link" href="ontology.html#${encodeURIComponent(v.relatedOntology)}">&rarr; See this in the 3D ontology</a>` : ''}
     `;
     el.querySelector('.ont-verse-chip').onclick = function () {
       onVerseChipClick(this, v.ref);
@@ -135,7 +149,9 @@
     const cat = categorySelect.value;
     listEl.querySelectorAll('.tv-card').forEach((card) => {
       const matchesText = !q || card.dataset.searchBlob.includes(q);
-      const matchesCat = !cat || card.dataset.category === cat;
+      const matchesCat =
+        !cat ||
+        (cat === '__lens' ? card.dataset.lenses.length > 0 : card.dataset.category === cat);
       card.style.display = matchesText && matchesCat ? '' : 'none';
     });
   }
@@ -160,7 +176,8 @@
 
       const categories = [...new Set(allVariants.map((v) => v.category))];
       categorySelect.innerHTML =
-        '<option value="">All categories</option>' + categories.map((c) => `<option value="${escapeHtml(c)}">${escapeHtml(c)}</option>`).join('');
+        '<option value="">All categories</option><option value="__lens">Van Dorn spiritual cruxes</option>' +
+        categories.map((c) => `<option value="${escapeHtml(c)}">${escapeHtml(c)}</option>`).join('');
 
       render();
 
